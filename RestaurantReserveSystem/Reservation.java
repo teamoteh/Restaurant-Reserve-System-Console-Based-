@@ -2,16 +2,17 @@ package RestaurantReserveSystem;
 //import java.util.Date;
 
 public class Reservation {
-	//private date; // not sure what data type to use for date n time
-	//private time; // convert the int input to string? idk
+
 	private int numOfPax;
 	private String custName;
 	private int custContact;
+	private String reserveTime;
+	private String reserveDate;
 	
 public Reservation ()
 	{
-		//date = ;
-		//time = ;
+		reserveDate = null;
+		reserveTime = null;
 		numOfPax = 0;
 		custName = null;
 		custContact = 0;
@@ -19,14 +20,14 @@ public Reservation ()
 
 // get methods
 
-//public getDate() {
-//	return this.date;
-//}
+public String getReserveDate() {
+	return this.reserveDate;
+}
 
-//public getTime()
-//{
-//	return this.time;
-//} 
+public String getReserveTime()
+{
+	return this.reserveTime;
+} 
 
 public int getNumOfPax()
 {
@@ -47,13 +48,15 @@ public int getCustContact()
 
 //set methods
 
-//public void setDate( date){
-//  this.date = date;
-//}
+public void setDate(String reserveDate)
+{
+  	this.reserveDate = reserveDate;
+}
 
-//public void setTime( time){
-//this.time = time;
-//}
+public void setTime(String reserveTime)
+{
+	this.reserveTime = reserveTime;
+}
 
 
 public void setCustName(String custName){
