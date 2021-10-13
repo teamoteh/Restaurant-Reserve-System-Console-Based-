@@ -85,6 +85,9 @@ public class OrderInvoice {
 
     public double getTotalSum() {
         // Add all the values
+        totalSum = 0.0;
+        for(int i = 0; i < this.orderItems.size(); i++){
+            totalSum += orderItems.get(i).get??price();
         return this.totalSum;
     }
 }
