@@ -6,13 +6,21 @@ public class SalesReport {
     private String startDate;
     private String endDate;
 
-    SalesReport(){}
+    SalesReport() {
+    }
 
     public double generateTotalRevenue() {
         return 0;
     }
     // public String[] generateIndividualItems() {
-    //     this.allOrderInvoices;
-    //     return this.allOrderInvoices;
+    // this.allOrderInvoices;
+    // return this.allOrderInvoices;
     // }
 }
+
+/*
+ * Should we have another class that acts like a database to keep all the
+ * orderInvoices that way we can initialise a SalesReport object with a start
+ * date and end date. This will prevent confusion in my opinion what do you
+ * thinK?
+ */

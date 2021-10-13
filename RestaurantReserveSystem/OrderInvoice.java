@@ -13,15 +13,21 @@ public class OrderInvoice {
     private double salesTax;
     private double serviceCharge;
 
-    public OrderInvoice() {
+    public OrderInvoice(int tableNum, String timeStamp, String dateStamp, String staffName) {
         this.orderItems = new ArrayList<String>();
+        this.tableNo = tableNum; // Added these 3 because I think it would be neccesary when creating a new
+                                 // invoice
+        this.timeStamp = timeStamp;
+        this.dateStamp = dateStamp;
+        this.staffName = staffName;
     };
 
     public String getOrderItems() {
-        return this.getOrderItems();
+        return this.getOrderItems(); // What is this doing?
     };
+
     // Consider list instead of array?
-    public void setOrderItems(String OrderItems){
+    public void setOrderItems(String OrderItems) {
         this.orderItems.add(OrderItems);
     };
 
