@@ -1,20 +1,27 @@
 package RestaurantReserveSystem;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class SalesReport {
-    // Consider as string instead. Easier to append
-    private OrderInvoice[] allOrderInvoices;
+    private List<OrderInvoice> allOrderInvoices;
     private String startDate;
     private String endDate;
 
     SalesReport() {
     }
 
+    // Todo: When prices are updated
     public double generateTotalRevenue() {
         return 0;
     }
-    // public String[] generateIndividualItems() {
-    // this.allOrderInvoices;
-    // return this.allOrderInvoices;
+    // Cake : 6
+    // Coke : 10
+
+    // public void generateIndividualItems() {
+    //     for (int i = 0; i < allOrderInvoices.size(); i++){
+    //         System.out.println();
+    //     }
     // }
 }
 

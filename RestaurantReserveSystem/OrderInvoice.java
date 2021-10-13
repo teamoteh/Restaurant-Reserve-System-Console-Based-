@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class OrderInvoice {
-    // private String[] orderItems;
     private List<String> orderItems;
     private String staffName;
     private int tableNo;
@@ -12,6 +11,7 @@ public class OrderInvoice {
     private String dateStamp;
     private double salesTax;
     private double serviceCharge;
+    private double totalSum;
 
     public OrderInvoice(int tableNum, String timeStamp, String dateStamp, String staffName) {
         this.orderItems = new ArrayList<String>();
@@ -22,13 +22,17 @@ public class OrderInvoice {
         this.staffName = staffName;
     };
 
-    public String getOrderItems() {
-        return this.getOrderItems(); // What is this doing?
+    public List<String> getOrderItems() {
+        return this.orderItems;
     };
 
-    // Consider list instead of array?
-    public void setOrderItems(String OrderItems) {
+    // Add items
+    public void addOrderItems(String OrderItems) {
         this.orderItems.add(OrderItems);
+    };
+    // Remove items
+    public void removeOrderItems(String OrderItems) {
+        this.orderItems.remove(OrderItems);
     };
 
     public String getStaffName() {
@@ -79,4 +83,8 @@ public class OrderInvoice {
         this.serviceCharge = serviceCharge;
     };
 
+    public double getTotalSum() {
+        // Add all the values
+        return this.totalSum;
+    }
 }
