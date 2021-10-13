@@ -13,21 +13,18 @@ public class SalesReport {
 
     // Todo: When prices are updated
     public double generateTotalRevenue() {
-        return 0;
+        double totalRevenue = 0;
+        for (int i = 0; i < allOrderInvoices.size(); i++) {
+            totalRevenue += allOrderInvoices.get(i).getTotalSum();
+        }
+        return totalRevenue;
     }
     // Cake : 6
     // Coke : 10
 
     // public void generateIndividualItems() {
-    //     for (int i = 0; i < allOrderInvoices.size(); i++){
-    //         System.out.println();
-    //     }
+    // for (int i = 0; i < allOrderInvoices.size(); i++){
+    // System.out.println();
+    // }
     // }
 }
-
-/*
- * Should we have another class that acts like a database to keep all the
- * orderInvoices that way we can initialise a SalesReport object with a start
- * date and end date. This will prevent confusion in my opinion what do you
- * thinK?
- */
