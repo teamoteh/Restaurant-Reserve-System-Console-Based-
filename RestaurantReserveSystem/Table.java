@@ -2,19 +2,20 @@ public class Table {
     private int TableNo;
     private int maxNumOfSeats;
     private Boolean availStatus;
-    private String reserverName;
+    private String contactNo;
 
     public Table(){
         TableNo = 0;
         maxNumOfSeats = 0;
         availStatus = 0;
-        reserverName = null;
+        contactNo = null;
     }
 
     public Table(int No, int maxSeats){
         this.TableNo = No;
         this.maxNumOfSeats = maxSeats;
         this.availStatus = 0;
+        this.contactNo = null;
     }
 
     public int getTableNo(){
@@ -29,8 +30,8 @@ public class Table {
         return this.availStatus;
     }
 
-    public String getReserveName(){
-        return this.reserverName;
+    public String getContactNo(){
+        return this.contactNo;
     }
 
     public void setTableNo(int No){
