@@ -8,6 +8,7 @@ public class Reservation {
 	private int custContact;
 	private String reserveTime;
 	private String reserveDate;
+	private int tableNo;
 	
 public Reservation ()
 	{
@@ -16,6 +17,7 @@ public Reservation ()
 		numOfPax = 0;
 		custName = null;
 		custContact = 0;
+		tableNo = 0;
 	}
 
 // get methods
@@ -71,6 +73,13 @@ public void setCustContact(int custContact){
     this.custContact = custContact;
 }
 
+
+public void bookTable(int tableNo)
+{
+	Table.availStatus = 1;
+}
+
+public
 
 
 }
