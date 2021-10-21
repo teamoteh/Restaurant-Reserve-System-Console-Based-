@@ -76,10 +76,22 @@ public void setCustContact(int custContact){
 
 public void bookTable(int tableNo)
 {
-	Table.availStatus = 1;
+	if (Table.availStatus == 1)
+	{
+		Table.availStatus = 0;
+		System.out.printf("Table" + tableNo + " has been successfully reserved." );
+	}
+	
+	else
+	{
+		System.out.printf("Table" + tableNo + " has been reserved already. Please choose anothet table" );
+	}
 }
 
-public
-
+public void unbookTable(int tableNo)
+{
+	Table.availStatus = 1;
+	System.out.printf("Table" + tableNo + " has been unreserved." );
+}
 
 }
