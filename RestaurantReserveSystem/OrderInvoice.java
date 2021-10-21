@@ -12,6 +12,11 @@ public class OrderInvoice {
     private double salesTax;
     private double serviceCharge;
     private double totalSum;
+    // added staffgender, employee id and job title
+    private String staffGender;
+    private int staffID;
+    private String jobTitle;
+
 
     public OrderInvoice(int tableNum, String timeStamp, String dateStamp, String staffName) {
         this.orderItems = new ArrayList<String>();
@@ -20,6 +25,13 @@ public class OrderInvoice {
         this.timeStamp = timeStamp;
         this.dateStamp = dateStamp;
         this.staffName = staffName;
+
+        // as prof replied in the email that needed to add staff info (gender,employee id and job title)
+        this.staffGender = staffGender;
+        this.staffID = staffID;
+        this.jobTitle = jobTitle;
+
+
     };
 
     public List<String> getOrderItems() {
@@ -42,6 +54,36 @@ public class OrderInvoice {
     public void setStaffName(String staffName) {
         this.staffName = staffName;
     };
+
+
+    // added this part
+    public String getStaffGender() {
+        return this.staffGender;
+    };
+
+    public void setStaffGender(String staffGender) {
+        this.staffGender = staffGender;
+    };
+
+    public String getStaffID() {
+        return this.staffID;
+    };
+
+    public void setStaffID(String staffID) {
+        this.staffID = staffID;
+    };
+
+
+    public void getJobTitle(String jobTitle)
+    {
+        return this.jobTitle;
+    };
+
+    public void setJobTitle(String jobTitle)
+    {
+        this.jobTitle = jobTitle;
+    };
+    // to here
 
     public int getTableNo() {
         return this.tableNo;
