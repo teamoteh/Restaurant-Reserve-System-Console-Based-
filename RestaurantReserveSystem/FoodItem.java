@@ -5,14 +5,14 @@ public class FoodItem {
     private double foodPrice;
     private String foodDesc;
 
-    public food()
+    public FoodItem()
     {
         this.foodName = null;
         this.foodDesc = null;
         this.foodPrice = 0;
     }
 
-    public food(String name, double price, String description){
+    public FoodItem(String name, double price, String description){
         this.foodName = name;
         this.foodPrice = price;
         this.foodDesc = description;
