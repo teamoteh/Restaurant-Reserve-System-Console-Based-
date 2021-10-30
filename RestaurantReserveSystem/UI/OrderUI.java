@@ -1,4 +1,4 @@
-package RestaurantReserveSystem.UI;
+package UI;
 
 import java.util.ArrayList;
 

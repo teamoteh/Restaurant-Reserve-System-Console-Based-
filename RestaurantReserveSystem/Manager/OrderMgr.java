@@ -1,16 +1,16 @@
-package RestaurantReserveSystem.Manager;
+package Manager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.sound.sampled.BooleanControl;
 
-import RestaurantReserveSystem.Entities.FoodItem;
-import RestaurantReserveSystem.Entities.Staff;
-import RestaurantReserveSystem.Entities.Menu;
-import RestaurantReserveSystem.Entities.Table;
-import RestaurantReserveSystem.Entities.Order;
-import RestaurantReserveSystem.Entities.Restaurant;
+import Entities.FoodItem;
+import Entities.Staff;
+import Entities.Menu;
+import Entities.Table;
+import Entities.Order;
+import Entities.Restaurant;
 
 // import Entities.MenuItem;
 // import Entities.Restaurant;
