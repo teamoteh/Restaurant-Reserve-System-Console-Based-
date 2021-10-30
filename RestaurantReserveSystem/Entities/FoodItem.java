@@ -1,18 +1,17 @@
-package Entities;
+package RestaurantReserveSystem.Entities;
 
 public class FoodItem {
     private String foodName;
     private double foodPrice;
     private String foodDesc;
 
-    public FoodItem()
-    {
+    public FoodItem() {
         this.foodName = null;
         this.foodDesc = null;
         this.foodPrice = 0;
     }
 
-    public FoodItem(String name, double price, String description){
+    public FoodItem(String name, double price, String description) {
         this.foodName = name;
         this.foodPrice = price;
         this.foodDesc = description;
