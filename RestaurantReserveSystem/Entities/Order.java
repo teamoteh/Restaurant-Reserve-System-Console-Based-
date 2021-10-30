@@ -9,16 +9,16 @@ import java.util.Date;
 // Order class object to represent Restaurant Orders
 public class Order {
     private ArrayList<Menu> listOfItems;
-    private Staff staffAssigned;
+    private Staff staff;
     private Table table;
     private Date date;
     private String name;
     private boolean checkOut;
 
     // Constructor for Order
-    public Order(Staff staffAssigned, Table table) {
+    public Order(Staff staff, Table table) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        this.staffAssigned = staffAssigned;
+        this.staff = staff;
         this.setTable(table);
         this.listOfItems = new ArrayList<Menu>();
         this.date = new Date();
@@ -27,8 +27,8 @@ public class Order {
     }
 
     // Add a Menu Item to the Order
-    public void addFood(Menu menuItem) {
-        this.listOfItems.add(menuItem);
+    public void addFood(Menu item) {
+        this.listOfItems.add(item);
     }
 
     // Removes a Menu Item from the Order
@@ -50,12 +50,12 @@ public class Order {
         return listOfItems;
     }
 
-    public Staff getStaffAssigned() {
-        return staffAssigned;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setStaffAssigned(Staff staffAssigned) {
-        this.staffAssigned = staffAssigned;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 
     public Date getTimestamp() {
