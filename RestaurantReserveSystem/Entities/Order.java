@@ -15,7 +15,7 @@ public class Order {
     private String name;
     private boolean checkOut;
 
-    // Constructor
+    // Constructor for Order
     public Order(Staff staffAssigned, Table table) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.staffAssigned = staffAssigned;
