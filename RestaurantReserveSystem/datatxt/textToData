@@ -1,0 +1,78 @@
+package Classes;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Txt2Dat implements Serializable {
+    private static final long serialVersionUID = 7048499616360745364L;
+	public static final String SEPARATOR = "|";
+
+	// an example of reading
+	public static void main(String[] args) throws IOException  {
+		StudentDataManager SDM = new StudentDataManager();
+		Crypt c = new Crypt();
+
+		// read String from text file
+		ArrayList stringArray = (ArrayList)read("./src/Classes/student.txt");
+		ArrayList<Student> alr = new ArrayList() ;// to store Professors data
+		Scanner sc = new Scanner(System.in);
+        for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
+
+				String  name = star.nextToken().trim();	// first token
+				String  id = star.nextToken().trim();	// second token
+				id = id.toUpperCase();
+				String pass = star.nextToken().trim();
+				pass = c.digest(pass);
+				String dob = star.nextToken().trim();
+				char gender = star.nextToken().trim().charAt(0);
+				String nat = star.nextToken().trim();
+				String schID = star.nextToken().trim();
+				String email = star.nextToken().trim();
+				int  aus = Integer.parseInt(star.nextToken().trim()); // third token
+				ArrayList<Index> clist = new ArrayList<Index>();
+				System.out.println("Name: " + name);
+				System.out.println("ID: " + id);
+				System.out.println("Pass: " + pass);
+				System.out.println("DOB: " + dob);
+				System.out.println("Gender: " + gender);
+				System.out.println("Nationality: "+ nat);
+				System.out.println("School ID: " + schID);
+				System.out.println("Email: " + email);
+				System.out.println("AUs: " + aus);
+				System.out.println("Enter 1 to confirm, anything else to break.");
+				int choice = sc.nextInt();
+				if(choice != 1)
+					break;
+				// create Professor object from file data
+				Student s = new Student(name, id, pass, dob, gender, nat, schID, email, aus, clist);
+				// add to Professors list
+				alr.add(s);
+				SDM.saveData(alr);
+			}
+
+	}
+
+	// Read the contents of the given file.
+	public static List read(String fileName) throws IOException {
+		List data = new ArrayList() ;
+	    Scanner scanner = new Scanner(new FileInputStream(fileName));
+	    try {
+	      while (scanner.hasNextLine()){
+	        data.add(scanner.nextLine());
+	      }
+	    }
+	    finally{
+	      scanner.close();
+	    }
+	    return data;
+	  }
+}
+
