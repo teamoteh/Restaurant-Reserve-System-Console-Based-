@@ -1,3 +1,5 @@
+package Entities;
+
 public class Table {
     private int TableNo;
     private int maxNumOfSeats;

@@ -1,4 +1,4 @@
-package RestaurantReserveSystem;
+package Entities;
 
 public class SetPromo {
     private static final double DISC = 0.2;

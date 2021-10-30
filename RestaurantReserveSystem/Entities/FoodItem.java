@@ -1,4 +1,4 @@
-package RestaurantReserveSystem;
+package Entities;
 
 public class FoodItem {
     private String foodName;

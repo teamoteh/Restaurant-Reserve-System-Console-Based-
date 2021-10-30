@@ -1,4 +1,4 @@
-package RestaurantReserveSystem;
+package Entities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
