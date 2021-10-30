@@ -9,14 +9,13 @@ public class Table {
     public Table(){
         TableNo = 0;
         maxNumOfSeats = 0;
-        availStatus = 0;
         contactNo = null;
     }
 
     public Table(int No, int maxSeats){
         this.TableNo = No;
-        this.maxNumOfSeats = maxSeats;
-        this.availStatus = 0;
+        setMaxNumSeats(maxSeats);
+        this.availStatus = true;
         this.contactNo = null;
     }
 
@@ -28,7 +27,7 @@ public class Table {
         return this.maxNumOfSeats;
     }
 
-    public String getAvailStatus(){
+    public boolean getAvailStatus(){
         return this.availStatus;
     }
 
@@ -41,7 +40,13 @@ public class Table {
     }
 
     public void setMaxNumSeats(int maxSeats){
-        this.maxNumOfSeats = maxSeats;
+        if(maxSeats % 2 == 1){
+            System.out.println("Please input an even number.");
+        }
+
+        else if(maxSeats % 2 == 0){
+            this.maxNumOfSeats = maxSeats;
+        }
     }
 
 }
