@@ -1,4 +1,4 @@
-package RestaurantReserveSystem.Entities;
+package Entities;
 
 import java.util.ArrayList;
 import java.util.Scanner;
