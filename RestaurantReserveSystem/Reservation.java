@@ -9,6 +9,7 @@ public class Reservation {
 	private String reserveTime;
 	private String reserveDate;
 	private int tableNo;
+	// private Table table;
 	
 public Reservation ()
 	{
@@ -19,6 +20,15 @@ public Reservation ()
 		custContact = 0;
 		tableNo = 0;
 	}
+
+public Reservation (int numOfPax, String custName, int custContact, String reserveTime, String reserveDate)
+{
+	this.numOfPax=numOfPax;
+	this.custName=custName;
+	this.custContact=custContact;
+	this.reserveTime=reserveTime;
+	this.reserveDate=reserveDate;
+}
 
 // get methods
 
