@@ -1,9 +1,13 @@
+package Manager;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import Entities.Table;
+import db.Restaurant;
 
 public class TableMgr {
    
-    private static ArrayList<Table> tables = new ArrayList<Table>();
+    private static ArrayList<Table> tables = Restaurant.tables;
 
     public static void addRestTables(int num){
         for(int i = 0; i < num; i++){
