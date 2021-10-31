@@ -3,7 +3,7 @@ package Manager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.sampled.BooleanControl;
+// import javax.sound.sampled.BooleanControl;
 
 import Entities.FoodItem;
 import Entities.Staff;
@@ -16,6 +16,7 @@ import Entities.Restaurant;
 // import Entities.Restaurant;
 
 public class OrderMgr {
+    ////////////////// NEED TO CHECK WITH TEAM MATES /////////////
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<Order> orderList = Restaurant.orders;
     private static ArrayList<Menu> menuItemList = Restaurant.menu;
@@ -104,7 +105,7 @@ public class OrderMgr {
                 do {
                     // Prompt user
                     System.out.println("Which food would you like to remove from the " + order.getName() + " Invoice?");
-                    // Display removable item
+                    // UI Display removable item
                     int index = 0;
                     for (MenuItem menuItem : order.getListOfItems())
                         System.out.println("[" + (index++) + "] : " + menuItem.getName());
@@ -113,7 +114,7 @@ public class OrderMgr {
                     // Error catching (input)
                     do {
                         int option = sc.nextInt();
-                    } while (option >= order.getListOfItems().size() || option < 0);
+                    } while (option < 0 || option >= order.getListOfItems().size());
 
                     order.removeFood(option);
 
@@ -140,9 +141,9 @@ public class OrderMgr {
         Order completedOrder = orderList.get(index);
         String removedOrderName = completedOrder.getName();
         completedOrder.setCheckOut(true);
-        //////////////////////////////////// CHECK TABLE CLASS W JOVIAN/////////////////////////////////////
+        ////////////////// NEED TO CHECK WITH TEAM MATES /////////////
         completedOrder.getTable().isOccupied = false;
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
         invoiceList.add(completedOrder);
 
         orderList.remove(index);
@@ -150,4 +151,5 @@ public class OrderMgr {
         System.out.println("\n~~~~~~~This is the printed invoice~~~~~~~\n");
         printOrderDetails(completedOrder);
         System.out.println("\nSuccessfully completed [" + removedOrderName + "] Order");
+    }
 }

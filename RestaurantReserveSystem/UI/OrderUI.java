@@ -1,6 +1,7 @@
 package UI;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Entities.Table;
 import Entities.Staff;
@@ -11,11 +12,13 @@ import Manager.OrderMgr;
 
 public class OrderUI {
 	// UI provided to user showing actions that can be performed by user
+	private static Scanner sc = new Scanner(System.in);
+
 	public static void orderMainOptions() {
 		int choice;
-		do {
+		while (true) {
+			// UI Display option
 			System.out.println("\nORDER UI");
-
 			System.out.println("[1] - View Current Orders");
 			System.out.println("[2] - Create Orders");
 			System.out.println("[3] - Modify Orders");
@@ -23,8 +26,12 @@ public class OrderUI {
 			System.out.println("[5] - Make Payment");
 			System.out.println("[0] - Go Back");
 
-			choice = CusScanner.nextInt(0, 5);
+			// Error Catching (input)
+			do {
+				choice = sc.nextInt();
+			} while (choice < 0 || choice > 5);
 
+			// Option
 			switch (choice) {
 			case 1:
 				viewCurrentOrderUI();
@@ -41,48 +48,47 @@ public class OrderUI {
 			case 5:
 				makePaymentUI();
 				break;
-			case 0:
-				return;
 			}
-		} while (true);
+		}
 	}
 
-	// Provides user with the current List of Restaurant's Orders. More information
-	// on the specific order can be viewed in this UI
+	// Display current order
 	private static void viewCurrentOrderUI() {
 		int index, choice;
 		ArrayList<Order> orderList = OrderMgr.getRestaurantOrders();
 
 		if (orderList.size() < 1) {
-			System.out.println(
-					"There are no orders currently, You must have at least 1 order to view the list of orders");
+			System.out.println("There are no orders");
 			return;
 		}
 
-		do {
-			index = 0;
-			System.out.println("\nThese are the current orders, which order do you want more details on");
+		while (true) {
+			index = 1;
+			// Print out all orders
+			System.out.println("\nWhich order do you want more details on?");
+			System.out.println("[" + (0) + "] - " + "Return");
 			for (Order order : orderList)
-				System.out.println("[" + (index++ + 1) + "] - " + order.getName());
-			System.out.println("[" + (0) + "] - " + "Back");
+				System.out.println("[" + (index++) + "] - " + order.getName());
 
-			choice = CusScanner.nextInt(0, index);
+			// Error Catching (input)
+			do {
+				choice = sc.nextInt();
+			} while (choice < 0 || choice >= orderList.size());
 
 			if (choice == 0)
 				break;
 
-			OrderMgr.printOrderDetails(orderList.get(choice - 1));
-		} while (true);
-
+			// Print selected order details
+			OrderMgr.printOrderDetails(orderList.get(choice));
+		}
 	}
 
-	// UI Provided to faciliate addition of new Order
+	// UI to faciliate addition of new Order
 	public static void addNewOrderUI() {
 		Staff staff = selectStaffUI();
 		Table table = selectTableUI();
 
 		OrderMgr.addNewOrder(staff, table);
-
 	}
 
 	public static void addNewOrderUI(int tableId) {
@@ -90,10 +96,9 @@ public class OrderUI {
 		Table table = OrderMgr.getRestaurantTables().get(tableId);
 
 		OrderMgr.addNewOrder(staff, table);
-
 	}
 
-	// Internal method used to select table for new Orders
+	// Select table for new Orders
 	private static Table selectTableUI() {
 		int index = 0;
 
@@ -102,8 +107,10 @@ public class OrderUI {
 		System.out.println(
 				"These are the list of available tables in the restaurant, please choose according to your pax ?");
 		System.out.println("Choice\tTableID\tNumber of Seats");
+		/////////////////////////////// Check if 30===================
 		for (int i = 0; i < 30; i++) {
 			try {
+				/////////////////////////////////////////// wait for jovian
 				if (entities.Restaurant.tables.get(i).isOccupied == false
 						&& entities.Restaurant.sessionReservations.get(i).tableReservation == null) {
 					System.out.println("[" + (index++ + 1) + "] - " + "\t" + entities.Restaurant.tables.get(i).tableId
