@@ -1,42 +1,15 @@
-package RestaurantReserveSystem;
+package MenuClass;
 
-public class MainCourse {
-    private String courseName;
-    private double coursePrice;
-    private String courseDesc;
+import Entities.FoodItem;
 
-    public MainCourse(){
-        courseName = null;
-        coursePrice = 0.0;
-        courseDesc = null;
+public class MainCourse extends FoodItem{
+    
+    public MainCourse() {
+        super();
     }
 
-    public MainCourse(String name, double price){
-        this.courseName = name;
-        this.coursePrice = price;
+    public MainCourse(String name, double price, String description) {
+        super(name, price, description);
     }
 
-    public String getCourseName(){
-        return this.courseName;
-    }
-
-    public double getCoursePrice(){
-        return this.coursePrice;
-    }
-
-    public String getCourseDesc(){
-        return this.courseDesc;
-    }
-
-    public void setCourseName(String name){
-        this.courseName = name;
-    }
-
-    public void setCoursePrice(double price){
-        this.coursePrice = price;
-    }
-
-    public void setCourseDesc(String desc){
-        this.courseDesc = desc;
-    }
 }

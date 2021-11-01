@@ -1,5 +1,8 @@
 package Entities;
-
+import MenuClass.Appetizer;
+import MenuClass.Dessert;
+import MenuClass.Drink;
+import MenuClass.MainCourse;
 public class SetPromo {
     private static final double DISC = 0.2;
 
@@ -17,28 +20,28 @@ public class SetPromo {
         totalCost = 0;
     }
 
-    public void updatePromoAppet(String appetName, double appetPrice){
-        this.appet = new Appetizer(appetName, appetPrice);
+    public void updatePromoAppet(String name, double price, String description) {
+        this.appet = new Appetizer(name, price, description);
     }
 
-    public void updatePromoDrink(String drinkName, double drinkPrice){
-        this.drink = new Drink(drinkName, drinkPrice);
+    public void updatePromoDrink(String name, double price, String description) {
+        this.drink = new Drink(name, price, description);
     }
 
-    public void updatePromoDessert(String dessertName, double dessertPrice){
-        this.dessert = new Dessert(dessertName, dessertPrice);
+    public void updatePromoDessert(String name, double price, String description) {
+        this.dessert = new Dessert(name, price, description);
     }
 
-    public void updatePromoMain(String mainName, double mainPrice){
-        this.main = new MainCourse(mainName, mainPrice);
+    public void updatePromoMain(String name, double price, String description) {
+        this.main = new MainCourse(name, price, description);
     }
 
     protected double totalCost(Appetizer appet, Dessert dessert, MainCourse main, Drink drink){
         double total = 0;
-        total += appet.getAppetPrice();
-        total += dessert.getDessertPrice();
-        total += main.getCoursePrice();
-        total += drink.getDrinkPrice();
+        total += appet.getFoodPrice();
+        total += dessert.getFoodPrice();
+        total += main.getFoodPrice();
+        total += drink.getFoodPrice();
 
         total *= DISC;
         this.totalCost = total;
@@ -48,17 +51,17 @@ public class SetPromo {
 
     public void getPromo(){
         System.out.printf("The set promo for today is:\n");
-        if(appet.getAppetName() != null){
-            System.out.printf("Appetizer: %s, %s\n", appet.getAppetName(), appet.getAppetDesc());
+        if(appet.getFoodName() != null){
+            System.out.printf("Appetizer: %s, %s\n", appet.getFoodName(), appet.getFoodDesc());
         }
-        if(main.getCourseName() != null){
-            System.out.printf("Course: %s, %s\n", main.getCourseName(), main.getCourseDesc());
+        if(main.getFoodName() != null){
+            System.out.printf("Course: %s, %s\n", main.getFoodName(), main.getFoodDesc());
         }
-        if(dessert.getDessertName() != null){
-            System.out.printf("Dessert: %s, %s\n", dessert.getDessertName(), dessert.getDessertDesc());
+        if(dessert.getFoodName() != null){
+            System.out.printf("Dessert: %s, %s\n", dessert.getFoodName(), dessert.getFoodDesc());
         }
-        if(drink.getDrinkName() != null){
-            System.out.printf("Drinks to go: %s, %s\n", drink.getDrinkName(), drink.getDrinkDesc());
+        if(drink.getFoodName() != null){
+            System.out.printf("Drinks to go: %s, %s\n", drink.getFoodName(), drink.getFoodDesc());
         }        
     }
 }

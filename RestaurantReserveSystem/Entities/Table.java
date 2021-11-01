@@ -9,6 +9,7 @@ public class Table {
     public Table(){
         TableNo = 0;
         maxNumOfSeats = 0;
+        availStatus = true;
         contactNo = null;
     }
 
