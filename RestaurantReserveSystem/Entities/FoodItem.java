@@ -2,27 +2,26 @@ package Entities;
 
 public class FoodItem {
     private String foodName;
-    private double foodPrice;
+    private String foodPrice;
     private String foodDesc;
 
     public FoodItem() {
         this.foodName = null;
+        this.foodPrice = null;
         this.foodDesc = null;
-        this.foodPrice = 0;
     }
 
-    public FoodItem(String name, double price, String description) {
+    public FoodItem(String name, String price, String description) {
         this.foodName = name;
         this.foodPrice = price;
         this.foodDesc = description;
-
     }
 
     public String getFoodName() {
         return this.foodName;
     }
 
-    public double getFoodPrice() {
+    public String getFoodPrice() {
         return this.foodPrice;
     }
 
@@ -34,7 +33,7 @@ public class FoodItem {
         this.foodName = name;
     }
 
-    public void setFoodPrice(double price) {
+    public void setFoodPrice(String price) {
         this.foodPrice = price;
     }
 
@@ -42,3 +41,4 @@ public class FoodItem {
         this.foodDesc = desc;
     }
 }
+
