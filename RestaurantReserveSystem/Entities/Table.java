@@ -40,6 +40,14 @@ public class Table {
         this.TableNo = No;
     }
 
+    public void setUnavailStatus(){
+        this.availStatus = false;
+    }
+
+    public void setContact(String contact){
+        this.contactNo = contact;
+    }
+    
     public void setMaxNumSeats(int maxSeats){
         if(maxSeats % 2 == 1){
             System.out.println("Please input an even number.");
