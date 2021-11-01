@@ -1,1 +1,1 @@
-Alice Lee|Female|564|Manager
+Alice Lee,Female,564,Manager
