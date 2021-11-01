@@ -1,15 +1,12 @@
-Alice Bob|U1801291G|password|1/1/1998|F|Singaporean|abob@ntu.edu.sg|SCSE|18
-Bob Charles|U1920192A|password1|1/2/1999|M|Singaporean|bcharles@ntu.edu.sg|SCSE|19
-Charles David|U1884176D|password2|2/2/1996|M|Singaporean|cdavid@ntu.edu.sg|SCSE|20
-Joseph|U2092965C|password3|5/2/1998|M|Singaporean|jos@ntu.edu.sg|SCSE|21
-    Zhao Chang|U1933039B|password4|2/3/1996|M|Singaporean|zhaoc@ntu.edu.sg|SCSE|18
-Cai Fan|U1600192Y|password5|3/2/1995|M|Singaporean|caifan@ntu.edu.sg|MAE|19
-Cheng Ning|U2093191L|password6|2/10/1999|F|Singaporean|chengn@ntu.edu.sg|SCSE|20
-Deng Fenfang|U1900843R|password7|30/6/2000|F|Singaporean|fenfangd@ntu.edu.sg|SCBE|21
-Johnny Hou|U1693478E|password8|5/5/1995|M|Singaporean|johnny@ntu.edu.sg|WKW|18
-Nicole Lee|U1702913W|password9|2/6/1997|F|Singaporean|nicole@ntu.edu.sg|SCSE|19
-Natalie Delaney|U1892492A|password10|10/2/1996|F|Singaporean|delaneyn@ntu.edu.sg|WKW|20
-Nate Gray|U2002919P|password11|20/2/1998|M|Singaporean|nategray@ntu.edu.sg|NBS|21
-Heidi Beverley|U1801293Q|password12|15/8/1996|F|Singaporean|heidi@ntu.edu.sg|SCSE|18
-Nellie Wong|U1690193C|password13|8/6/1993|F|Singaporean|nellie@ntu.edu.sg|SCSE|19
-Zhen Zhen|U2001929A|password14|1/2/1996|F|Singaporean|zz@ntu.edu.sg|NBS|20
+1,2
+2,2
+3,2
+4,2
+5,4
+7,4
+8,4
+9,6
+10,6
+11,8
+12,8
+

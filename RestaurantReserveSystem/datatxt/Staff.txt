@@ -1,1 +1,5 @@
-Alice Lee,Female,564,Manager
+Alice Lee, Female, 564, Manager
+Tom Hardy, Male, 31, Waiter
+Tom Holland, Male, 20. Waiter
+Tom Hiddleston, Male, 30, Cashier
+Natalie Portman, Female, 404, Assistant Manager
