@@ -14,6 +14,13 @@ public Staff () {
 	jobTitle = null;
 }
 
+public Staff (String name, String gender, int id, String title) {
+	this.staffName = name;
+	this.staffGender = gender; 
+	this.staffId = id;
+	this.jobTitle = title;
+}
+
 //get methods
 public String getStaffName()
 {
