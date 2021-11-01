@@ -22,7 +22,7 @@ public class StaffMgr{
         }
     }
 
-    public void getStaffs(ArrayList<Staff> staffs) throws FileNotFoundException
+    public void readStaffs(ArrayList<Staff> staffs) throws FileNotFoundException
 	      {
       		  File file = new File("/Users/pranwanth/eclipse-workspace/assignmentTest/src/assignmentTest/drinks.txt");
       		  Scanner sc = new Scanner(file);
