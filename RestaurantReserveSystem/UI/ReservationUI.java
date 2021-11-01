@@ -56,7 +56,7 @@ public class ReservationUI {
 			}
 			
 		
-			for(int i=0; i< tableArr.size;i++) {
+			for(int i=0; i< tableArr.size();i++) {
 				if(tableArr.get(i).getMaxNumOfSeats()>=pax && tableArr.get(i).getAvailStatus()==false) {
 					System.out.println("Enter customer contact number: \n");
 					String number = sc.nextLine();
