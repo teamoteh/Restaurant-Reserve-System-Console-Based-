@@ -1,22 +1,30 @@
 package Entities;
 
 import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RestaurantApp{
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("1. Create/Update/Remove menu item\n"
-						+ "2. Create/Update/Remove promotion\n"
-						+ "3. Create order\n"
-						+ "4. View order\n"
-						+ "5. Add/Remove order item/s to/from order\n"
-                        + "6. Create reservation booking\n"
-                        + "7. Check/Remove reservation booking\n"
-                        + "8. Check table availability\n"
-                        + "9. Print order invoice\n"
-                        + "10. Print sale revenue report by period (eg day or month)");
-        
+         Scanner sc = new Scanner(System.in);
+         System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
+         LocalDate date	= LocalDate.parse(sc.nextLine());
+
+         System.out.println("What would you like to do? ");
+       
+        System.out.println("1. Check Available Tables\n" 
+                            + "2. Create New Order\n"
+                            + "3. View Current Orders\n"
+                            + "4. Edit Current Orders\n"
+                            + "5. Make A Reservation\n"
+                            + "6. Check Reservation Booking\n"
+                            + "7. Remove Reservation Booking\n"
+                            + "8. Print order invoice\n"
+                            + "9. Print sale revenue report by period (eg day or month)"
+                            + "10. End The Day" );
+            
         do 
         {
             System.out.println("Input a choice:");
