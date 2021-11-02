@@ -1,5 +1,8 @@
 package Manager;
+import datatxt.FileReaderWriter;
+
 import java.io.FileNotFoundException;
+import Entities.FoodItem;
 import java.util.ArrayList;
 
 public class MenuMgr {

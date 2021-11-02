@@ -1,8 +1,9 @@
 package datatxt;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 import Entities.FoodItem;
+import Entities.Table;
+import java.util.ArrayList;
 
 public class FileReaderWriter {
   
@@ -18,11 +19,11 @@ public class FileReaderWriter {
 		      sc.useDelimiter("\\s*,\\s*");
 	
 		      do{
-		    	  	String foodname = sc.next();
-		          	String foodprice = sc.next();
-		          	String fooddesc = sc.next();
+		    	  	String foodName = sc.next();
+		          	String foodPrice = sc.next();
+		          	String foodDesc = sc.next();
 		            
-		            FoodItem drink = new FoodItem(foodname,foodprice,fooddesc);
+		            FoodItem drink = new FoodItem(foodName,foodPrice,foodDesc);
 		            drinks.add(drink);
 		      }
 		      while(sc.hasNextLine());     
@@ -36,13 +37,14 @@ public class FileReaderWriter {
 		      sc.useDelimiter("\\s*,\\s*");
 	
 		      do{
-		    	  	int numOfPax = sc.next();
+		    	  	int numOfPax = sc.nextInt();
 		          	String custName = sc.next();
-		          	int custContact = sc.next();
+		          	int custContact = sc.nextInt();
 					String reserveTime = sc.next();
 					String reserveDate = sc.next();
 		            
 		            Table table = new Table(numOfPax,  custName,  custContact,  reserveTime,  reserveDate);
+					// Shouldn't this be Reservation not table?
 		            tables.add(table);
 		      }
 		      while(sc.hasNextLine());     
