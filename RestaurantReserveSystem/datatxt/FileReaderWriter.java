@@ -29,6 +29,28 @@ public class FileReaderWriter {
 		     sc.close();
 	      }
 	      
+		  public void getReservation(ArrayList<Table> tables) throws FileNotFoundException
+	      {
+      		  File file = new File("/Users/pranwanth/eclipse-workspace/assignmentTest/src/assignmentTest/drinks.txt");
+      		  Scanner sc = new Scanner(file);
+		      sc.useDelimiter("\\s*,\\s*");
+	
+		      do{
+		    	  	int numOfPax = sc.next();
+		          	String custName = sc.next();
+		          	int custContact = sc.next();
+					String reserveTime = sc.next();
+					String reserveDate = sc.next();
+		            
+		            Table table = new Table(numOfPax,  custName,  custContact,  reserveTime,  reserveDate);
+		            tables.add(table);
+		      }
+		      while(sc.hasNextLine());     
+		     sc.close();
+	      }
+
+		  
+		  
 	      /*Things to implement
 	       * getReservation
 	       * getTable
