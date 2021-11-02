@@ -86,9 +86,13 @@ public void setCustContact(int custContact){
 
 public void bookTable(int tableNo)
 {
-	if (Table.availStatus == 1)
+	//Changed it from Table.availStatus to Table.getAvailStatus() since availStatus is private to Table
+	// availStatus is boolean as well
+	// and by the way I don't think you can directly do this because it is not a static method as well.
+	// maybe use a table variable?
+	if (Table.getAvailStatus() == true)
 	{
-		Table.availStatus = 0;
+		Table.getAvailStatus() = false;
 		System.out.printf("Table" + tableNo + " has been successfully reserved." );
 	}
 	
@@ -100,7 +104,7 @@ public void bookTable(int tableNo)
 
 public void unbookTable(int tableNo)
 {
-	Table.availStatus = 1;
+	Table.getAvailStatus() = true;
 	System.out.printf("Table" + tableNo + " has been unreserved." );
 }
 
