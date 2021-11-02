@@ -1,10 +1,19 @@
 package Manager;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class ReservationMgr {
 
+    protected ArrayList<Table> table;
+
+    public ReservationMgr(){
+
+        this.table= new ArrayList<Table>();
+    }
+
     public static void checkReservationExpiry(Reservation r) {
         if (LocalTime.now().isAfter(r.rTime.plusMinutes(30))) {
-            cancelReservation(r); // Free up table
+            removeReservationBooking(r); // Free up table
         }
     }
 
