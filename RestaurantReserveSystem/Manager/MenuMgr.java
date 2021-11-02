@@ -17,23 +17,28 @@ public class MenuMgr {
 	        this.dessert = new ArrayList<FoodItem>();
 	        this.mainCourse = new ArrayList<FoodItem>();
 	        this.drinks = new ArrayList<FoodItem>();
-	        
-	        /*this.drinks = new FoodItem[3];
-	    	  
-	    	  for(int i = 0; i < 3; i++)
-	  		{
-	  			this.drinks[i] = new FoodItem();
-	  		}*/
 	    }
 
-	    public void addAppetizer(String name, String price, String description) {
-	        FoodItem appetizer = new FoodItem(name, price, description);
-	        this.appet.add(appetizer);
+	    public void addAppetizer() {
+			FileReaderWriter fi1 = new FileReaderWriter();
+			try {
+				fi1.getAppetizer(this.appet);
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 	    }
 
-	    public void addDessert(String name, String price, String description) {
-	        FoodItem dessert = new FoodItem(name, price, description);
-	        this.dessert.add(dessert);
+	    public void addDessert() {
+			FileReaderWriter fi2 = new FileReaderWriter();
+			try {
+				fi2.getDessert(this.dessert);
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 	    }
 
 	    public void addDrink() {
@@ -41,27 +46,67 @@ public class MenuMgr {
 	        try {
 				fi.getDrinks(this.drinks);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
-	    
-	    public void printDrinks() {
-	    	int size = this.drinks.size();
-	    	for(int i = 0; i < size; i++)
-	    	{
-	    		System.out.println(this.drinks.get(i).getFoodName());
-	    		System.out.println(this.drinks.get(i).getFoodPrice());
-	    		System.out.println(this.drinks.get(i).getFoodDesc());
-	    	}
+
+	    public void addMainCourse() {
+	        FileReaderWriter fi3 = new FileReaderWriter();
+			try{
+				fi3.getMainCourse(this.mainCourse);
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 	    }
 
-	    public void addMainCourse(String name, String price, String description) {
-	        FoodItem mainCourse = new FoodItem(name, price, description);
-	        this.mainCourse.add(mainCourse);
-	    }
+		public void printDrinks() {
+			int size = this.drinks.size();
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(this.drinks.get(i).getFoodName());
+				System.out.println(this.drinks.get(i).getFoodPrice());
+				System.out.println(this.drinks.get(i).getFoodDesc());
+				System.out.println();
+			}
+		}
 
-	    public void deleteAppet(String name) {
+		public void printAppetizer() {
+			int size = this.appet.size();
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(this.appet.get(i).getFoodName());
+				System.out.println(this.appet.get(i).getFoodPrice());
+				System.out.println(this.appet.get(i).getFoodDesc());
+				System.out.println();
+			}
+		}
+
+		public void printDessert() {
+			int size = this.dessert.size();
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(this.dessert.get(i).getFoodName());
+				System.out.println(this.dessert.get(i).getFoodPrice());
+				System.out.println(this.dessert.get(i).getFoodDesc());
+				System.out.println();
+			}
+		}
+
+		public void printMainCourse() {
+			int size = this.mainCourse.size();
+			for(int i = 0; i < size; i++)
+			{
+				System.out.println(this.mainCourse.get(i).getFoodName());
+				System.out.println(this.mainCourse.get(i).getFoodPrice());
+				System.out.println(this.mainCourse.get(i).getFoodDesc());
+				System.out.println();
+			}
+		}
+
+
+	public void deleteAppet(String name) {
 	        for (int i = 0; i < this.appet.size(); i++) {
 	            if (this.appet.get(i).getFoodName() == name) {
 	                this.appet.remove(i);

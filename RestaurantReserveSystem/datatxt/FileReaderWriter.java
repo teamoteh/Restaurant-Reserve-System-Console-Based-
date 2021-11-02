@@ -20,7 +20,7 @@ public class FileReaderWriter {
 	
 		      do{
 		    	  	String foodName = sc.next();
-		          	String foodPrice = sc.next();
+		          	double foodPrice = sc.nextDouble();
 		          	String foodDesc = sc.next();
 		            
 		            FoodItem drink = new FoodItem(foodName,foodPrice,foodDesc);
@@ -29,7 +29,61 @@ public class FileReaderWriter {
 		      while(sc.hasNextLine());     
 		     sc.close();
 	      }
-	      
+
+		public void getAppetizer(ArrayList<FoodItem> appet) throws FileNotFoundException
+		{
+			File file = new File("./Appetizer.txt");
+			Scanner sc = new Scanner(file);
+			sc.useDelimiter("\\s*,\\s*");
+
+			do{
+				String foodName = sc.next();
+				double foodPrice = sc.nextDouble();
+				String foodDesc = sc.next();
+
+				FoodItem appetizer = new FoodItem(foodName,foodPrice,foodDesc);
+				appet.add(appetizer);
+			}
+			while(sc.hasNextLine());
+			sc.close();
+		}
+
+		public void getDessert(ArrayList<FoodItem> desserts) throws FileNotFoundException
+		{
+			File file = new File("./Dessert.txt");
+			Scanner sc = new Scanner(file);
+			sc.useDelimiter("\\s*,\\s*");
+
+			do{
+				String foodName = sc.next();
+				double foodPrice = sc.nextDouble();
+				String foodDesc = sc.next();
+
+				FoodItem dessert = new FoodItem(foodName,foodPrice,foodDesc);
+				desserts.add(dessert);
+			}
+			while(sc.hasNextLine());
+			sc.close();
+		}
+
+	public void getMainCourse(ArrayList<FoodItem> mainCourses) throws FileNotFoundException
+	{
+		File file = new File("./MainCourse.txt");
+		Scanner sc = new Scanner(file);
+		sc.useDelimiter("\\s*,\\s*");
+
+		do{
+			String foodName = sc.next();
+			double foodPrice = sc.nextDouble();
+			String foodDesc = sc.next();
+
+			FoodItem mainCourse = new FoodItem(foodName,foodPrice,foodDesc);
+			mainCourses.add(mainCourse);
+		}
+		while(sc.hasNextLine());
+		sc.close();
+	}
+
 		  public void getReservation(ArrayList<Table> tables) throws FileNotFoundException
 	      {
       		  File file = new File("./Reservation.txt");
