@@ -13,7 +13,7 @@ public class FileReaderWriter {
 	      
 	      public void getDrinks(ArrayList<FoodItem> drinks) throws FileNotFoundException
 	      {
-      		  File file = new File("/Users/pranwanth/eclipse-workspace/assignmentTest/src/assignmentTest/drinks.txt");
+      		  File file = new File("./Drinks.txt");
       		  Scanner sc = new Scanner(file);
 		      sc.useDelimiter("\\s*,\\s*");
 	
@@ -31,7 +31,7 @@ public class FileReaderWriter {
 	      
 		  public void getReservation(ArrayList<Table> tables) throws FileNotFoundException
 	      {
-      		  File file = new File("/Users/pranwanth/eclipse-workspace/assignmentTest/src/assignmentTest/drinks.txt");
+      		  File file = new File("./Reservation.txt");
       		  Scanner sc = new Scanner(file);
 		      sc.useDelimiter("\\s*,\\s*");
 	
