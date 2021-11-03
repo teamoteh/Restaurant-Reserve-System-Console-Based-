@@ -2,6 +2,7 @@ package datatxt;
 import java.io.*;
 import java.util.Scanner;
 import Entities.FoodItem;
+import Entities.Reservation;
 import Entities.Table;
 import java.util.ArrayList;
 
@@ -84,7 +85,7 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
-		  public void getReservation(ArrayList<Table> tables) throws FileNotFoundException
+		  public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
 	      {
       		  File file = new File("./Reservation.txt");
       		  Scanner sc = new Scanner(file);
@@ -97,9 +98,9 @@ public class FileReaderWriter {
 					String reserveTime = sc.next();
 					String reserveDate = sc.next();
 		            
-		            Table table = new Table(numOfPax,  custName,  custContact,  reserveTime,  reserveDate);
+		            Reservation r = new Reservation(numOfPax,  custName,  custContact,  reserveTime,  reserveDate, getTable);
 					// Shouldn't this be Reservation not table?
-		            tables.add(table);
+		            Reservations.add(r);
 		      }
 		      while(sc.hasNextLine());     
 		     sc.close();
