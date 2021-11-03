@@ -9,9 +9,9 @@ public class Reservation {
 	private String reserveTime;
 	private String reserveDate;
 	private int tableNo;
-	// private Table table;
+	private ArrayList<Table> table;
 	
-public Reservation ()
+/*public Reservation ()
 	{
 		reserveDate = null;
 		reserveTime = null;
@@ -19,15 +19,16 @@ public Reservation ()
 		custName = null;
 		custContact = 0;
 		tableNo = 0;
-	}
+	}*/
 
-public Reservation (int numOfPax, String custName, int custContact, String reserveTime, String reserveDate)
+public Reservation (int numOfPax, String custName, int custContact, String reserveTime, String reserveDate, ArrayList<Table> table)
 {
 	this.numOfPax=numOfPax;
 	this.custName=custName;
 	this.custContact=custContact;
 	this.reserveTime=reserveTime;
 	this.reserveDate=reserveDate;
+	this.table=table;
 }
 
 // get methods
@@ -93,12 +94,12 @@ public void bookTable(int tableNo)
 	if (Table.getAvailStatus() == true)
 	{
 		Table.getAvailStatus() = false;
-		System.out.printf("Table" + tableNo + " has been successfully reserved." );
+		System.out.printf("Table" + table.TableNo + " has been successfully reserved." );
 	}
 	
 	else
 	{
-		System.out.printf("Table" + tableNo + " has been reserved already. Please choose anothet table" );
+		System.out.printf("Table" + table.TableNo + " has been reserved already. Please choose another table" );
 	}
 }
 
