@@ -1,14 +1,16 @@
 package Manager;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import datatxt.FileReaderWriter;
+import Entities.Table;
 
 public class ReservationMgr {
 
-    protected ArrayList<Table> table;
+    protected ArrayList<Reservation> r;
 
     public ReservationMgr(){
 
-        this.table= new ArrayList<Table>();
+        this.r= new ArrayList<Reservation>();
     }
 
     public static void checkReservationExpiry(Reservation r) {
@@ -34,6 +36,16 @@ public class ReservationMgr {
         // String sessionStr = (session == 1?"AM":"PM");
         // String fileName = "reservation"+date+sessionStr+".dat";
         // Table[] temp = db.fileIO.readReservation(fileName);
+        
+        FileReaderWriter fi1 = new FileReaderWriter();
+			try {
+				fi1.getReservation(this.Reservation);
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+
         for (int i = 0; i < temp.length; i++) {
             if (temp[i].tableId == tableID) {
                 temp[i].tableReservation = r;
