@@ -2,16 +2,25 @@ package datatxt;
 import java.io.*;
 import java.util.Scanner;
 import Entities.FoodItem;
-import Entities.Reservation;
-import Entities.Table;
 import java.util.ArrayList;
 
 public class FileReaderWriter {
   
-	      public FileReaderWriter() {
+	    public FileReaderWriter() {
 	    	 
-	      }
-	      
+	    }
+	     public void write(String address, String text) throws IOException {
+    		try{
+				FileWriter fw = new FileWriter(address, true);
+    			BufferedWriter bw = new BufferedWriter(fw);
+    			PrintWriter out = new PrintWriter(bw);
+				out.println(text);
+				out.close();
+    			//more code
+				} catch (IOException e) {
+    			//exception handling left as an exercise for the reader
+				}
+			}
 	      
 	      public void getDrinks(ArrayList<FoodItem> drinks) throws FileNotFoundException
 	      {
@@ -23,8 +32,9 @@ public class FileReaderWriter {
 		    	  	String foodName = sc.next();
 		          	double foodPrice = sc.nextDouble();
 		          	String foodDesc = sc.next();
+					FoodItem.FoodType fType = FoodItem.FoodType.Drinks;
 		            
-		            FoodItem drink = new FoodItem(foodName,foodPrice,foodDesc);
+		            FoodItem drink = new FoodItem(foodName,foodPrice,foodDesc, fType);
 		            drinks.add(drink);
 		      }
 		      while(sc.hasNextLine());     
@@ -41,8 +51,9 @@ public class FileReaderWriter {
 				String foodName = sc.next();
 				double foodPrice = sc.nextDouble();
 				String foodDesc = sc.next();
+				FoodItem.FoodType fType = FoodItem.FoodType.Appetizer;
 
-				FoodItem appetizer = new FoodItem(foodName,foodPrice,foodDesc);
+				FoodItem appetizer = new FoodItem(foodName,foodPrice,foodDesc, fType);
 				appet.add(appetizer);
 			}
 			while(sc.hasNextLine());
@@ -59,8 +70,9 @@ public class FileReaderWriter {
 				String foodName = sc.next();
 				double foodPrice = sc.nextDouble();
 				String foodDesc = sc.next();
+				FoodItem.FoodType fType = FoodItem.FoodType.Dessert;
 
-				FoodItem dessert = new FoodItem(foodName,foodPrice,foodDesc);
+				FoodItem dessert = new FoodItem(foodName,foodPrice,foodDesc, fType);
 				desserts.add(dessert);
 			}
 			while(sc.hasNextLine());
@@ -77,15 +89,16 @@ public class FileReaderWriter {
 			String foodName = sc.next();
 			double foodPrice = sc.nextDouble();
 			String foodDesc = sc.next();
+			FoodItem.FoodType fType = FoodItem.FoodType.MainCourse;
 
-			FoodItem mainCourse = new FoodItem(foodName,foodPrice,foodDesc);
+			FoodItem mainCourse = new FoodItem(foodName,foodPrice,foodDesc,fType);
 			mainCourses.add(mainCourse);
 		}
 		while(sc.hasNextLine());
 		sc.close();
 	}
 
-		  public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
+		  /*public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
 	      {
       		  File file = new File("./Reservation.txt");
       		  Scanner sc = new Scanner(file);
@@ -99,12 +112,12 @@ public class FileReaderWriter {
 					String reserveDate = sc.next();
 		            
 		            Reservation r = new Reservation(numOfPax,  custName,  custContact,  reserveTime,  reserveDate, getTable);
-					// Shouldn't this be Reservation not table?
+	
 		            Reservations.add(r);
 		      }
 		      while(sc.hasNextLine());     
 		     sc.close();
-	      }
+	      }*/
 
 		  
 		  

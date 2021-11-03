@@ -1,4 +1,4 @@
 Coke, 2.00 , Gasy and Tasty,
 Sprite, 1.60, Fancy Lemonade,
-Ice Lemon Tea, 1.80, Freshly Brewed
+Ice Lemon Tea, 1.80, Freshly Brewed,
 

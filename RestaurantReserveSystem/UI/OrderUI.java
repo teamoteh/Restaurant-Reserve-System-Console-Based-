@@ -7,6 +7,7 @@ import Entities.Table;
 import Entities.Staff;
 import Entities.Order;
 import Manager.OrderMgr;
+import Manager.TableMgr;
 
 // Boundary class that provides UI for users to perform actions on Order Objects
 
@@ -14,17 +15,17 @@ public class OrderUI {
 	// UI provided to user showing actions that can be performed by user
 	private static Scanner sc = new Scanner(System.in);
 
-	public static void orderMainOptions() {
+	public static void displayOrder_UI() {
 		int choice;
 		while (true) {
 			// UI Display option
 			System.out.println("\nORDER UI");
 			System.out.println("[1] - View Current Orders");
-			System.out.println("[2] - Create Orders");
-			System.out.println("[3] - Modify Orders");
-			System.out.println("[4] - Remove Orders");
+			System.out.println("[2] - Create Order");
+			System.out.println("[3] - Modify Order");
+			System.out.println("[4] - Remove Order");
 			System.out.println("[5] - Make Payment");
-			System.out.println("[0] - Go Back");
+			System.out.println("[0] - Return");
 
 			// Error Catching (input)
 			do {
@@ -33,6 +34,8 @@ public class OrderUI {
 
 			// Option
 			switch (choice) {
+			case 0:
+				return;
 			case 1:
 				viewCurrentOrderUI();
 				break;
@@ -55,7 +58,7 @@ public class OrderUI {
 	// Display current order
 	private static void viewCurrentOrderUI() {
 		int index, choice;
-		ArrayList<Order> orderList = OrderMgr.getRestaurantOrders();
+		ArrayList<Order> orderList = OrderMgr.getOrderList();
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders");
@@ -76,10 +79,10 @@ public class OrderUI {
 			} while (choice < 0 || choice >= orderList.size());
 
 			if (choice == 0)
-				break;
+				return;
 
 			// Print selected order details
-			OrderMgr.printOrderDetails(orderList.get(choice));
+			OrderMgr.printOrderDetails(orderList.get(choice - 1));
 		}
 	}
 
@@ -100,50 +103,43 @@ public class OrderUI {
 
 	// Select table for new Orders
 	private static Table selectTableUI() {
-		int index = 0;
-
-		ArrayList<Integer> temp = new ArrayList<Integer>();
+		ArrayList<Table> tList = new ArrayList<Table>();
 		ArrayList<Table> tableList = OrderMgr.getRestaurantTables();
-		System.out.println(
-				"These are the list of available tables in the restaurant, please choose according to your pax ?");
-		System.out.println("Choice\tTableID\tNumber of Seats");
-		/////////////////////////////// Check if 30===================
-		for (int i = 0; i < 30; i++) {
-			try {
-				/////////////////////////////////////////// wait for jovian
-				if (entities.Restaurant.tables.get(i).isOccupied == false
-						&& entities.Restaurant.sessionReservations.get(i).tableReservation == null) {
-					System.out.println("[" + (index++ + 1) + "] - " + "\t" + entities.Restaurant.tables.get(i).tableId
-							+ "\t" + entities.Restaurant.tables.get(i).numOfSeats);
-					temp.add(entities.Restaurant.tables.get(i).tableId);
-				}
-			} catch (IndexOutOfBoundsException e) {
-				if (entities.Restaurant.tables.get(i).isOccupied == false) {
-					System.out.println("[" + (index++ + 1) + "] - " + "\t" + entities.Restaurant.tables.get(i).tableId
-							+ "\t" + entities.Restaurant.tables.get(i).numOfSeats);
-					temp.add(entities.Restaurant.tables.get(i).tableId);
-				}
-			}
-		}
-		int choice = CusScanner.nextInt(1, index);
-		choice = temp.get(choice - 1);
-		for (Table table : tableList)
-			if (table.tableId == choice)
-				return table;
-		return tableList.get(0);
+		//int index = 0;
+		int choice;
 
+		System.out.println("These are the list of available tables in the restaurant, please choose according to your pax ?");
+		tList = TableMgr.findAvailTables(tList);
+		for (int i = 0; i < tList.size(); i++) {
+			int tableNO = tList.get(i).getTableNo();
+			int tableSeat = tList.get(i).getMaxNumSeats();
+			System.out.println("[" + i + "] - " + "TableNo: " + tableNO + "\t Available Seats: "  + tableSeat);
+		}
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input your choice of table: ");
+		
+
+		do {
+			choice = sc.nextInt();
+		} while (choice < 0 || choice > tList.size());
+
+		int userTable = tableList.get(choice).getTableNo();
+		sc.close();
+		return tableList.get(userTable);
 	}
 
 	// Internal method use to select Staff for new Orders
 	private static Staff selectStaffUI() {
-		int index = 0;
+		int index = 0, choice;
 
 		ArrayList<Staff> staffList = OrderMgr.getRestaurantStaff();
 		System.out.println("Which Staff is keying this order ?");
 		for (Staff staff : staffList)
 			System.out.println("[" + (index++ + 1) + "] - " + staff.toString());
 
-		int choice = CusScanner.nextInt(1, index);
+		do {
+			choice = sc.nextInt();
+		} while (choice < 1 || choice > index);
 
 		return staffList.get(choice - 1);
 
@@ -154,7 +150,7 @@ public class OrderUI {
 		int index, choice;
 
 		index = 0;
-		ArrayList<Order> orderList = OrderMgr.getRestaurantOrders();
+		ArrayList<Order> orderList = OrderMgr.getOrderList();
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently, You must have at least 1 order to modify an order");
@@ -166,7 +162,9 @@ public class OrderUI {
 			System.out.println("[" + (index++ + 1) + "] - " + order.getName());
 		System.out.println("[" + (0) + "] - " + "Back");
 
-		choice = CusScanner.nextInt(0, index);
+		do {
+			choice = sc.nextInt();
+		} while (choice < 0 || choice > index);
 
 		if (choice == 0)
 			return;
@@ -176,8 +174,11 @@ public class OrderUI {
 		System.out.println("[2] - Remove");
 		System.out.println("[0] - Back");
 		int choice_1;
+		
+		do {
+			choice_1 = sc.nextInt();
+		} while (choice_1 < 0 || choice_1 > 2);
 
-		choice_1 = CusScanner.nextInt(0, 2);
 		switch (choice_1) {
 		case 1:
 			OrderMgr.addFoodItemToOrder(orderList.get(choice - 1));
@@ -194,8 +195,8 @@ public class OrderUI {
 	// UI Provided to user to remove an Order from the Restaurant's current list of
 	// orders
 	private static void removeOrderUI() {
-		int index = 0;
-		ArrayList<Order> orderList = OrderMgr.getRestaurantOrders();
+		int index = 0, choice;
+		ArrayList<Order> orderList = OrderMgr.getOrderList();
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently, You must have at least 1 order to remove an order");
@@ -206,7 +207,10 @@ public class OrderUI {
 			System.out.println("[" + (index++ + 1) + "] - " + order.getName());
 		System.out.println("[" + (0) + "] - Back");
 
-		int choice = CusScanner.nextInt(0, index);
+		do {
+			choice = sc.nextInt();
+		} while (choice < 0 || choice > index);
+
 		if (choice == 0)
 			return;
 
@@ -216,8 +220,8 @@ public class OrderUI {
 
 	// Provides UI for choosing the specific order to be paid for
 	private static void makePaymentUI() {
-		int index = 0;
-		ArrayList<Order> orderList = OrderMgr.getRestaurantOrders();
+		int index = 1, choice;
+		ArrayList<Order> orderList = OrderMgr.getOrderList();
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently, You must have at least 1 order to complete an order");
@@ -226,10 +230,14 @@ public class OrderUI {
 
 		System.out.println("Which of the following is the order being paid for?");
 		for (Order order : orderList)
-			System.out.println("[" + (index++ + 1) + "] - " + order.getName());
+			System.out.println("[" + (index++) + "] - " + order.getName());
 		System.out.println("[" + (0) + "] - Back");
 
-		int choice = CusScanner.nextInt(0, index);
+
+		do {
+			choice = sc.nextInt();
+		} while (choice < 0 || choice > index);
+
 		if (choice == 0)
 			return;
 

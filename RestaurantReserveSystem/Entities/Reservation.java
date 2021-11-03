@@ -1,15 +1,16 @@
 package Entities;
 //import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Reservation {
 
 	private int numOfPax;
 	private String custName;
 	private int custContact;
-	private String reserveTime;
-	private String reserveDate;
-	private int tableNo;
-	private ArrayList<Table> table;
+	private LocalTime reserveTime;
+	private LocalDate reserveDate;
+	private Table table;
 	
 /*public Reservation ()
 	{
@@ -21,7 +22,7 @@ public class Reservation {
 		tableNo = 0;
 	}*/
 
-public Reservation (int numOfPax, String custName, int custContact, String reserveTime, String reserveDate, ArrayList<Table> table)
+public Reservation (LocalTime reserveTime, LocalDate reserveDate, int numOfPax, String custName, int custContact, Table table)
 {
 	this.numOfPax=numOfPax;
 	this.custName=custName;
@@ -33,11 +34,11 @@ public Reservation (int numOfPax, String custName, int custContact, String reser
 
 // get methods
 
-public String getReserveDate() {
+public LocalDate getReserveDate() {
 	return this.reserveDate;
 }
 
-public String getReserveTime()
+public LocalTime getReserveTime()
 {
 	return this.reserveTime;
 } 
@@ -57,16 +58,23 @@ public int getCustContact()
 	return this.custContact;
 }
 
+public int getTableNo()
+{
+	return this.table.getTableNo();
+}
+
+
+
 
 
 //set methods
 
-public void setDate(String reserveDate)
+public void setDate(LocalDate reserveDate)
 {
   	this.reserveDate = reserveDate;
 }
 
-public void setTime(String reserveTime)
+public void setTime(LocalTime reserveTime)
 {
 	this.reserveTime = reserveTime;
 }
@@ -85,7 +93,8 @@ public void setCustContact(int custContact){
 }
 
 
-public void bookTable(int tableNo)
+
+/*public void bookTable(int tableNo) // Under Table MGr
 {
 	//Changed it from Table.availStatus to Table.getAvailStatus() since availStatus is private to Table
 	// availStatus is boolean as well
@@ -107,6 +116,6 @@ public void unbookTable(int tableNo)
 {
 	Table.getAvailStatus() = true;
 	System.out.printf("Table" + tableNo + " has been unreserved." );
-}
+}*/
 
 }

@@ -1,7 +1,6 @@
 package Entities;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +12,7 @@ public class Order {
     private Table table;
     private Date timestamp;
     private String name;
-    private boolean checkOut;
+    private boolean MemberDiscount;
 
     // Constructor for Order
     public Order(Staff staff, Table table) {
@@ -22,8 +21,8 @@ public class Order {
         this.setTable(table); // from param
         this.orderItems = new ArrayList<FoodItem>();
         this.timestamp = new Date(); // Wed Nov 03 02:50:54 GMT 2021 => Date
-        this.setName("Table: " + getTable().tableID + " - Date:" + dateFormat.format(this.timestamp)); // 2021-11-03 02:50:54 => String
-        this.setCheckOut(false);
+        this.setName("Table: " + getTable().getTableNo() + " - Date:" + dateFormat.format(this.timestamp)); // 2021-11-03 02:50:54 => String
+        this.setMemberDiscount(false);
     }
 
     // Add a FoodItem Item to the Order
@@ -33,7 +32,7 @@ public class Order {
 
     // Removes a FoodItem Item from the Order
     public void removeItem(int index) {
-        String removedItemName = this.orderItems.get(index).getName();
+        String removedItemName = this.orderItems.get(index).getFoodName();
         this.orderItems.remove(index);
         System.out.println(removedItemName + " was successfully removed from the " + this.getName() + " Invoice");
     }
@@ -58,7 +57,7 @@ public class Order {
         this.staff = staff;
     }
 
-    public Date getTimestamp() {
+    public Date getTimeStamp() {
         return timestamp;
     }
 
@@ -74,12 +73,12 @@ public class Order {
         this.table = table;
     }
 
-    public boolean getCheckOut() {
-        return this.checkOut;
+    public boolean getMemberDiscount() {
+        return this.MemberDiscount;
     }
 
-    public void setCheckOut(boolean checkOut) {
-        this.checkOut = checkOut;
+    public void setMemberDiscount(boolean MemberDiscount) {
+        this.MemberDiscount = MemberDiscount;
     }
 
 }

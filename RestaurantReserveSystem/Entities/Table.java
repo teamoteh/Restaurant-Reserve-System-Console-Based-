@@ -1,23 +1,30 @@
 package Entities;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Table {
     private int TableNo;
     private int maxNumOfSeats;
     private Boolean availStatus;
-    private String contactNo;
 
     public Table(){
         TableNo = 0;
         maxNumOfSeats = 0;
         availStatus = true;
-        contactNo = null;
     }
 
-    public Table(int No, int maxSeats){
+    public Table(int No, int maxSeats, int avail){
         this.TableNo = No;
         setMaxNumSeats(maxSeats);
-        this.availStatus = true;
-        this.contactNo = null;
+        if (avail == 0){
+            this.availStatus = true;
+        }
+        else if (avail == 1){
+            this.availStatus = false;
+        }
     }
 
     public int getTableNo(){
@@ -32,10 +39,6 @@ public class Table {
         return this.availStatus;
     }
 
-    public String getContactNo(){
-        return this.contactNo;
-    }
-
     public void setTableNo(int No){
         this.TableNo = No;
     }
@@ -44,8 +47,8 @@ public class Table {
         this.availStatus = false;
     }
 
-    public void setContact(String contact){
-        this.contactNo = contact;
+    public void setAvailStatus(){
+        this.availStatus = true;
     }
     
     public void setMaxNumSeats(int maxSeats){
@@ -58,4 +61,16 @@ public class Table {
         }
     }
 
+    public void write(String address, String text) throws IOException {
+    		try{
+				FileWriter fw = new FileWriter(address, true);
+    			BufferedWriter bw = new BufferedWriter(fw);
+    			PrintWriter out = new PrintWriter(bw);
+				out.println(text);
+                out.close();
+    			//more code
+				} catch (IOException e) {
+    			//exception handling left as an exercise for the reader
+				}
+			}
 }

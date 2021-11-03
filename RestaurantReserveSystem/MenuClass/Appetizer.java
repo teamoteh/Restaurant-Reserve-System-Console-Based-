@@ -11,7 +11,6 @@ public class Appetizer extends FoodItem{
 
     // contructor
     public Appetizer(String name, double price, String description) {
-        super(name, price, description);
+        super(name, price, description, FoodType.Appetizer);
     }
-
 }

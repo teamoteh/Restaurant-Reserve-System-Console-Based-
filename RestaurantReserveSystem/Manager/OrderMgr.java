@@ -2,31 +2,30 @@ package Manager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter; // Import the FileWriter class
-import java.io.IOException; // Import the IOException class to handle errors
 
-// import javax.sound.sampled.BooleanControl;
+import Entities.*;
+import Manager.*; // It is in used, ignore error. See line 17~19
 
-import Entities.Order;
-import Entities.FoodItem;
-import Entities.Table;
-import Entities.Staff;
-import db.Restaurant;
 
 // import Entities.Restaurant;
 
 public class OrderMgr {
     ////////////////// NEED TO CHECK WITH TEAM MATES /////////////
     private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Order> orderList = Restaurant.orders;
-    private static ArrayList<FoodItem> FoodItemList = Restaurant.FoodItem;
-    private static ArrayList<Table> tableList = Restaurant.tables;
-    private static ArrayList<Order> invoiceList = Restaurant.invoices;
-    private static ArrayList<Staff> staffList = Restaurant.staff;
+    private static ArrayList<Order> orderList = new ArrayList<Order>();
+    private static ArrayList<Order> invoiceList = new ArrayList<Order>();
+    private static ArrayList<FoodItem> FoodItemList = MenuMgr.getMenu();
+    private static ArrayList<Table> tableList = TableMgr.getTableList();
+    private static ArrayList<Staff> staffList = StaffMgr.getStaffList();
 
     // Retrieves List of Restaurant's Orders
-    public static ArrayList<Order> getRestaurantOrders() {
+    public static ArrayList<Order> getOrderList() {
         return orderList;
+    }
+
+    // Retrieves List of Restaurant's completed Orders
+    public static ArrayList<Order> getInvoiceList() {
+        return invoiceList;
     }
 
     // Retrieves List of Restaurant's Tables
@@ -47,16 +46,19 @@ public class OrderMgr {
         System.out.println("Order ID \t: " + order.getName());
         System.out.println("Staff \t\t: " + order.getStaff().getStaffName());
         System.out.println("Table ID\t: " + order.getTable().getTableNo());
-        System.out.println("DateTime \t: " + order.getTimestamp().toString());
+        System.out.println("DateTime \t: " + order.getTimeStamp().toString());
+        System.out.println("Membership Discount: \t " + order.getMemberDiscount());
 
         System.out.println("\n\t================= ORDERS MADE =================\t\n");
         double sum = 0;
         int index = 1;
         for (FoodItem item : order.getOrderItems()) {
-            // ===============================Check with Prawn====================
-            // ==================Change all to foodItem instead of Menu?==========
             System.out.println((index++) + ". " + item.getFoodName() + " - " + item.getFoodPrice());
-            sum += item.getPrice();
+            sum += item.getFoodPrice();
+        }
+        // MEMBER DISCOUNT
+        if (order.getMemberDiscount()){
+            sum = sum * 0.8;
         }
         System.out.printf("\nSUBTOTAL\t\t:%.2f \n", sum);
         System.out.printf("GST ( 7%% )\t\t:%.2f \n", sum * 0.07);
@@ -72,7 +74,7 @@ public class OrderMgr {
     // input: table - Table assigned to this order
     public static void addNewOrder(Staff staff, Table table) {
         Order newOrder = new Order(staff, table);
-        table.isOccupied = true;
+        table.setUnavailStatus();
 
         newOrder = addFoodItemToOrder(newOrder);
         orderList.add(newOrder);
@@ -81,13 +83,12 @@ public class OrderMgr {
 
     // Adds FoodItems to the order
     // input: order - Order to be modified
-    // ==================Should this be menu instead of food? This is quite
-    // confusing============================
     public static Order addFoodItemToOrder(Order order) {
+        int opt;
         String choice = "", compare = "Y";
         do {
             int index = 1;
-            ArrayList<Integer> temp = new ArrayList<Integer>();
+            // ArrayList<Integer> temp = new ArrayList<Integer>();
 
             if (FoodItemList.size() < 1) {
                 System.out.println("There are no items in the menu");
@@ -100,20 +101,21 @@ public class OrderMgr {
             for (int i = 0; i < FoodItemList.size(); i++) {
                 if (FoodItemList.get(i) instanceof FoodItem) {
                     System.out.println("[" + (index++) + "] - " + FoodItemList.get(i).getFoodName());
-                    temp.add(i);
+                    // temp.add(i);
                 }
             }
 
             System.out.println();
             do {
-                int option = sc.nextInt();
-            } while (option < 1 || option > index);
+                opt = sc.nextInt();
+            } while (opt < 1 || opt > index);
 
-            FoodItem food = (FoodItem) FoodItemList.get(temp.get(option - 1));
-            orderList.add(food);
+            // FoodItem food = (FoodItem) FoodItemList.get(temp.get(opt - 1));
+            FoodItem food = (FoodItem) FoodItemList.get(opt-1);
+            order.addItem(food);
             System.out.println(food.getFoodName() + " was successfully add to [" + order.getName() + "] Order");
 
-            order.addItem(FoodItemList);
+            // order.add(FoodItemList);
 
             // Repeater
             System.out.println("Input \"Y\" to add more food to the order, or other characters to stop adding");
@@ -126,6 +128,7 @@ public class OrderMgr {
     // Removes FoodItem Items from the order
     // input: order - Order to be modified
     public static void removeFoodItemFromOrder(Order order) {
+        int opt;
         // Sanity check
         if (order.getOrderItems().size() < 1) {
             System.out.println("There are no items in this order");
@@ -146,10 +149,10 @@ public class OrderMgr {
 
                     // Error catching (input)
                     do {
-                        int option = sc.nextInt();
-                    } while (option < 0 || option >= order.getOrderItems().size());
+                        opt = sc.nextInt();
+                    } while (opt < 0 || opt >= order.getOrderItems().size());
 
-                    order.removeItem(option);
+                    order.removeItem(opt);
 
                     // Repeater
                     System.out.println(
@@ -168,46 +171,23 @@ public class OrderMgr {
         System.out.println("Successfully removed " + removedOrderName + " from the list of current orders");
     }
 
-    // Simulates the customer paying for his/her orders
+    // Simulates the customer paying for his/her orde (Input: true or falsers
     // input: index - index of "order" in Restaurant Order which is to be completed
     public static void completeOrder(int index) {
         Order completedOrder = orderList.get(index);
         String removedOrderName = completedOrder.getName();
-        completedOrder.setCheckOut(true);
-        // ============== NEED TO CHECK WITH TEAMMATES==================
-        completedOrder.getTable().isOccupied = false;
-        // =============================================================
+        System.out.println("Is the customer a member?");
+        Boolean membership = sc.nextBoolean();
+        completedOrder.setMemberDiscount(membership);
+        completedOrder.getTable().setAvailStatus();
+        
+        // Shift this order to invoiceOrder
         invoiceList.add(completedOrder);
-
+        // Remove this order from orderList
         orderList.remove(index);
 
         System.out.println("\n~~~~~~~This is the printed invoice~~~~~~~\n");
         printOrderDetails(completedOrder);
         System.out.println("\nSuccessfully completed [" + removedOrderName + "] Order");
-    }
-
-    // Add receipt to database
-    // Sale revenue report will detail the period, individual sale items (either ala
-    // carte or
-    // promotional items) and total revenue.
-    public static void addReceipt(ArrayList<Order> orderList) {
-        try {
-            FileWriter myWriter = new FileWriter("//datatxt/Order.txt");
-            myWriter.write(order.getTimestamp().toString() + "," + order.getTotal()); // toString() is a library
-                                                                                      // function. Nosuch getTotal function
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-        do {
-            int tableID = Integer.parseInt(sc.next());
-            int tableMaxSeats = Integer.parseInt(sc.next());
-
-            Table table = new Table(tableID, tableMaxSeats);
-            tables.add(table);
-        } while (sc.hasNextLine());
     }
 }

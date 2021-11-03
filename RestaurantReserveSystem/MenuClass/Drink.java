@@ -9,7 +9,7 @@ public class Drink extends FoodItem{
     }
 
     public Drink(String name, double price, String description) {
-        super(name, price, description);
+        super(name, price, description, FoodType.Drinks);
     }
 
 }

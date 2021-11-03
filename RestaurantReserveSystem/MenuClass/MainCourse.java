@@ -9,7 +9,7 @@ public class MainCourse extends FoodItem{
     }
 
     public MainCourse(String name, double price, String description) {
-        super(name, price, description);
+        super(name, price, description,FoodType.MainCourse);
     }
 
 }

@@ -1,29 +1,27 @@
-package ui;
+package UI;
 
 import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
-
-import java.util.Date;
 import java.text.DateFormatSymbols;
 import java.util.Collections;
 
 import Entities.FoodItem;
-import Entities.MenuItem;
 import Entities.Order;
-import db.Restaurant;
 import Manager.OrderMgr;
 
 // Sale revenue report will detail the period, individual sale items (either ala carte or
 // promotional items) and total revenue.
 
-public class SalesInvoiceUI {
+public class SalesReportUI {
 
 	private static Scanner sc = new Scanner(System.in);
-	private static ArrayList<Order> orderList = Restaurant.orders;
+	private static ArrayList<Order> invoiceList = OrderMgr.getInvoiceList();
     // private static ArrayList<Menu> menuItemList = Restaurant.menu;
 	// UI provided to display list of actions that can be performed on Restaurant's Invoices
 
-	public static void salesInvoiceMainOption() {
+	public static void displaysalesInvoiceUI() {
 		int choice;
 		do {
 			System.out.println("\nWhich Sales Report to view?\n");
@@ -40,15 +38,14 @@ public class SalesInvoiceUI {
 			switch (choice) {
 			case 1:
 				System.out.println("\nWhich month to view?\n");
-				int month = sc.nextint();
+				int month = sc.nextInt();
 				printSalesRevenueReport(month);
 				break;
 			case 2:
 				
-				viewSaleMthUi();
 				break;
 			case 3:
-				viewSale();
+			
 				break;
 			case 0:
 				return;
@@ -82,14 +79,14 @@ public class SalesInvoiceUI {
 	private static double getPeriodTotalRevenue(int month){
 		double totalSum = 0;
 		
-		for (Order order: orderList) {
+		for (Order order: invoiceList) {
 			if ((order.getTimeStamp().getMonth()) + 1 == month) {
-				for (FoodItem item : order.get(i).getOrderItems()) {
+				for (FoodItem item : order.getOrderItems()) {
 					totalSum += item.getFoodPrice();
 				}
 			}
 		}
-		double totalRoundOff = Math.round(totalSum * 100.0)/100.0;
+		double totalRoundOff = Math.round(totalSum *1.17 * 100.0)/100.0;
 		return totalRoundOff;
 
 	}
@@ -106,20 +103,19 @@ public class SalesInvoiceUI {
 		
 		ArrayList<FoodItem> totalFoodDetail = new ArrayList<FoodItem>();
 
-		for (Order order: orderList) {
+		for (Order order: invoiceList) {
 			if ((order.getTimeStamp().getMonth()) + 1 == month) {
-				for (FoodItem item : order.get(i).getOrderItems()) {
+				for (FoodItem item : order.getOrderItems()) {
 					totalFoodDetail.add(item);
 				}
 			}
 		}
 
 		// gets unique name
-		Set<String> unique = new HashSet<String>(totalFoodDetail);
-
+		Set<FoodItem> unique = new HashSet<FoodItem>(totalFoodDetail);
+		
 		System.out.println(String.format("%30s", "================================================="));
-		// get fooditem name : occurence
-		for (String key : unique) {
+		for (FoodItem key : unique) {
 			System.out.println(key + ": " + Collections.frequency(totalFoodDetail, key));
 		}
 	}
