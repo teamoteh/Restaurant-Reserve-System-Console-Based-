@@ -21,8 +21,8 @@ public class Order {
         this.staff = staff; // from param
         this.setTable(table); // from param
         this.orderItems = new ArrayList<FoodItem>();
-        this.timestamp = new Date();
-        this.setName("Table: " + getTable().tableID + " - Date:" + dateFormat.format(this.timestamp));
+        this.timestamp = new Date(); // Wed Nov 03 02:50:54 GMT 2021 => Date
+        this.setName("Table: " + getTable().tableID + " - Date:" + dateFormat.format(this.timestamp)); // 2021-11-03 02:50:54 => String
         this.setCheckOut(false);
     }
 

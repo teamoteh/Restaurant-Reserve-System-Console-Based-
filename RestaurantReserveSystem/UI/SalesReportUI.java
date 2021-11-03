@@ -3,7 +3,7 @@ package ui;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.text.DateFormatSymbols;
 import java.util.Collections;
 
@@ -20,7 +20,7 @@ public class SalesInvoiceUI {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Order> orderList = Restaurant.orders;
-    private static ArrayList<Menu> menuItemList = Restaurant.menu;
+    // private static ArrayList<Menu> menuItemList = Restaurant.menu;
 	// UI provided to display list of actions that can be performed on Restaurant's Invoices
 
 	public static void salesInvoiceMainOption() {
@@ -28,9 +28,8 @@ public class SalesInvoiceUI {
 		do {
 			System.out.println("\nWhich Sales Report to view?\n");
 
-			System.out.println("[1] - View Sales Revenue (Day)");
-			System.out.println("[2] - View Sales Revenue (Month)");
-			System.out.println("[3] - View List of invoices by month");
+			System.out.println("[1] - View Individual Sales Revenue (Month)");
+			System.out.println("[2] - View List of Sales Revenue (Month)");
 			System.out.println("[0] - Go Back");
 
 			// Error catching
@@ -40,9 +39,12 @@ public class SalesInvoiceUI {
 
 			switch (choice) {
 			case 1:
-				viewSaleDayUi();
+				System.out.println("\nWhich month to view?\n");
+				int month = sc.nextint();
+				printSalesRevenueReport(month);
 				break;
 			case 2:
+				
 				viewSaleMthUi();
 				break;
 			case 3:
@@ -62,8 +64,7 @@ public class SalesInvoiceUI {
 	 */
 	public static void printSalesRevenueReport(int month){
 		double totalRevenue = getPeriodTotalRevenue(month);
-		
-		String monthName = new DateFormatSymbols().getMonths()[month-1];
+		String monthName = new DateFormatSymbols().getMonths()[month-1]; // Convert int month to string month name
 		System.out.println(String.format("%30s", "================================================="));
 		System.out.println("\nSales Revenue Report for " + monthName);
 		System.out.println("Total Sales Revenue: " + totalRevenue);
@@ -82,7 +83,7 @@ public class SalesInvoiceUI {
 		double totalSum = 0;
 		
 		for (Order order: orderList) {
-			if ((order.getDateGenerated().get(Calendar.MONTH) + 1 == month)){
+			if ((order.getTimeStamp().getMonth()) + 1 == month) {
 				for (FoodItem item : order.get(i).getOrderItems()) {
 					totalSum += item.getFoodPrice();
 				}
@@ -101,12 +102,12 @@ public class SalesInvoiceUI {
 	 * @return Array containing quantity sold for each menu item
 	 */
 	
-	private static int[] getPeriodProductStatistics(int month){
+	private static void getPeriodProductStatistics(int month){
 		
 		ArrayList<FoodItem> totalFoodDetail = new ArrayList<FoodItem>();
 
 		for (Order order: orderList) {
-			if (order.getTimestamp().get(Calendar.MONTH) + 1 == month) {
+			if ((order.getTimeStamp().getMonth()) + 1 == month) {
 				for (FoodItem item : order.get(i).getOrderItems()) {
 					totalFoodDetail.add(item);
 				}
