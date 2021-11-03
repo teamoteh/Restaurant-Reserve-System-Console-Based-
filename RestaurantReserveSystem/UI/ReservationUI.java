@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import Entities.Reservation;
+import Entities.Table;
+
 public class ReservationUI {
 
     protected ArrayList<Table> tableArr;
