@@ -89,19 +89,12 @@ public class ReservationMgr {
     }
 
 
-    public static void displayReservation ()
+    public static void displayReservation () throws FileNotFoundException
     {
-
-        FileReaderWriter fi = new FileReaderWriter();
-        try {
-            fi.getReservation(r);
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        FileReaderWriter.getReservation(r);
         System.out.println("Date    Time      Name     Pax      Contact      TableNo");
         for (int i = 0; i < r.size(); i++) {
-            System.out.println(r.get(i).getReserveDate() + "    " + r.get(i).getReserveTime()+ "    " + r.get(i).getCustName() + "    " + r.get(i).getNumOfPax()+ "    " + r.get(i).getCustContact()+ "    " + r.get(i).getTableNo());
+        System.out.println(r.get(i).getReserveDate() + "    " + r.get(i).getReserveTime()+ "    " + r.get(i).getCustName() + "    " + r.get(i).getNumOfPax()+ "    " + r.get(i).getCustContact()+ "    " + r.get(i).getTableNo());
     }
     }
 }
