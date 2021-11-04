@@ -1,7 +1,13 @@
 package datatxt;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 import Entities.FoodItem;
+import Entities.Reservation;
+import Entities.Table;
+import Manager.TableMgr;
+
 import java.util.ArrayList;
 
 public class FileReaderWriter {
@@ -98,9 +104,9 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
-		  /*public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
+		  public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
 	      {
-      		  File file = new File("./Reservation.txt");
+      		  File file = new File("/Users/ASUS/OneDrive/Documents/GitHub/Restaurant-Reserve-System-Console-Based-/RestaurantReserveSystem/datatxt/Reservation.txt");
       		  Scanner sc = new Scanner(file);
 		      sc.useDelimiter("\\s*,\\s*");
 	
@@ -108,16 +114,17 @@ public class FileReaderWriter {
 		    	  	int numOfPax = sc.nextInt();
 		          	String custName = sc.next();
 		          	int custContact = sc.nextInt();
-					String reserveTime = sc.next();
-					String reserveDate = sc.next();
+					LocalTime reserveTime = LocalTime.parse(sc.nextLine());
+					LocalDate reserveDate = LocalDate.parse(sc.nextLine());
+					Table table = TableMgr.assignTable(numOfPax);
 		            
-		            Reservation r = new Reservation(numOfPax,  custName,  custContact,  reserveTime,  reserveDate, getTable);
+		            Reservation r = new Reservation(reserveTime,  reserveDate,numOfPax,  custName,  custContact, table);
 	
 		            Reservations.add(r);
 		      }
 		      while(sc.hasNextLine());     
 		     sc.close();
-	      }*/
+	      }
 
 		  
 		  
