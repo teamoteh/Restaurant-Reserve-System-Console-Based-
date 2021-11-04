@@ -104,18 +104,18 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
-		  public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
+		  public static void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException
 	      {
       		  File file = new File("/Users/ASUS/OneDrive/Documents/GitHub/Restaurant-Reserve-System-Console-Based-/RestaurantReserveSystem/datatxt/Reservation.txt");
       		  Scanner sc = new Scanner(file);
 		      sc.useDelimiter("\\s*,\\s*");
 	
 		      do{
-		    	  	int numOfPax = sc.nextInt();
+		    	  	int numOfPax = Integer.parseInt(sc.next());
 		          	String custName = sc.next();
-		          	int custContact = sc.nextInt();
-					LocalTime reserveTime = LocalTime.parse(sc.nextLine());
-					LocalDate reserveDate = LocalDate.parse(sc.nextLine());
+		          	int custContact = Integer.parseInt(sc.next());
+					LocalTime reserveTime = LocalTime.parse(sc.next());
+					LocalDate reserveDate = LocalDate.parse(sc.next());
 					Table table = TableMgr.assignTable(numOfPax);
 		            
 		            Reservation r = new Reservation(reserveTime,  reserveDate,numOfPax,  custName,  custContact, table);
