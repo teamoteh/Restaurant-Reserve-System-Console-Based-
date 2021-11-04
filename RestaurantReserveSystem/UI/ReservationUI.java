@@ -1,6 +1,7 @@
 package UI;
 
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import Entities.Reservation;
@@ -10,7 +11,7 @@ import Manager.TableMgr;
 
 public class ReservationUI {
 
-	public static void displayReservationUI() {
+	public static void displayReservationUI() throws FileNotFoundException {
 		Scanner sc = new Scanner (System.in);
 	
 		System.out.println("What would you like to do?");
