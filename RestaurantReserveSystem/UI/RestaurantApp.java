@@ -1,5 +1,6 @@
  package UI;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 // import java.text.DateFormat;
 // import java.text.SimpleDateFormat;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 //import java.util.Date;
 
 public class RestaurantApp{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
          Scanner sc = new Scanner(System.in);
         //  System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
