@@ -6,7 +6,6 @@ import java.util.Scanner;
 import Entities.*;
 import Manager.*; // It is in used, ignore error. See line 17~19
 
-
 // import Entities.Restaurant;
 
 public class OrderMgr {
@@ -14,9 +13,19 @@ public class OrderMgr {
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<Order> orderList = new ArrayList<Order>();
     private static ArrayList<Order> invoiceList = new ArrayList<Order>();
+    private static ArrayList<SetPromo> PromoItemList = PromoMgr.getPromoList(); // Need tim inputs - changing to
+                                                                                // fooditem :)
     private static ArrayList<FoodItem> FoodItemList = MenuMgr.getMenu();
     private static ArrayList<Table> tableList = TableMgr.getTableList();
     private static ArrayList<Staff> staffList = StaffMgr.getStaffList();
+
+    // SetPromo
+    // ArrayList<SetPromo> allFoodItemList = new ArrayList<FoodItem>()
+    // for(
+    // SetPromo item:PromoItemList)
+    // {
+    // item.getPromo();
+    // }
 
     // Retrieves List of Restaurant's Orders
     public static ArrayList<Order> getOrderList() {
@@ -42,7 +51,7 @@ public class OrderMgr {
     // Input: order - Prints detail of input Order object
     public static void printOrderDetails(Order order) {
         System.out.println();
-        System.out.println("*********************** RECEIPT ***************************");
+        System.out.println("======================= RECEIPT =======================");
         System.out.println("Order ID \t: " + order.getName());
         System.out.println("Staff \t\t: " + order.getStaff().getStaffName());
         System.out.println("Table ID\t: " + order.getTable().getTableNo());
@@ -57,14 +66,14 @@ public class OrderMgr {
             sum += item.getFoodPrice();
         }
         // MEMBER DISCOUNT
-        if (order.getMemberDiscount()){
+        if (order.getMemberDiscount()) {
             sum = sum * 0.8;
         }
-        System.out.printf("\nSUBTOTAL\t\t:%.2f \n", sum);
-        System.out.printf("GST ( 7%% )\t\t:%.2f \n", sum * 0.07);
-        System.out.printf("SERVICE TAX ( 10 %% )\t:%.2f \n", sum * 0.10);
-        System.out.printf("GRAND TOTAL\t\t:%.2f \n", sum * 1.17);
-        System.out.println("*********************** RECEIPT END ***********************");
+        System.out.printf("\nSUBTOTAL\t\t\t:%.2f \n", sum);
+        System.out.printf("GST (7%%)\t\t\t:%.2f \n", sum * 0.07);
+        System.out.printf("SERVICE TAX (10%%)\t:%.2f \n", sum * 0.10);
+        System.out.printf("GRAND TOTAL\t\t\t:%.2f \n", sum * 1.17);
+        System.out.println("======================= RECEIPT END =======================");
         System.out.println();
 
     }
@@ -90,7 +99,7 @@ public class OrderMgr {
             int index = 1;
             // ArrayList<Integer> temp = new ArrayList<Integer>();
 
-            if (FoodItemList.size() < 1) {
+            if (allFoodItemList.size() < 1) {
                 System.out.println("There are no items in the menu");
                 break;
             }
@@ -98,9 +107,9 @@ public class OrderMgr {
             System.out.println();
             System.out.println("Which food would you like to add to the [" + order.getName() + "] Order?");
 
-            for (int i = 0; i < FoodItemList.size(); i++) {
-                if (FoodItemList.get(i) instanceof FoodItem) {
-                    System.out.println("[" + (index++) + "] - " + FoodItemList.get(i).getFoodName());
+            for (int i = 0; i < allFoodItemList.size(); i++) {
+                if (allFoodItemList.get(i) instanceof FoodItem) {
+                    System.out.println((index++) + ". " + allFoodItemList.get(i).getFoodName());
                     // temp.add(i);
                 }
             }
@@ -110,12 +119,12 @@ public class OrderMgr {
                 opt = sc.nextInt();
             } while (opt < 1 || opt > index);
 
-            // FoodItem food = (FoodItem) FoodItemList.get(temp.get(opt - 1));
-            FoodItem food = (FoodItem) FoodItemList.get(opt-1);
+            // FoodItem food = (FoodItem) allFoodItemList.get(temp.get(opt - 1));
+            FoodItem food = (FoodItem) allFoodItemList.get(opt - 1);
             order.addItem(food);
             System.out.println(food.getFoodName() + " was successfully add to [" + order.getName() + "] Order");
 
-            // order.add(FoodItemList);
+            // order.add(allFoodItemList);
 
             // Repeater
             System.out.println("Input \"Y\" to add more food to the order, or other characters to stop adding");
@@ -180,7 +189,7 @@ public class OrderMgr {
         Boolean membership = sc.nextBoolean();
         completedOrder.setMemberDiscount(membership);
         completedOrder.getTable().setAvailStatus();
-        
+
         // Shift this order to invoiceOrder
         invoiceList.add(completedOrder);
         // Remove this order from orderList

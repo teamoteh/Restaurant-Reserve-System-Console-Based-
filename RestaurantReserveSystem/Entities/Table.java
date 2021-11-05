@@ -8,69 +8,64 @@ import java.io.PrintWriter;
 public class Table {
     private int TableNo;
     private int maxNumOfSeats;
-    private Boolean availStatus;
+    private boolean availStatus;
 
-    public Table(){
+    public Table() {
         TableNo = 0;
         maxNumOfSeats = 0;
         availStatus = true;
     }
 
-    public Table(int No, int maxSeats, int avail){
+    public Table(int No, int maxSeats, boolean availStatus2) {
         this.TableNo = No;
         setMaxNumSeats(maxSeats);
-        if (avail == 0){
-            this.availStatus = true;
-        }
-        else if (avail == 1){
-            this.availStatus = false;
-        }
+        availStatus = availStatus2;
     }
 
-    public int getTableNo(){
+    public int getTableNo() {
         return this.TableNo;
     }
 
-    public int getMaxNumSeats(){
+    public int getMaxNumSeats() {
         return this.maxNumOfSeats;
     }
 
-    public boolean getAvailStatus(){
+    public boolean getAvailStatus() {
         return this.availStatus;
     }
 
-    public void setTableNo(int No){
+    public void setTableNo(int No) {
         this.TableNo = No;
     }
 
-    public void setUnavailStatus(){
+    public void setUnavailStatus() {
         this.availStatus = false;
     }
 
-    public void setAvailStatus(){
+    public void setAvailStatus() {
         this.availStatus = true;
     }
-    
-    public void setMaxNumSeats(int maxSeats){
-        if(maxSeats % 2 == 1){
+
+    public void setMaxNumSeats(int maxSeats) {
+        if (maxSeats % 2 == 1) {
             System.out.println("Please input an even number.");
         }
 
-        else if(maxSeats % 2 == 0){
+        else if (maxSeats % 2 == 0) {
             this.maxNumOfSeats = maxSeats;
         }
     }
 
     public void write(String address, String text) throws IOException {
-    		try{
-				FileWriter fw = new FileWriter(address, true);
-    			BufferedWriter bw = new BufferedWriter(fw);
-    			PrintWriter out = new PrintWriter(bw);
-				out.println(text);
-                out.close();
-    			//more code
-				} catch (IOException e) {
-    			//exception handling left as an exercise for the reader
-				}
-			}
+        try {
+            FileWriter fw = new FileWriter(address, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.println(text);
+            out.close();
+            // more code
+        } catch (IOException e) {
+            // exception handling left as an exercise for the reader
+        }
+    }
 }

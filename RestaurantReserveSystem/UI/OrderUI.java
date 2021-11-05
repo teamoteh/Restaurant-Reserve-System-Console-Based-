@@ -69,9 +69,9 @@ public class OrderUI {
 			index = 1;
 			// Print out all orders
 			System.out.println("\nWhich order do you want more details on?");
-			System.out.println("[" + (0) + "] - " + "Return");
+			System.out.println("0. " + "Return");
 			for (Order order : orderList)
-				System.out.println("[" + (index++) + "] - " + order.getName());
+				System.out.println((index++) + ". " + order.getName());
 
 			// Error Catching (input)
 			do {
@@ -105,19 +105,19 @@ public class OrderUI {
 	private static Table selectTableUI() {
 		ArrayList<Table> tList = new ArrayList<Table>();
 		ArrayList<Table> tableList = OrderMgr.getRestaurantTables();
-		//int index = 0;
+		// int index = 0;
 		int choice;
 
-		System.out.println("These are the list of available tables in the restaurant, please choose according to your pax ?");
+		System.out.println(
+				"These are the list of available tables in the restaurant, please choose according to your pax ?");
 		tList = TableMgr.findAvailTables(tList);
 		for (int i = 0; i < tList.size(); i++) {
 			int tableNO = tList.get(i).getTableNo();
 			int tableSeat = tList.get(i).getMaxNumSeats();
-			System.out.println("[" + i + "] - " + "TableNo: " + tableNO + "\t Available Seats: "  + tableSeat);
+			System.out.println(+i + ". " + "TableNo: " + tableNO + "\t Available Seats: " + tableSeat);
 		}
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input your choice of table: ");
-		
 
 		do {
 			choice = sc.nextInt();
@@ -135,7 +135,7 @@ public class OrderUI {
 		ArrayList<Staff> staffList = OrderMgr.getRestaurantStaff();
 		System.out.println("Which Staff is keying this order ?");
 		for (Staff staff : staffList)
-			System.out.println("[" + (index++ + 1) + "] - " + staff.toString());
+			System.out.println((index++ + 1) + ". " + staff.toString());
 
 		do {
 			choice = sc.nextInt();
@@ -158,9 +158,9 @@ public class OrderUI {
 		}
 
 		System.out.println("\nThese are the current orders, which do you want to modify ?");
+		System.out.println("[" + (0) + "] - " + "Exit");
 		for (Order order : orderList)
-			System.out.println("[" + (index++ + 1) + "] - " + order.getName());
-		System.out.println("[" + (0) + "] - " + "Back");
+			System.out.println((index++ + 1) + ". " + order.getName());
 
 		do {
 			choice = sc.nextInt();
@@ -170,11 +170,11 @@ public class OrderUI {
 			return;
 
 		System.out.println("\nDo you want to add or remove items to the order");
-		System.out.println("[1] - Add");
-		System.out.println("[2] - Remove");
-		System.out.println("[0] - Back");
+		System.out.println("0. Exit");
+		System.out.println("1. Add");
+		System.out.println("2. Remove");
 		int choice_1;
-		
+
 		do {
 			choice_1 = sc.nextInt();
 		} while (choice_1 < 0 || choice_1 > 2);
@@ -202,10 +202,10 @@ public class OrderUI {
 			System.out.println("There are no orders currently, You must have at least 1 order to remove an order");
 			return;
 		}
-		System.out.println("Which Order you wanna remove?");
+		System.out.println("Which order do you want to remove?");
+		System.out.println((0) + ". Exit");
 		for (Order order : orderList)
-			System.out.println("[" + (index++ + 1) + "] - " + order.getName());
-		System.out.println("[" + (0) + "] - Back");
+			System.out.println((index++ + 1) + ". " + order.getName());
 
 		do {
 			choice = sc.nextInt();
@@ -229,10 +229,9 @@ public class OrderUI {
 		}
 
 		System.out.println("Which of the following is the order being paid for?");
+		System.out.println("0. Exit");
 		for (Order order : orderList)
-			System.out.println("[" + (index++) + "] - " + order.getName());
-		System.out.println("[" + (0) + "] - Back");
-
+			System.out.println((index++) + ". " + order.getName());
 
 		do {
 			choice = sc.nextInt();

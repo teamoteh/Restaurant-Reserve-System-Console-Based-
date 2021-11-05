@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+
+import java.text.ParseException;
 
 // Order class object to represent Restaurant Orders
 public class Order {
@@ -16,12 +19,30 @@ public class Order {
 
     // Constructor for Order
     public Order(Staff staff, Table table) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // Date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // Ask for Date input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the Date (yyyy-MM-dd):");
+        String input_date = scanner.next();
+        Date date = null;
+        try {
+            // Parsing the String
+            date = dateFormat.parse(input_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+
         this.staff = staff; // from param
         this.setTable(table); // from param
         this.orderItems = new ArrayList<FoodItem>();
-        this.timestamp = new Date(); // Wed Nov 03 02:50:54 GMT 2021 => Date
-        this.setName("Table: " + getTable().getTableNo() + " - Date:" + dateFormat.format(this.timestamp)); // 2021-11-03 02:50:54 => String
+        // this.timestamp = new Date(); // Wed Nov 03 02:50:54 GMT 2021 => Date
+        this.timestamp = date;
+        this.setName("Table: " + getTable().getTableNo() + " - Date:" + dateFormat.format(this.timestamp)); // 2021-11-03
+                                                                                                            // 02:50:54
+                                                                                                            // => String
         this.setMemberDiscount(false);
     }
 

@@ -5,76 +5,52 @@ import datatxt.FileReaderWriter;
 import java.io.FileNotFoundException;
 import Entities.FoodItem;
 import java.util.ArrayList;
-import java.io.FileWriter;   
-import java.io.IOException; 
-import Entities.FoodItem.FoodType; 
+import java.io.FileWriter;
+import java.io.IOException;
+import Entities.FoodItem.FoodType;
 
+// figure out how to read from txt and need to update and delete correctly
 public class MenuMgr {
 
-	protected static ArrayList<FoodItem> appet;
-	protected static ArrayList<FoodItem> dessert;
-	protected static ArrayList<FoodItem> drinks;
-	protected static ArrayList<FoodItem> mainCourse;
-	protected static ArrayList<FoodItem> menu;
+	protected static ArrayList<FoodItem> appet = new ArrayList<FoodItem>();
+	protected static ArrayList<FoodItem> dessert = new ArrayList<FoodItem>();
+	protected static ArrayList<FoodItem> drinks = new ArrayList<FoodItem>();
+	protected static ArrayList<FoodItem> mainCourse = new ArrayList<FoodItem>();
+	protected static ArrayList<FoodItem> menu = new ArrayList<FoodItem>();
 
-	/*public static MenuMgr() {
-		appet = new ArrayList<FoodItem>();
-		dessert = new ArrayList<FoodItem>();
-		mainCourse = new ArrayList<FoodItem>();
-		drinks = new ArrayList<FoodItem>();
-		menu = new ArrayList<FoodItem>();
-	}
-
-	public static void addAppetizer() {
-		FileReaderWriter fi1 = new FileReaderWriter();
-		try {
-			fi1.getAppetizer(MenuMgr.appet);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void addDessert() {
-		FileReaderWriter fi2 = new FileReaderWriter();
-		try {
-			fi2.getDessert(dessert);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void addDrink() {
-		FileReaderWriter fi = new FileReaderWriter();
-		try {
-			fi.getDrinks(drinks);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-
-	public static void addMainCourse() {
-		FileReaderWriter fi3 = new FileReaderWriter();
-		try {
-			fi3.getMainCourse(mainCourse);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}*/
+	/*
+	 * public static MenuMgr() { appet = new ArrayList<FoodItem>(); dessert = new
+	 * ArrayList<FoodItem>(); mainCourse = new ArrayList<FoodItem>(); drinks = new
+	 * ArrayList<FoodItem>(); menu = new ArrayList<FoodItem>(); }
+	 * 
+	 * public static void addAppetizer() { FileReaderWriter fi1 = new
+	 * FileReaderWriter(); try { fi1.getAppetizer(MenuMgr.appet); } catch
+	 * (FileNotFoundException e) { e.printStackTrace(); } }
+	 * 
+	 * public static void addDessert() { FileReaderWriter fi2 = new
+	 * FileReaderWriter(); try { fi2.getDessert(dessert); } catch
+	 * (FileNotFoundException e) { e.printStackTrace(); } }
+	 * 
+	 * public static void addDrink() { FileReaderWriter fi = new FileReaderWriter();
+	 * try { fi.getDrinks(drinks); } catch (FileNotFoundException e) {
+	 * e.printStackTrace(); } }
+	 * 
+	 * 
+	 * public static void addMainCourse() { FileReaderWriter fi3 = new
+	 * FileReaderWriter(); try { fi3.getMainCourse(mainCourse); } catch
+	 * (FileNotFoundException e) { e.printStackTrace(); } }
+	 */
 
 	public static ArrayList<FoodItem> getMenu() {
 		FileReaderWriter fi = new FileReaderWriter();
-		try{
+		try {
+			fi.getDrinks(drinks);
 			fi.getAppetizer(appet);
 			fi.getDessert(dessert);
 			fi.getMainCourse(mainCourse);
-			fi.getDrinks(drinks);
-		}
-		catch(FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 
 		menu.addAll(appet);
 		menu.addAll(drinks);
@@ -84,46 +60,38 @@ public class MenuMgr {
 		return menu;
 	}
 
-	public static void addToMenu(String name, double price, String desc,String type)
-	{
-		FoodType ftype = FoodType.Drinks; //Default value will change if it soemthing else
-		for(int i = 0; i < FoodType.values().length; i++)
-		{
-			if(FoodType.values()[i].toString() == type)
-			{
+	public static void addToMenu(String name, double price, String desc, String type) {
+		FoodType ftype = FoodType.Drinks; // Default value will change if it
+		// soemthing else
+		// FoodType ftype;
+		for (int i = 0; i < FoodType.values().length; i++) {
+			if (FoodType.values()[i].toString() == type) {
 				ftype = FoodType.values()[i];
 			}
 		}
 		FoodItem item = new FoodItem(name, price, desc, ftype);
 		menu.add(item);
 
-		String file_Name = item.getFoodType().toString();
-		
-		try {
-			FileWriter myWriter = new FileWriter(file_Name+".txt");
-			myWriter.write(item.getFoodName()+ ", "+item.getFoodPrice()+","+item.getFoodDesc()+",");
-			myWriter.close();
-		} 
-		catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
+		// String file_Name = item.getFoodType().toString();
+
+		/*
+		 * try { FileWriter myWriter = new FileWriter(file_Name + ".txt");
+		 * myWriter.write(item.getFoodName() + ", " + item.getFoodPrice() + "," +
+		 * item.getFoodDesc() + ","); myWriter.close(); } catch (IOException e) {
+		 * System.out.println("An error occurred."); e.printStackTrace(); }
+		 */
 	}
 
 	public static void updateToMenu(String name, String newName, double newPrice, String newDesc, String newType) {
-		FoodType ftype = FoodType.Drinks; //Default value will change if it soemthing else
-		for(int i = 0; i < FoodType.values().length; i++)
-		{
-			if(FoodType.values()[i].toString() == newType)
-			{
+		FoodType ftype = FoodType.Drinks; // Default value will change if it soemthing else
+		for (int i = 0; i < FoodType.values().length; i++) {
+			if (FoodType.values()[i].toString() == newType) {
 				ftype = FoodType.values()[i];
 			}
 		}
 
-		for(int j = 0; j < menu.size(); j++)
-		{
-			if(menu.get(j).getFoodName() == name)
-			{
+		for (int j = 0; j < menu.size(); j++) {
+			if (menu.get(j).getFoodName() == name) {
 				menu.get(j).setFoodName(newName);
 				menu.get(j).setFoodPrice(newPrice);
 				menu.get(j).setFoodDesc(newDesc);
@@ -131,27 +99,22 @@ public class MenuMgr {
 			}
 		}
 
-		//Need to implement writing to text file;
+		// Need to implement writing to text file;
 	}
 
-	public static void removeFromMenu(String name){
-		for(int j = 0; j < menu.size(); j++)
-		{
-			if(menu.get(j).getFoodName() == name)
-			{
+	public static void removeFromMenu(String name) {
+		for (int j = 0; j < menu.size(); j++) {
+			if (menu.get(j).getFoodName() == name) {
 				menu.remove(j);
 			}
 		}
 	}
 
-	public static void printMenu()
-	{
-		for(int s = 0; s < menu.size(); s++)
-		{
-			System.out.println(menu.get(s).getFoodName());
-			System.out.println(menu.get(s).getFoodPrice());
-			System.out.println(menu.get(s).getFoodDesc());
-			System.out.println(menu.get(s).getFoodType());
+	public static void printMenu() {
+		System.out.println("Name       Price        Description       Food Type");
+		for (int s = 0; s < menu.size(); s++) {
+			System.out.println(menu.get(s).getFoodName() + "     " + menu.get(s).getFoodPrice() + "     "
+					+ menu.get(s).getFoodDesc() + "     " + menu.get(s).getFoodType());
 		}
 	}
 
@@ -204,9 +167,8 @@ public class MenuMgr {
 	}
 
 	/*
-	 * public void deleteDrink(String name) { for (int i = 0; i < drink.size();
-	 * i++) { if (drink.get(i).getFoodName() == name) { drink.remove(i); }
-	 * } }
+	 * public void deleteDrink(String name) { for (int i = 0; i < drink.size(); i++)
+	 * { if (drink.get(i).getFoodName() == name) { drink.remove(i); } } }
 	 */
 
 	public static void deleteDessert(String name) {
