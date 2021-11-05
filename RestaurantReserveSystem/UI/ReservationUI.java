@@ -33,7 +33,7 @@ public class ReservationUI {
 					do		
 					{		
 						System.out.println("Enter name: ");
-						String name = sc.nextLine();
+						String name = sc.next();
 				
 						System.out.println("Enter date of reservation in the format of YYYY-MM-DD: ");
 						LocalDate date = LocalDate.parse(sc.nextLine());
