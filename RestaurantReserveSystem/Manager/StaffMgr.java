@@ -22,7 +22,7 @@ public class StaffMgr {
 	}
 
 	public static void readStaffs(ArrayList<Staff> staffs) throws FileNotFoundException {
-		File file = new File("/Users/pranwanth/eclipse-workspace/assignmentTest/src/assignmentTest/drinks.txt");
+		File file = new File("RestaurantReserveSystem/datatxt/Staff.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
 
