@@ -16,9 +16,46 @@ public class ReservationMgr {
 
     protected static ArrayList<Reservation> r = new ArrayList<Reservation>();
 
-    public ReservationMgr() throws FileNotFoundException {
+    public static void readReservations(ArrayList<Reservation> r) throws FileNotFoundException {
+        File file = new File("RestaurantReserveSystem/datatxt/Reservation.txt");
+        Scanner sc = new Scanner(file);
+        sc.useDelimiter("\\s*,\\s*");
 
-        /*
+        while (sc.hasNextLine()) {
+            // System.out.println(sc.nextInt());
+            // System.out.println(sc.nextInt());
+            // .getClass().getName() -> to check class type
+            // System.out.println(sc.nextBoolean());
+            LocalTime reserveTime = LocalTime.parse(sc.next());
+            LocalDate reserveDate = LocalDate.parse(sc.next());
+            int numOfPax  = sc.nextInt();
+            String custName = sc.next();
+            int custContact = sc.nextInt();
+            Table table = TableMgr.assignTable(numOfPax);
+
+            Reservation reservation = new Reservation(reserveTime, reserveDate, numOfPax, custName, custContact, table);
+            r.add(reservation);
+            // System.out.println("prawn");
+        }
+        sc.close();
+    }
+
+    public static void write(String address, String text) throws IOException {
+        try {
+            FileWriter fw = new FileWriter(address, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.println(text);
+            out.close();
+            // more code
+        } catch (IOException e) {
+            // exception handling left as an exercise for the reader
+        }
+    }
+
+    /*public ReservationMgr() throws FileNotFoundException {
+
+        
          * File file = new File( // RestaurantReserveSystem/datatxt/Reservation.txt ->
          * Relative path
          * "Users/ASUS/OneDrive/Documents/GitHub/Restaurant-Reserve-System-Console-Based-/RestaurantReserveSystem/datatxt/Reservation.txt"
@@ -34,8 +71,8 @@ public class ReservationMgr {
          * 
          * FileReaderWriter fi = new FileReaderWriter(); try { fi.getReservation(r); }
          * catch (FileNotFoundException e) { e.printStackTrace(); }
-         */
-    }
+         
+    }*/
 
     public static void checkReservationExpiry() {
 
