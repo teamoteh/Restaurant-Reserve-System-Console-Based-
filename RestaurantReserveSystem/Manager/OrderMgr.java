@@ -13,10 +13,13 @@ public class OrderMgr {
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<Order> orderList = new ArrayList<Order>();     // List of current order that is unpaid
     private static ArrayList<Order> invoiceList = new ArrayList<Order>();   // List of exisiting order that has checkout as invoice
-    // private static ArrayList<SetPromo> PromoItemList = PromoMgr.getPromoList(); // Need tim inputs - changing to fooditem :)
+    private static ArrayList<SetPromo> PromoItemList = PromoMgr.getPromoList(); // Need tim inputs - changing to fooditem :)
     private static ArrayList<FoodItem> allFoodItemList = MenuMgr.getMenu(); // All food options
     private static ArrayList<Table> tableList = TableMgr.getTableList();    // Available tables for walk in order
     private static ArrayList<Staff> staffList = StaffMgr.getStaffList();    // For receipt
+
+    // Need to check if
+    // ArrayList<FoodItem> lsit = PromoItemList.getFoodList();
 
     // SetPromo
     // ArrayList<SetPromo> allFoodItemList = new ArrayList<FoodItem>()
