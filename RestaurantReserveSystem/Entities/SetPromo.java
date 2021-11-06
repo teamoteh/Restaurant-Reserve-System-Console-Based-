@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 public class SetPromo extends FoodItem {
 
+    // public static ArrayList<FoodItem> foodList;
     public static ArrayList<FoodItem> foodList;
 
     public SetPromo(){
         super();
     }
+
     public SetPromo(String name, double cost, String description, FoodType type) {
         super(name, cost, description, type);
         this.foodList = new ArrayList<FoodItem>();
