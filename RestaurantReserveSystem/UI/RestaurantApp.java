@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Manager.MenuMgr;
 // import java.text.DateFormat;
 // import java.text.SimpleDateFormat;
-// import java.time.LocalDate;
+import java.time.LocalDate;
 //import java.util.Date;
 import Manager.TableMgr;
 import Manager.StaffMgr;
@@ -13,18 +13,22 @@ import Manager.PromoMgr;
 import Manager.MenuMgr;;
 
 public class RestaurantApp {
+    public static String date;
+
     public static void main(String[] args) throws FileNotFoundException {
 
-        
+        // To read in preset details for object intializati
         TableMgr.readTables(TableMgr.getTableList());
         StaffMgr.readStaffs(StaffMgr.getStaffList());
         PromoMgr.readPromo(PromoMgr.getPromoList());
-        MenuMgr.getMenu();
+        MenuMgr.readMenu();
 
         Scanner sc = new Scanner(System.in);
 
-        // System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
-        // LocalDate date = LocalDate.parse(sc.nextLine());
+        System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
+        date = sc.nextLine();
+        // LocalDate date = LocalDate.parse(date);
+
         int choice;
         do {
             System.out.println("What would you like to do? ");
@@ -46,7 +50,7 @@ public class RestaurantApp {
                 break;
 
             case 4:
-                UI.SalesReportUI.displaysalesInvoiceUI();
+                // UI.SalesReportUI.displaysalesInvoiceUI();
                 break;
             }
         } while (choice > 0 && choice < 5);

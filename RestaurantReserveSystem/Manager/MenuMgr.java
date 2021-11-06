@@ -18,7 +18,7 @@ public class MenuMgr {
 	protected static ArrayList<FoodItem> mainCourse = new ArrayList<FoodItem>();
 	protected static ArrayList<FoodItem> menu = new ArrayList<FoodItem>();
 
-	public static ArrayList<FoodItem> getMenu() {
+	public static ArrayList<FoodItem> readMenu() {
 		FileReaderWriter fi = new FileReaderWriter();
 		try {
 			fi.getDrinks(drinks);
@@ -28,7 +28,11 @@ public class MenuMgr {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		/*
+		 * for(int i = 0; i < appet.size(); i++) { for(int j = 0; j < menu.size(); j++)
+		 * { if(appet.get(i).getFoodName().equals(menu.get(j).getFoodName())) { break; }
+		 * } }
+		 */
 		menu.addAll(appet);
 		menu.addAll(drinks);
 		menu.addAll(dessert);
@@ -44,26 +48,18 @@ public class MenuMgr {
 				ftype = FoodType.values()[i];
 			}
 		}
-		if(ftype == null)
-		{
+		if (ftype == null) {
 			System.out.println("Invalid Food Type, please try again!");
 			return;
 		}
 		FoodItem item = new FoodItem(name, price, desc, ftype);
-		if(ftype == FoodType.Appetizer)
-		{
+		if (ftype == FoodType.Appetizer) {
 			appet.add(item);
-		}
-		else if(ftype == FoodType.Drinks)
-		{
+		} else if (ftype == FoodType.Drinks) {
 			drinks.add(item);
-		}
-		else if(ftype == FoodType.Dessert)
-		{
+		} else if (ftype == FoodType.Dessert) {
 			dessert.add(item);
-		}
-		else
-		{
+		} else {
 			mainCourse.add(item);
 		}
 		menu.add(item);
@@ -71,21 +67,14 @@ public class MenuMgr {
 		System.out.println("Item successfully added to Menu");
 
 		/*
-		Rewrites whole file if implemented
-		String file_Name = item.getFoodType().toString();
-
-		 try
-		 {
-		 FileWriter myWriter = new FileWriter("datatxt/" + file_Name + ".txt");
-		 myWriter.write("," + item.getFoodName() + ", " + item.getFoodPrice() + "," +
-		 item.getFoodDesc());
-		 myWriter.close();
-		 }
-		 catch (IOException e)
-		 {
-		 System.out.println("An error occurred.");
-		 e.printStackTrace();
-		 }*/
+		 * Rewrites whole file if implemented String file_Name =
+		 * item.getFoodType().toString();
+		 * 
+		 * try { FileWriter myWriter = new FileWriter("datatxt/" + file_Name + ".txt");
+		 * myWriter.write("," + item.getFoodName() + ", " + item.getFoodPrice() + "," +
+		 * item.getFoodDesc()); myWriter.close(); } catch (IOException e) {
+		 * System.out.println("An error occurred."); e.printStackTrace(); }
+		 */
 
 	}
 
@@ -96,8 +85,7 @@ public class MenuMgr {
 				ftype = FoodType.values()[i];
 			}
 		}
-		if(ftype == null)
-		{
+		if (ftype == null) {
 			System.out.println("Invalid Food Type, please try again!");
 			return;
 		}
@@ -111,8 +99,7 @@ public class MenuMgr {
 			}
 		}
 
-		if(ftype == FoodType.Appetizer)
-		{
+		if (ftype == FoodType.Appetizer) {
 			for (int j = 0; j < appet.size(); j++) {
 				if (appet.get(j).getFoodName().equals(name)) {
 					appet.get(j).setFoodName(newName);
@@ -121,9 +108,7 @@ public class MenuMgr {
 					appet.get(j).setFoodType(ftype);
 				}
 			}
-		}
-		else if(ftype == FoodType.Drinks)
-		{
+		} else if (ftype == FoodType.Drinks) {
 			for (int j = 0; j < drinks.size(); j++) {
 				if (drinks.get(j).getFoodName().equals(name)) {
 					drinks.get(j).setFoodName(newName);
@@ -132,9 +117,7 @@ public class MenuMgr {
 					drinks.get(j).setFoodType(ftype);
 				}
 			}
-		}
-		else if(ftype == FoodType.Dessert)
-		{
+		} else if (ftype == FoodType.Dessert) {
 			for (int j = 0; j < dessert.size(); j++) {
 				if (dessert.get(j).getFoodName().equals(name)) {
 					dessert.get(j).setFoodName(newName);
@@ -143,9 +126,7 @@ public class MenuMgr {
 					dessert.get(j).setFoodType(ftype);
 				}
 			}
-		}
-		else
-		{
+		} else {
 			for (int j = 0; j < mainCourse.size(); j++) {
 				if (mainCourse.get(j).getFoodName().equals(name)) {
 					mainCourse.get(j).setFoodName(newName);
@@ -170,32 +151,25 @@ public class MenuMgr {
 			}
 		}
 
-		if(fType == FoodType.Appetizer)
-		{
+		if (fType == FoodType.Appetizer) {
 			for (int j = 0; j < appet.size(); j++) {
 				if (appet.get(j).getFoodName().equals(name)) {
 					appet.remove(j);
 				}
 			}
-		}
-		else if(fType == FoodType.Drinks)
-		{
+		} else if (fType == FoodType.Drinks) {
 			for (int j = 0; j < drinks.size(); j++) {
 				if (drinks.get(j).getFoodName().equals(name)) {
 					drinks.remove(j);
 				}
 			}
-		}
-		else if(fType == FoodType.Dessert)
-		{
+		} else if (fType == FoodType.Dessert) {
 			for (int j = 0; j < dessert.size(); j++) {
 				if (dessert.get(j).getFoodName().equals(name)) {
 					dessert.remove(j);
 				}
 			}
-		}
-		else
-		{
+		} else {
 			for (int j = 0; j < mainCourse.size(); j++) {
 				if (mainCourse.get(j).getFoodName().equals(name)) {
 					mainCourse.remove(j);
@@ -208,47 +182,46 @@ public class MenuMgr {
 	}
 
 	public static void printMenu() {
-		/*System.out.println("Name       Price        Description       Food Type");
-		for (int s = 0; s < menu.size(); s++) {
-			System.out.println(menu.get(s).getFoodName() + " " + menu.get(s).getFoodPrice() + " "
-					+ menu.get(s).getFoodDesc() + " " + menu.get(s).getFoodType());
-		}*/
+		/*
+		 * System.out.println("Name       Price        Description       Food Type");
+		 * for (int s = 0; s < menu.size(); s++) {
+		 * System.out.println(menu.get(s).getFoodName() + " " +
+		 * menu.get(s).getFoodPrice() + " " + menu.get(s).getFoodDesc() + " " +
+		 * menu.get(s).getFoodType()); }
+		 */
 		System.out.println("Appetizers");
 		for (int s = 0; s < appet.size(); s++) {
-			System.out.println(appet.get(s).getFoodName()
-					+ " "
-					+ appet.get(s).getFoodPrice()
-					+ " "
-					+ appet.get(s).getFoodDesc());
-					//+ " "+ appet.get(s).getFoodType()); //Don't actually have to print food Type anymore
+			System.out.println(
+					appet.get(s).getFoodName() + " " + appet.get(s).getFoodPrice() + " " + appet.get(s).getFoodDesc());
+			// + " "+ appet.get(s).getFoodType()); //Don't actually have to print food Type
+			// anymore
 		}
 
 		System.out.println("MainCourse");
 		for (int s = 0; s < mainCourse.size(); s++) {
-			System.out.println(mainCourse.get(s).getFoodName()
-					+ " "
-					+ mainCourse.get(s).getFoodPrice()
-					+ " "
+			System.out.println(mainCourse.get(s).getFoodName() + " " + mainCourse.get(s).getFoodPrice() + " "
 					+ mainCourse.get(s).getFoodDesc());
-			//+ " " + mainCourse.get(s).getFoodType());
+			// + " " + mainCourse.get(s).getFoodType());
 		}
 
 		System.out.println("Dessert");
 		for (int s = 0; s < dessert.size(); s++) {
 			System.out.println(dessert.get(s).getFoodName() + " " + dessert.get(s).getFoodPrice() + " "
 					+ dessert.get(s).getFoodDesc());
-			//+ " " + dessert.get(s).getFoodType());
+			// + " " + dessert.get(s).getFoodType());
 		}
 
 		System.out.println("Drinks");
 		for (int s = 0; s < drinks.size(); s++) {
 			System.out.println(drinks.get(s).getFoodName() + " " + drinks.get(s).getFoodPrice() + " "
 					+ drinks.get(s).getFoodDesc());
-			//+ " " + drinks.get(s).getFoodType());
+			// + " " + drinks.get(s).getFoodType());
 		}
 
 	}
 
-
+	public static ArrayList<FoodItem> getMenuList() {
+		return menu;
+	}
 
 }

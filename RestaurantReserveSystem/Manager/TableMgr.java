@@ -92,13 +92,18 @@ public class TableMgr {
     public static Table assignTable(int pax) {
         for (int i = 0; i < tables.size(); i++) {
             if (tables.get(i).getAvailStatus() == true) {
-                if (tables.get(i).getMaxNumSeats() >= pax) {
+                if (tables.get(i).getMaxNumSeats() == pax) {
+                    tables.get(i).setUnavailStatus();
+                    return tables.get(i);
+                } else if (tables.get(i).getMaxNumSeats() - pax == 1) {
+                    tables.get(i).setUnavailStatus();
+                    return tables.get(i);
+                } else if (tables.get(i).getMaxNumSeats() > pax) {
+                    tables.get(i).setUnavailStatus();
                     return tables.get(i);
                 }
             }
-            tables.get(i).setUnavailStatus();
         }
-
         return null;
     }
 }

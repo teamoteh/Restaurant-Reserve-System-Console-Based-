@@ -46,7 +46,8 @@ public class PromoMgr {
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
                     FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
-                    set.addFood(food);;
+                    set.addFood(food);
+                    ;
                     break;
                 }
                 if (foodName == "Drink") {
@@ -55,7 +56,8 @@ public class PromoMgr {
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
                     FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
-                    set.addFood(food);;
+                    set.addFood(food);
+                    ;
                     break;
                 }
                 if (foodName == "Dessert") {
@@ -64,7 +66,8 @@ public class PromoMgr {
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
                     FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
-                    set.addFood(food);;
+                    set.addFood(food);
+                    ;
                     break;
                 }
             } else {
@@ -79,36 +82,36 @@ public class PromoMgr {
     }
 
     public static void addFood(FoodItem food, SetPromo set) {
-        if(food.getFoodType() == FoodType.Appetizer){
-            for(int i=0; i < MenuMgr.appet.size(); i++){
-                if(food.getFoodName() == MenuMgr.appet.get(i).getFoodName()){
-                    set.addFood(food);
-                    break;
-                }
-            }
-            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!"); 
-        }
-        if(food.getFoodType() == FoodType.MainCourse){
-            for(int i=0; i < MenuMgr.mainCourse.size(); i++){
-                if(food.getFoodName() == MenuMgr.mainCourse.get(i).getFoodName()){
+        if (food.getFoodType() == FoodType.Appetizer) {
+            for (int i = 0; i < MenuMgr.appet.size(); i++) {
+                if (food.getFoodName() == MenuMgr.appet.get(i).getFoodName()) {
                     set.addFood(food);
                     break;
                 }
             }
             System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
         }
-        if(food.getFoodType() == FoodType.Drinks){
-            for(int i=0; i < MenuMgr.drinks.size(); i++){
-                if(food.getFoodName() == MenuMgr.drinks.get(i).getFoodName()){
+        if (food.getFoodType() == FoodType.MainCourse) {
+            for (int i = 0; i < MenuMgr.mainCourse.size(); i++) {
+                if (food.getFoodName() == MenuMgr.mainCourse.get(i).getFoodName()) {
                     set.addFood(food);
                     break;
                 }
             }
             System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
         }
-        if(food.getFoodType() == FoodType.Dessert){
-            for(int i=0; i < MenuMgr.dessert.size(); i++){
-                if(food.getFoodName() == MenuMgr.dessert.get(i).getFoodName()){
+        if (food.getFoodType() == FoodType.Drinks) {
+            for (int i = 0; i < MenuMgr.drinks.size(); i++) {
+                if (food.getFoodName() == MenuMgr.drinks.get(i).getFoodName()) {
+                    set.addFood(food);
+                    break;
+                }
+            }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
+        }
+        if (food.getFoodType() == FoodType.Dessert) {
+            for (int i = 0; i < MenuMgr.dessert.size(); i++) {
+                if (food.getFoodName() == MenuMgr.dessert.get(i).getFoodName()) {
                     set.addFood(food);
                     break;
                 }
@@ -118,14 +121,14 @@ public class PromoMgr {
     }
 
     public static void removeFood(FoodItem food, SetPromo set) {
-            for(int i=0; i < SetPromo.foodList.size(); i++){
-                if(food.getFoodName() == SetPromo.foodList.get(i).getFoodName()){
-                    SetPromo.foodList.remove(food);
-                    break;
-                }
+        for (int i = 0; i < SetPromo.foodList.size(); i++) {
+            if (food.getFoodName() == SetPromo.foodList.get(i).getFoodName()) {
+                SetPromo.foodList.remove(food);
+                break;
             }
-            System.out.println("Food item:" + food.getFoodName() + "is not found in the Set Promo!"); 
         }
+        System.out.println("Food item:" + food.getFoodName() + "is not found in the Set Promo!");
+    }
 
     public static void printPromoMenu() {
         for (int s = 0; s < setPromoList.size(); s++) {
@@ -133,10 +136,9 @@ public class PromoMgr {
             System.out.println("The Set Promo for today is: \t" + setPromoList.get(s).getFoodName());
             System.out.println("The Set Promo cost is: \t" + setPromoList.get(s).getFoodPrice());
             System.out.println("About this Set Promo: \t" + setPromoList.get(s).getFoodDesc());
-            for(int j = 0; j < setPromoList.get(s).foodList.size(); j++){
-                System.out.println("The " + setPromoList.get(s).foodList.get(j).getFoodType()
-                                    + "in " + setName + " Set Promo for today is: \t" 
-                                    + setPromoList.get(s).foodList.get(j).getFoodName());
+            for (int j = 0; j < setPromoList.get(s).foodList.size(); j++) {
+                System.out.println("The " + setPromoList.get(s).foodList.get(j).getFoodType() + "in " + setName
+                        + " Set Promo for today is: \t" + setPromoList.get(s).foodList.get(j).getFoodName());
             }
         }
     }
