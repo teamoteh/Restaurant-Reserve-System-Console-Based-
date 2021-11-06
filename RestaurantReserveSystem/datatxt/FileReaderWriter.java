@@ -32,7 +32,7 @@ public class FileReaderWriter {
 
 	public void getDrinks(ArrayList<FoodItem> drinks) throws FileNotFoundException {
 		File file = new File(
-				"/Users/ASUS/OneDrive/Documents/GitHub/Restaurant-Reserve-System-Console-Based-/RestaurantReserveSystem/datatxt/Drinks.txt");
+				"datatxt/Drinks.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
 
@@ -49,7 +49,7 @@ public class FileReaderWriter {
 	}
 
 	public void getAppetizer(ArrayList<FoodItem> appet) throws FileNotFoundException {
-		File file = new File("/RestaurantReserveSystem/datatxt/Appetizer.txt");
+		File file = new File("datatxt/Appetizer.txt");
 		//
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
@@ -67,7 +67,7 @@ public class FileReaderWriter {
 	}
 
 	public void getDessert(ArrayList<FoodItem> desserts) throws FileNotFoundException {
-		File file = new File("./RestaurantReserveSystem/datatxt/Dessert.txt");
+		File file = new File("datatxt/Dessert.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
 
@@ -84,7 +84,7 @@ public class FileReaderWriter {
 	}
 
 	public void getMainCourse(ArrayList<FoodItem> mainCourses) throws FileNotFoundException {
-		File file = new File("./RestaurantReserveSystem/datatxt/MainCourse.txt");
+		File file = new File("datatxt/MainCourse.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
 
