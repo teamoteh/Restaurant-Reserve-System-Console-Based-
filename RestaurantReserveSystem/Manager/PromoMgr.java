@@ -18,8 +18,8 @@ public class PromoMgr {
 
     public static ArrayList<SetPromo> setPromoList;
 
-    public static void readStaffs(ArrayList<SetPromo> promoList) throws FileNotFoundException {
-        File file = new File("/datatxt/SetPromo.txt");
+    public static void readPromo(ArrayList<SetPromo> promoList) throws FileNotFoundException {
+        File file = new File("RestaurantReserveSystem/datatxt/SetPromo.txt");
         Scanner sc = new Scanner(file);
         sc.useDelimiter("\\s*,\\s*");
         SetPromo set = new SetPromo();
@@ -78,7 +78,7 @@ public class PromoMgr {
         return setPromoList;
     }
 
-    public void addFood(FoodItem food, SetPromo set) {
+    public static void addFood(FoodItem food, SetPromo set) {
         if(food.getFoodType() == FoodType.Appetizer){
             for(int i=0; i < MenuMgr.appet.size(); i++){
                 if(food.getFoodName() == MenuMgr.appet.get(i).getFoodName()){
@@ -117,7 +117,7 @@ public class PromoMgr {
         }
     }
 
-    public void removeFood(FoodItem food, SetPromo set) {
+    public static void removeFood(FoodItem food, SetPromo set) {
             for(int i=0; i < SetPromo.foodList.size(); i++){
                 if(food.getFoodName() == SetPromo.foodList.get(i).getFoodName()){
                     SetPromo.foodList.remove(food);
