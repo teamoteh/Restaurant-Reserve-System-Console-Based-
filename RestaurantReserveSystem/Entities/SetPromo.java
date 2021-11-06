@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.ArrayList;
 
-import enhancements.CusScanner;
+//import enhancements.CusScanner;
 
 public class SetPackage extends FoodItem {
 
