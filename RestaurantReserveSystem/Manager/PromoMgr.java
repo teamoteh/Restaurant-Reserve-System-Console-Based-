@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.SetPromo;
+import Entities.FoodItem.FoodType;
 import MenuClass.Appetizer;
 import MenuClass.Dessert;
 import MenuClass.Drink;
 import MenuClass.MainCourse;
 import Entities.FoodItem;
+import Manager.MenuMgr;
 
 public class PromoMgr {
 
@@ -35,31 +37,34 @@ public class PromoMgr {
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
                     FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
-                    set.updatePromoAppet(itemName, itemPrice, itemDesc);
+                    set.addFood(food);
                     break;
                 }
                 if (foodName == "Main") {
+                    ftype = FoodType.MainCourse;
                     itemName = sc.next();
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
-                    MainCourse course = new MainCourse(itemName, itemPrice, itemDesc);
-                    set.updatePromoMain(itemName, itemPrice, itemDesc);
+                    FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
+                    set.addFood(food);;
                     break;
                 }
                 if (foodName == "Drink") {
+                    ftype = FoodType.Drinks;
                     itemName = sc.next();
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
-                    Drink drink = new Drink(itemName, itemPrice, itemDesc);
-                    set.updatePromoDrink(itemName, itemPrice, itemDesc);
+                    FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
+                    set.addFood(food);;
                     break;
                 }
                 if (foodName == "Dessert") {
+                    ftype = FoodType.Dessert;
                     itemName = sc.next();
                     itemPrice = Double.parseDouble(sc.next());
                     itemDesc = sc.next();
-                    Dessert sweet = new Dessert(itemName, itemPrice, itemDesc);
-                    set.updatePromoDessert(itemName, itemPrice, itemDesc);
+                    FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
+                    set.addFood(food);;
                     break;
                 }
             } else {
@@ -69,65 +74,70 @@ public class PromoMgr {
         sc.close();
     }
 
-    public static void getSetPromo() {
-        for (int i = 0; i < setPromoList.size(); i++) {
-            SetPromo set = setPromoList.get(i);
-            ((SetPromo) set).getPromo();
-        }
-    }
-
     public static ArrayList<SetPromo> getPromoList() {
         return setPromoList;
     }
 
-    public void addFood(ArrayList<MenuItem> menuList) {
-        int idx = 0;
-        int i = 0;
-        ArrayList<Integer> mapping = new ArrayList<Integer>();
-
-        if (menuList.size() < 1) {
-            System.out.println("There are no items in the menu, You must have at least 1 item in the menu to add");
-            return;
-        }
-
-        System.out.println();
-        System.out.println("Which food would you like to add to the " + this.getName() + " Set Package?");
-
-        for (; i < menuList.size(); i++) {
-            if (menuList.get(i) instanceof FoodItem) {
-                System.out.println("[" + (idx++ + 1) + "] - " + menuList.get(i).getName());
-                mapping.add(i);
+    public void addFood(FoodItem food, SetPromo set) {
+        if(food.getFoodType() == FoodType.Appetizer){
+            for(int i=0; i < MenuMgr.appet.size(); i++){
+                if(food.getFoodName() == MenuMgr.appet.get(i).getFoodName()){
+                    set.addFood(food);
+                    break;
+                }
             }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!"); 
         }
-
-        System.out.println();
-        int choice = CusScanner.nextInt(1, idx);
-
-        FoodItem foodToAdd = (FoodItem) menuList.get(mapping.get(choice - 1));
-        this.foodList.add(foodToAdd);
-        System.out.println(foodToAdd.getName() + " was successfully add to " + this.getName() + " Set Package");
-
+        if(food.getFoodType() == FoodType.MainCourse){
+            for(int i=0; i < MenuMgr.mainCourse.size(); i++){
+                if(food.getFoodName() == MenuMgr.mainCourse.get(i).getFoodName()){
+                    set.addFood(food);
+                    break;
+                }
+            }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
+        }
+        if(food.getFoodType() == FoodType.Drinks){
+            for(int i=0; i < MenuMgr.drinks.size(); i++){
+                if(food.getFoodName() == MenuMgr.drinks.get(i).getFoodName()){
+                    set.addFood(food);
+                    break;
+                }
+            }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
+        }
+        if(food.getFoodType() == FoodType.Dessert){
+            for(int i=0; i < MenuMgr.dessert.size(); i++){
+                if(food.getFoodName() == MenuMgr.dessert.get(i).getFoodName()){
+                    set.addFood(food);
+                    break;
+                }
+            }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Menu!");
+        }
     }
 
-    public void removeFood() {
-        int idx = 0;
-
-        if (this.foodList.size() < 1) {
-            System.out.println(
-                    "There are no food items in this set package, You must have at least 1 item in the package to remove");
-            return;
+    public void removeFood(FoodItem food, SetPromo set) {
+            for(int i=0; i < SetPromo.foodList.size(); i++){
+                if(food.getFoodName() == SetPromo.foodList.get(i).getFoodName()){
+                    SetPromo.foodList.remove(food);
+                    break;
+                }
+            }
+            System.out.println("Food item:" + food.getFoodName() + "is not found in the Set Promo!"); 
         }
 
-        System.out.println();
-        System.out.println("Which food would you like to remove from the " + this.getName() + " Set Package?");
-        for (FoodItem foodItem : this.foodList)
-            System.out.println("[" + (idx++ + 1) + "] - " + foodItem.getName());
-
-        System.out.println();
-        int choice = CusScanner.nextInt(1, idx);
-
-        String removedItemName = this.foodList.get(choice - 1).getName();
-        this.foodList.remove(choice - 1);
-        System.out.println(removedItemName + " was successfully removed from the " + this.getName() + " Set Package");
+    public static void printPromoMenu() {
+        for (int s = 0; s < setPromoList.size(); s++) {
+            String setName = setPromoList.get(s).getFoodName();
+            System.out.println("The Set Promo for today is: \t" + setPromoList.get(s).getFoodName());
+            System.out.println("The Set Promo cost is: \t" + setPromoList.get(s).getFoodPrice());
+            System.out.println("About this Set Promo: \t" + setPromoList.get(s).getFoodDesc());
+            for(int j = 0; j < setPromoList.get(s).foodList.size(); j++){
+                System.out.println("The " + setPromoList.get(s).foodList.get(j).getFoodType()
+                                    + "in " + setName + " Set Promo for today is: \t" 
+                                    + setPromoList.get(s).foodList.get(j).getFoodName());
+            }
+        }
     }
 }

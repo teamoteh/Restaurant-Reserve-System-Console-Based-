@@ -2,7 +2,8 @@ package UI;
 
 import java.util.Scanner;
 import Manager.MenuMgr;
-
+import Manager.OrderMgr;
+import Manager.PromoMgr;
 public class MenuUI {
 	/*
 	* PLEASE READ BEFORE EDITING
@@ -89,7 +90,7 @@ public class MenuUI {
 					break;
 
 				case 5:
-					//MenuMgr.printMenu(); // promomenu
+					PromoMgr.printPromoMenu(); // promomenu
 					break;
 
 				case 6:

@@ -2,10 +2,10 @@ package Entities;
 
 public class FoodItem {
     public enum FoodType {MainCourse, Drinks, Dessert, Appetizer};
-    private String foodName;
-    private double foodPrice;
-    private String foodDesc;
-    private FoodType Ftype;
+    protected String foodName;
+    protected double foodPrice;
+    protected String foodDesc;
+    protected FoodType Ftype;
     
 
     public FoodItem() {
