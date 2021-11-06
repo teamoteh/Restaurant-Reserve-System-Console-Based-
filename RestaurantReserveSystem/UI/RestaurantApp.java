@@ -8,12 +8,19 @@ import Manager.MenuMgr;
 // import java.time.LocalDate;
 //import java.util.Date;
 import Manager.TableMgr;
+import Manager.StaffMgr;
+import Manager.PromoMgr;
+import Manager.MenuMgr;;
 
 public class RestaurantApp {
     public static void main(String[] args) throws FileNotFoundException {
 
-        // MenuMgr.getMenu();
+        
         TableMgr.readTables(TableMgr.getTableList());
+        StaffMgr.readStaffs(StaffMgr.getStaffList());
+        PromoMgr.readPromo(PromoMgr.getPromoList());
+        MenuMgr.getMenu();
+
         Scanner sc = new Scanner(System.in);
 
         // System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
