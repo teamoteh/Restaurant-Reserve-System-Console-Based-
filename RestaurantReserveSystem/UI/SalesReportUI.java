@@ -27,13 +27,13 @@ public class SalesReportUI {
 			System.out.println("\nWhich Sales Report to view?\n");
 
 			System.out.println("[1] - View Individual Sales Revenue (Month)");
-			System.out.println("[2] - View List of Sales Revenue (Month)");
-			System.out.println("[0] - Go Back");
+			System.out.println("[2] - Exit");
+			// System.out.println("[2] - View List of Sales Revenue (Month)");
 
 			// Error catching
 			do {
 				choice = sc.nextInt();
-			} while (choice < 0 || choice > 3);
+			} while (choice < 1 || choice > 2);
 
 			switch (choice) {
 			case 1:
@@ -42,12 +42,6 @@ public class SalesReportUI {
 				printSalesRevenueReport(month);
 				break;
 			case 2:
-				
-				break;
-			case 3:
-			
-				break;
-			case 0:
 				return;
 			}
 		} while (true);
@@ -105,9 +99,10 @@ public class SalesReportUI {
 
 		for (Order order: invoiceList) {
 			if ((order.getTimeStamp().getMonth()) + 1 == month) {
-				for (FoodItem item : order.getOrderItems()) {
-					totalFoodDetail.add(item);
-				}
+				// for (FoodItem item : order.getOrderItems()) {
+				// 	totalFoodDetail.add(item);
+				// }
+				totalFoodDetail = order.getOrderItems();
 			}
 		}
 
