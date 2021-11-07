@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import Manager.TableMgr;
 import Manager.StaffMgr;
 import Manager.PromoMgr;
-import Manager.MenuMgr;;
+import Manager.MenuMgr;
+import Manager.ReservationMgr;;
 
 public class RestaurantApp {
-    public static String date;
 
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -22,12 +22,9 @@ public class RestaurantApp {
         StaffMgr.readStaffs(StaffMgr.getStaffList());
         PromoMgr.readPromo(PromoMgr.getPromoList());
         MenuMgr.readMenu();
+        ReservationMgr.readReservation();
 
         Scanner sc = new Scanner(System.in);
-
-        System.out.println("Enter today's date in the format of YYYY-MM-DD: ");
-        date = sc.nextLine();
-        // LocalDate date = LocalDate.parse(date);
 
         int choice;
         do {

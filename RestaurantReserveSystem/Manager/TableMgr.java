@@ -82,12 +82,6 @@ public class TableMgr {
         return tables;
     }
 
-    public static void editAvailStatus(int idx) throws IOException {
-        /*
-         * for(Table table : tables){ if(table.getTableNo() == idx){ } }
-         * 
-         */ }
-
     // May need optimisation if have time
     public static Table assignTable(int pax) {
         for (int i = 0; i < tables.size(); i++) {
@@ -105,5 +99,9 @@ public class TableMgr {
             }
         }
         return null;
+    }
+
+    public static void unassignTable(int tableNum){
+        tables.get(tableNum - 1).setAvailStatus();
     }
 }

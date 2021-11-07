@@ -2,17 +2,15 @@ package Entities;
 
 import java.util.ArrayList;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.time.LocalDate;
+// import java.text.SimpleDateFormat;
+// import java.util.Date;
+// import java.time.LocalDate;
 import java.util.Scanner;
-
-import java.text.ParseException;
-import UI.RestaurantApp;
 
 // Order class object to represent Restaurant Orders
 public class Order {
     private ArrayList<FoodItem> orderItems;
+    private ArrayList<SetPromo> orderPromo;
     private Staff staff;
     private Table table;
     private String timestamp;
@@ -20,17 +18,15 @@ public class Order {
     private boolean MemberDiscount;
 
     // Constructor for Order
-    public Order(Staff staff, Table table) {
+    public Order(Staff staff, Table table, String date) {
 
         this.staff = staff; // from param
         this.setTable(table); // from param
         this.orderItems = new ArrayList<FoodItem>();
+        this.orderPromo = new ArrayList<SetPromo>();
         // this.timestamp = new Date(); // Wed Nov 03 02:50:54 GMT 2021 => Date
-        this.timestamp = RestaurantApp.date;
-        this.setName("Table: " + getTable().getTableNo() + " - Date: " + this.timestamp); // 2021-11-03
-                                                                                          // 02:50:54
-                                                                                          // =>
-                                                                                          // String
+        this.timestamp = date;
+        this.setName("Table: " + getTable().getTableNo() + " - Date: " + this.timestamp);
         this.setMemberDiscount(false);
     }
 
@@ -39,9 +35,20 @@ public class Order {
         this.orderItems.add(item);
     }
 
+    // Add a Promo Item to the Order
+    public void addPromo(SetPromo item) {
+        this.orderPromo.add(item);
+    }
+
     // Removes a FoodItem Item from the Order
     public void removeItem(int index) {
         String removedItemName = this.orderItems.get(index).getFoodName();
+        this.orderItems.remove(index);
+        System.out.println(removedItemName + " was successfully removed from the " + this.getName() + " Invoice");
+    }
+
+    public void removePromo(int index) {
+        String removedItemName = this.orderPromo.get(index).getPromoName();
         this.orderItems.remove(index);
         System.out.println(removedItemName + " was successfully removed from the " + this.getName() + " Invoice");
     }
@@ -56,6 +63,10 @@ public class Order {
 
     public ArrayList<FoodItem> getOrderItems() {
         return orderItems;
+    }
+
+    public ArrayList<SetPromo> getOrderPromo() {
+        return orderPromo;
     }
 
     public Staff getStaff() {

@@ -1,5 +1,6 @@
+Lunch Delight, 13.20, Four Course Set Promo,
 Appetizer, Mushroom Soup, 4.00, A creamy mushroom broth,
 Main, Chicken Chop, 7.00, Flame grilled chicken thigh,
 Drink, Lemon Tea, 2.50, Home brewed ice lemon Tea,
-Dessert, Vanilla Ice Cream, 3, Honey infused Vanilla Ice Cream
-~
+Dessert, Vanilla Ice Cream, 3, Honey infused Vanilla Ice Cream,
+End

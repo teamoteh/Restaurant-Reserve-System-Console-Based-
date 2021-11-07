@@ -17,6 +17,11 @@ public class FileReaderWriter {
 
 	}
 
+	/**
+	 * @param address
+	 * @param text
+	 * @throws IOException
+	 */
 	public void write(String address, String text) throws IOException {
 		try {
 			FileWriter fw = new FileWriter(address, true);
@@ -30,6 +35,10 @@ public class FileReaderWriter {
 		}
 	}
 
+	/**
+	 * @param drinks
+	 * @throws FileNotFoundException
+	 */
 	public void getDrinks(ArrayList<FoodItem> drinks) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/Drinks.txt");
 		Scanner sc = new Scanner(file);
@@ -47,6 +56,10 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
+	/**
+	 * @param appet
+	 * @throws FileNotFoundException
+	 */
 	public void getAppetizer(ArrayList<FoodItem> appet) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/Appetizer.txt");
 		//
@@ -65,6 +78,10 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
+	/**
+	 * @param desserts
+	 * @throws FileNotFoundException
+	 */
 	public void getDessert(ArrayList<FoodItem> desserts) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/Dessert.txt");
 		Scanner sc = new Scanner(file);
@@ -82,6 +99,10 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
+	/**
+	 * @param mainCourses
+	 * @throws FileNotFoundException
+	 */
 	public void getMainCourse(ArrayList<FoodItem> mainCourses) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/MainCourse.txt");
 		Scanner sc = new Scanner(file);
@@ -99,23 +120,38 @@ public class FileReaderWriter {
 		sc.close();
 	}
 
+	/**
+	 * @param Reservations
+	 * @throws FileNotFoundException
+	 */
 	public static void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/Reservation.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
-
-		do {
+		System.out.println(file.length());
+		if (file.length() < 2) {
+			sc.close();
+			return;
+		}
+		while (sc.hasNextLine()) {
+			LocalTime reserveTime = LocalTime.parse(sc.next());
+			LocalDate reserveDate = LocalDate.parse(sc.next());
 			int numOfPax = Integer.parseInt(sc.next());
 			String custName = sc.next();
 			int custContact = Integer.parseInt(sc.next());
-			LocalTime reserveTime = LocalTime.parse(sc.next());
-			LocalDate reserveDate = LocalDate.parse(sc.next());
-			Table table = TableMgr.assignTable(numOfPax);
+			// System.out.println(custContact);
+			int tableNum = Integer.parseInt(sc.next());
+			Table table = null;
+			for (int i = 0; i < TableMgr.getTableList().size(); i++) {
+				if (TableMgr.getTableList().get(i).getTableNo() == tableNum) {
+					table = TableMgr.getTableList().get(i);
+				}
+			}
 
 			Reservation r = new Reservation(reserveTime, reserveDate, numOfPax, custName, custContact, table);
 
 			Reservations.add(r);
-		} while (sc.hasNextLine());
+		}
 		sc.close();
 	}
 

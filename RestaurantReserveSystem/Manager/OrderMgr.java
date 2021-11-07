@@ -48,15 +48,18 @@ public class OrderMgr {
         System.out.println("DateTime \t\t: " + order.getTimeStamp().toString());
         System.out.println("Membership Discount\t: " + (order.getMemberDiscount() ? "20% OFF APPLIED" : "N.A."));
 
-
         System.out.println("\n===================== ORDERS MADE =====================\n");
         double sum = 0;
         int index = 1;
         for (FoodItem item : order.getOrderItems()) {
-            System.out.printf("%d. %s  \t- $%.2f\n", (index++), item.getFoodName(), item.getFoodPrice());
-            // System.out.println((index++) + ". " + item.getFoodName() + " - $" + item.getFoodPrice());
+            System.out.printf("%d. %s  \t\t- $%.2f\n", (index++), item.getFoodName(), item.getFoodPrice());
             sum += item.getFoodPrice();
         }
+        for (SetPromo item : order.getOrderPromo()) {
+            System.out.printf("%d. %s  \t- $%.2f\n", (index++), item.getPromoName(), item.getPromoPrice());
+            sum += item.getPromoPrice();
+        }
+
         // MEMBER DISCOUNT (20%)
         if (order.getMemberDiscount()) {
             sum = sum * 0.8;
@@ -75,7 +78,10 @@ public class OrderMgr {
     // input: staff - Staff who keys in the order
     // input: table - Table assigned to this order
     public static void addNewOrder(Staff staff, Table table) {
-        Order newOrder = new Order(staff, table);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter today's date in the format of YYYY-MM-DD: ");
+        String date = sc.nextLine();
+        Order newOrder = new Order(staff, table, date);
         table.setUnavailStatus();
         Order item = addFoodItemToOrder(newOrder);
         orderList.add(item);
@@ -90,6 +96,7 @@ public class OrderMgr {
         String compare = "Y";
         do {
             int index = 1;
+            int setIndex;
 
             // Sanity check for menu
             if (FoodItemList.size() < 1) {
@@ -101,26 +108,44 @@ public class OrderMgr {
             System.out.println();
             System.out.println("======================= ALL ADDABLE FOOD ======================");
             System.out.println("Which food would you like to [add] to the [" + order.getName() + "] Order?");
+
+            // Ala carte items
+            System.out.println("\t========== A' LA CARTE ==========\t");
             for (FoodItem item : FoodItemList) {
                 System.out.println((index++) + ". " + item.getFoodName());
+            }
+            // Placeholder to identify from which index onwards are setPromo
+            setIndex = index;
+
+            // SetMeal items
+            System.out.println("\t=========== SET MEAL ============\t");
+            for (SetPromo set : PromoItemList) {
+                System.out.println((index++) + ". " + set.getPromoName());
             }
             System.out.println("================================================================");
             System.out.println();
             System.out.println("Input your choice of addable food: ");
-            if (scanner.hasNextLine()) {
-                opt = Integer.parseInt(scanner.nextLine());
-            }
-            // System.out.println(opt);
-            // opt = Integer.parseInt(sc.nextLine());
 
-            // Actual adding of food into Order
-            FoodItem food = FoodItemList.get(opt - 1);
-            order.addItem(food);
-            System.out.println(food.getFoodName() + " was successfully add to [" + order.getName() + "] Order");
+            // Error checking for user input
+            do {
+                opt = scanner.nextInt();
+            } while (opt < 0 || opt > index);
+
+            // Adding the foodItem / setPromo to the arrayList
+            if (opt >= setIndex) {
+                // int size = PromoItemList.size() - 1;
+                SetPromo food = PromoItemList.get(opt - setIndex);
+                order.addPromo(food);
+                System.out.println(food.getPromoName() + " was successfully add to [" + order.getName() + "] Order");
+            } else {
+                FoodItem food = FoodItemList.get(opt - 1);
+                order.addItem(food);
+                System.out.println(food.getFoodName() + " was successfully add to [" + order.getName() + "] Order");
+            }
 
             // Repeater
             System.out.println("Do you want to [add] more food to the order? (Y/N)");
-            choice = scanner.nextLine();
+            choice = scanner.next();
         } while (choice.toUpperCase().equals(compare));
         // scanner.close();
         return order;
@@ -132,6 +157,7 @@ public class OrderMgr {
         Scanner scanner = new Scanner(System.in);
 
         int opt;
+        int setIndex;
 
         // Sanity check for menu
         if (order.getOrderItems().size() < 1) {
@@ -141,7 +167,7 @@ public class OrderMgr {
         }
         // Removal of items
         else {
-            while (order.getOrderItems().size() > 0) {
+            while ((order.getOrderItems().size() > 0) && (order.getOrderPromo().size() > 0)) {
                 String choice = "", compare = "Y";
                 do {
                     // Prompt user
@@ -151,19 +177,34 @@ public class OrderMgr {
                     // UI Display removable item
                     System.out.println("====================== ALL REMOVABLE FOOD =====================");
                     int index = 0;
+
+                    // A' La carte
+                    System.out.println("\t========== A' LA CARTE ==========\t");
                     for (FoodItem item : order.getOrderItems()) {
                         System.out.println("[" + (index++) + "] : " + item.getFoodName());
                     }
-                    System.out.println("================================================================");
-                    System.out.println();
+                    // Placeholder to identify from which index onwards are setPromo
+                    setIndex = index;
 
+                    // Set Meal
+                    System.out.println("\t=========== SET MEAL ============\t");
+                    for (SetPromo set : PromoItemList) {
+                        System.out.println((index++) + ". " + set.getPromoName());
+                    }
+
+                    System.out.println("================================================================\n");
                     System.out.println("Input your choice of removable food: ");
                     // Error Checking: Ask user to input an options within the given range
                     do {
                         opt = scanner.nextInt();
                     } while (opt < 0 || opt > index);
 
-                    order.removeItem(opt);
+                    // Removing the foodItem / setPromo to the arrayList
+                    if (opt >= setIndex) {
+                        order.removePromo(opt); // Remove set promo
+                    } else {
+                        order.removeItem(opt); // Remove a' la carte
+                    }
 
                     // Repeater
                     System.out.println("Do you want to [remove] more food from the order? (Y/N)");
@@ -195,7 +236,7 @@ public class OrderMgr {
         // During checkout, prompt user if he/she is a member for member discount
         System.out.println("Is the customer a member (Y/N) ?");
         String choice = scanner.nextLine().toUpperCase();
-        Boolean membership = (choice == "Y")? true : false; // ternary operator / conditional operator
+        Boolean membership = (choice == "Y") ? true : false; // ternary operator / conditional operator
         completedOrder.setMemberDiscount(membership);
 
         // Update the table status to "available"
@@ -213,3 +254,10 @@ public class OrderMgr {
         // scanner.close();
     }
 }
+
+/**
+ * Find the total revenue made for a reporting month
+ * 
+ * @param month Month for statistics to be reported
+ * @return Total revenue for reporting period
+ */

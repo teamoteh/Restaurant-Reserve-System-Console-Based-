@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import Entities.FoodItem;
 import java.util.ArrayList;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 import Entities.FoodItem.FoodType;
 
@@ -66,15 +67,17 @@ public class MenuMgr {
 
 		System.out.println("Item successfully added to Menu");
 
-		/*
-		 * Rewrites whole file if implemented String file_Name =
-		 * item.getFoodType().toString();
-		 * 
-		 * try { FileWriter myWriter = new FileWriter("datatxt/" + file_Name + ".txt");
-		 * myWriter.write("," + item.getFoodName() + ", " + item.getFoodPrice() + "," +
-		 * item.getFoodDesc()); myWriter.close(); } catch (IOException e) {
-		 * System.out.println("An error occurred."); e.printStackTrace(); }
-		 */
+		String file_name = item.getFoodType().toString();
+
+		try {
+			// RestaurantReserveSystem/datatxt/MainCourse.txt
+			FileWriter menuWriter = new FileWriter("RestaurantReserveSystem/" + "datatxt/" + file_name + ".txt", true);
+			PrintWriter menuPrinter = new PrintWriter(menuWriter);
+			menuPrinter.println("," + item.getFoodName() + ", " + item.getFoodPrice() + "," + item.getFoodDesc());
+			menuPrinter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

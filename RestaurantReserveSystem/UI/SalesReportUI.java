@@ -4,13 +4,12 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.ArrayList;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.text.DateFormatSymbols;
 import java.util.Collections;
 
 import Entities.FoodItem;
 import Entities.Order;
+import Entities.SetPromo;
 import Manager.OrderMgr;
 
 // Sale revenue report will detail the period, individual sale items (either ala carte or promotional items) and total revenue.
@@ -48,26 +47,25 @@ public class SalesReportUI {
         } while (true);
     }
 
-/**
-* Print the sales revenue report for a specified month
-* and year. Revenue and quantity sold for each product
-* for that time period is reported.
-* @param month Month for statistics to be reported
-*/
-public static void printSalesRevenueReport(int month){
-    double totalRevenue = getPeriodTotalRevenue(month);
-    String monthName = new DateFormatSymbols().getMonths()[month-1]; // Convert int month to string month name
-    System.out.println("=================== SALES REPORT =====================");
-    System.out.println("\nSales Revenue Report for " + monthName);
-    System.out.println("Total Sales Revenue: $" + totalRevenue);
-    System.out.println("Total Number of Food Products: ");
-    getPeriodProductStatistics(month);
-    System.out.println("======================================================");
-    System.out.println();
-}
+    /**
+     * Print the sales revenue report for a specified month and year. Revenue and
+     * quantity sold for each product for that time period is reported.
+     * 
+     * @param month Month for statistics to be reported
+     */
+    public static void printSalesRevenueReport(int month) {
+        double totalRevenue = getPeriodTotalRevenue(month);
+        String monthName = new DateFormatSymbols().getMonths()[month - 1]; // Convert int month to string month name
+        System.out.println("=================== SALES REPORT =====================");
+        System.out.println("\nSales Revenue Report for " + monthName);
+        System.out.println("Total Sales Revenue: $" + totalRevenue);
+        System.out.println("Total Number of Food Products: ");
+        getPeriodProductStatistics(month);
+        System.out.println();
+    }
 
     /**
-     * Find the total revenue made for a reporting period
+     * Find the total revenue made for a reporting month
      * 
      * @param month Month for statistics to be reported
      * @return Total revenue for reporting period
@@ -76,52 +74,68 @@ public static void printSalesRevenueReport(int month){
         double totalSum = 0;
 
         for (Order order : invoiceList) {
-            String input_date = order.getTimeStamp();  //YYYY-MM-DD
-            String input_month = input_date.substring(5,7); // MM
+            String input_date = order.getTimeStamp(); // YYYY-MM-DD
+            String input_month = input_date.substring(5, 7); // MM
             String string_month = String.valueOf(month); // Convert input integer to string
+
+            // Checking through the invoice to get the matching month
             if (string_month.equals(input_month)) {
+                // Summing the A' la carte
                 for (FoodItem item : order.getOrderItems()) {
                     totalSum += item.getFoodPrice();
+                }
+                // Summing the PromoItem
+                for (SetPromo item : order.getOrderPromo()) {
+                    totalSum += item.getPromoPrice();
                 }
             }
         }
         double totalRoundOff = Math.round(totalSum * 1.17 * 100.0) / 100.0;
         return totalRoundOff;
-
     }
 
     /**
-     * Find the quantity sold for each menu item in a reporting period
+     * Display the quantity sold for each menu item in a reporting month
      * 
-     * @param month Month for statistics to be reported
-     * @param year  Year for statistics to be reported
-     * @return Array containing quantity sold for each menu item
+     * @param month Month requested
      */
 
     private static void getPeriodProductStatistics(int month) {
-
         ArrayList<FoodItem> totalFoodDetail = new ArrayList<FoodItem>();
+        ArrayList<SetPromo> totalPromoDetail = new ArrayList<SetPromo>();
 
         for (Order order : invoiceList) {
-            String input_date = order.getTimeStamp();  //YYYY-MM-DD
-            String input_month = input_date.substring(5,7); // MM
+            String input_date = order.getTimeStamp(); // YYYY-MM-DD
+            String input_month = input_date.substring(5, 7); // MM
             String string_month = String.valueOf(input_month); // Convert input integer to string
-            // user_input month tallies with invoice month
+
+            // Checking through the invoice to get the matching month
             if (string_month.equals(input_month)) {
                 ArrayList<FoodItem> foodList = order.getOrderItems();
-                // to add individual food item into a collection list
+                ArrayList<SetPromo> promoList = order.getOrderPromo();
+
+                // To add individual food item into the collection list
                 for (FoodItem food : foodList) {
                     totalFoodDetail.add(food);
+                }
+                for (SetPromo set : promoList) {
+                    totalPromoDetail.add(set);
                 }
             }
         }
 
         // gets unique name
-        Set<FoodItem> unique = new HashSet<FoodItem>(totalFoodDetail);
+        Set<FoodItem> unique1 = new HashSet<FoodItem>(totalFoodDetail);
+        Set<SetPromo> unique2 = new HashSet<SetPromo>(totalPromoDetail);
 
-        System.out.println("=================================================");
-        for (FoodItem key : unique) {
+        System.out.println("=================== A' LA CARTE ======================");
+        for (FoodItem key : unique1) {
             System.out.println(key.getFoodName() + ": " + Collections.frequency(totalFoodDetail, key));
         }
+        System.out.println("=================== SET PROMO ========================");
+        for (SetPromo key : unique2) {
+            System.out.println(key.getPromoName() + ": " + Collections.frequency(totalPromoDetail, key));
+        }
+        System.out.println("======================================================");
     }
 }

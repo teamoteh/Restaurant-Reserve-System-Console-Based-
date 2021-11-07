@@ -10,6 +10,10 @@ import Manager.ReservationMgr;
 import Manager.TableMgr;
 
 public class ReservationUI {
+
+	/**
+	 * @throws FileNotFoundException
+	 */
 	public static void displayReservationUI() throws FileNotFoundException {
 		Scanner sc = new Scanner(System.in);
 		int user_choice;
