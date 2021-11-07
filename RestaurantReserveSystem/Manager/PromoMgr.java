@@ -74,7 +74,7 @@ public class PromoMgr {
                 setPromoList.add(set);
             }
         } while (sc.hasNextLine());
-        sc.close();
+        // sc.close();
     }
 
     public static ArrayList<SetPromo> getPromoList() {

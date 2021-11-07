@@ -42,27 +42,30 @@ public class OrderMgr {
     public static void printOrderDetails(Order order) {
         System.out.println();
         System.out.println("======================= RECEIPT =======================");
-        System.out.println("Order ID \t: " + order.getName());
-        System.out.println("Staff \t\t: " + order.getStaff().getStaffName());
-        System.out.println("Table ID\t: " + order.getTable().getTableNo());
-        System.out.println("DateTime \t: " + order.getTimeStamp().toString());
-        System.out.println("Membership Discount: \t " + (order.getMemberDiscount() ? "20% OFF APPLIED" : "N.A."));
+        System.out.println("Order ID \t\t: " + order.getName());
+        System.out.println("Staff \t\t\t: " + order.getStaff().getStaffName());
+        System.out.println("Table ID\t\t: " + order.getTable().getTableNo());
+        System.out.println("DateTime \t\t: " + order.getTimeStamp().toString());
+        System.out.println("Membership Discount\t: " + (order.getMemberDiscount() ? "20% OFF APPLIED" : "N.A."));
 
-        System.out.println("\n\t================= ORDERS MADE =================\t\n");
+
+        System.out.println("\n===================== ORDERS MADE =====================\n");
         double sum = 0;
         int index = 1;
         for (FoodItem item : order.getOrderItems()) {
-            System.out.println((index++) + ". " + item.getFoodName() + " - " + item.getFoodPrice());
+            System.out.printf("%d. %s  \t- $%.2f\n", (index++), item.getFoodName(), item.getFoodPrice());
+            // System.out.println((index++) + ". " + item.getFoodName() + " - $" + item.getFoodPrice());
             sum += item.getFoodPrice();
         }
         // MEMBER DISCOUNT (20%)
         if (order.getMemberDiscount()) {
             sum = sum * 0.8;
         }
-        System.out.printf("\nSUBTOTAL\t\t\t:%.2f \n", sum);
-        System.out.printf("SERVICE TAX (10%%)\t:%.2f \n", sum * 0.10);
-        System.out.printf("GST (7%%)\t\t\t:%.2f \n", sum * 0.07);
-        System.out.printf("TOTAL DUE\t\t\t:$%.2f \n", sum * 1.17);
+        System.out.println("\n=======================================================");
+        System.out.printf("SUBTOTAL\t\t:$%.2f \n", sum);
+        System.out.printf("SERVICE TAX (10%%)\t:$%.2f \n", sum * 0.10);
+        System.out.printf("GST (7%%)\t\t:$%.2f \n", sum * 0.07);
+        System.out.printf("TOTAL DUE\t\t:$%.2f \n", sum * 1.17);
         System.out.println("============= THANK YOU FOR DINING WITH US ============");
         System.out.println();
 
@@ -107,7 +110,7 @@ public class OrderMgr {
             if (scanner.hasNextLine()) {
                 opt = Integer.parseInt(scanner.nextLine());
             }
-            System.out.println(opt);
+            // System.out.println(opt);
             // opt = Integer.parseInt(sc.nextLine());
 
             // Actual adding of food into Order
@@ -119,7 +122,7 @@ public class OrderMgr {
             System.out.println("Do you want to [add] more food to the order? (Y/N)");
             choice = scanner.nextLine();
         } while (choice.toUpperCase().equals(compare));
-        scanner.close();
+        // scanner.close();
         return order;
     }
 
@@ -133,7 +136,7 @@ public class OrderMgr {
         // Sanity check for menu
         if (order.getOrderItems().size() < 1) {
             System.out.println("There are no items in this order");
-            scanner.close();
+            // scanner.close();
             return;
         }
         // Removal of items
@@ -167,12 +170,12 @@ public class OrderMgr {
                     choice = scanner.nextLine();
                 } while (choice.toUpperCase().equals(compare));
 
-                scanner.close();
+                // scanner.close();
                 // To break the while Loop
                 return;
             }
         }
-        scanner.close();
+        // scanner.close();
     }
 
     // Removes an entire order from Restaurant's orders
@@ -189,10 +192,10 @@ public class OrderMgr {
         Scanner scanner = new Scanner(System.in);
         Order completedOrder = orderList.get(index);
 
-        // During checkout, prompt user if he/she is a member to update attribute of
-        // Order for member discount
-        System.out.println("Is the customer a member?");
-        Boolean membership = scanner.nextBoolean();
+        // During checkout, prompt user if he/she is a member for member discount
+        System.out.println("Is the customer a member (Y/N) ?");
+        String choice = scanner.nextLine().toUpperCase();
+        Boolean membership = (choice == "Y")? true : false; // ternary operator / conditional operator
         completedOrder.setMemberDiscount(membership);
 
         // Update the table status to "available"
@@ -201,13 +204,12 @@ public class OrderMgr {
         // Printing of invoice
         String removedOrderName = completedOrder.getName();
         System.out.println("Successfully completed [" + removedOrderName + "] Order");
-        System.out.println("\n============ Printing invoice ============\n");
         printOrderDetails(completedOrder);
 
         // Shift order to invoice arraylist
         invoiceList.add(completedOrder);
         orderList.remove(index);
 
-        scanner.close();
+        // scanner.close();
     }
 }

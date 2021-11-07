@@ -35,7 +35,7 @@ public class TableMgr {
             tables.add(table);
             // System.out.println("prawn");
         }
-        sc.close();
+        // sc.close();
     }
 
     public static void write(String address, String text) throws IOException {
@@ -60,7 +60,7 @@ public class TableMgr {
             System.out.println("Enter number of seats: ");
             nseats = sc.nextInt();
             tables.add(new Table(i, nseats, true));
-            sc.close();
+            // sc.close();
         }
     }
 

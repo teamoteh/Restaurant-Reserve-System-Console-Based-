@@ -73,6 +73,6 @@ public class ReservationUI {
 				break;
 			}
 		} while (user_choice > 0 && user_choice < 5);
-		sc.close();
+		// sc.close();
 	}
 }

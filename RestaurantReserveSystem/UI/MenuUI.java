@@ -158,7 +158,7 @@ public class MenuUI {
 			}
 
 		} while (user_choice > 0 && user_choice < 9);
-		sc.close();
+		// sc.close();
 	}
 
 }

@@ -34,7 +34,7 @@ public class StaffMgr {
 			Staff staffPerson = new Staff(staffName, staffGender, staffID, staffTitle);
 			staffs.add(staffPerson);
 		} while (sc.hasNextLine());
-		sc.close();
+		// sc.close();
 	}
 
 	public static ArrayList<Staff> getStaffList() {

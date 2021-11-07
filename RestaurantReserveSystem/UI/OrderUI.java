@@ -51,7 +51,7 @@ public class OrderUI {
 			case 6:
 				return;
 			}
-			sc.close();
+			// sc.close();
 		}
 
 	}
@@ -65,7 +65,7 @@ public class OrderUI {
 		// Sanity Check
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders");
-			sc.close();
+			// sc.close();
 			return;
 		}
 
@@ -77,7 +77,7 @@ public class OrderUI {
 			for (Order order : orderList) {
 				System.out.println((index++) + ". " + order.getName());
 			}
-			System.out.println(orderList.size() + ". Exit");
+			System.out.println(orderList.size()+1 + ". Exit");
 			System.out.println("======================================================");
 
 			System.out.println("Input your choice of Order: ");
@@ -87,8 +87,8 @@ public class OrderUI {
 			} while (choice < 1 || choice > (index + 1));
 
 			// To break the while Loop
-			if (choice == orderList.size()) {
-				sc.close();
+			if (choice == index) {
+				// sc.close();
 				return;
 			}
 
@@ -96,7 +96,7 @@ public class OrderUI {
 			Order item = orderList.get(choice - 1);
 			System.out.println("********************** PREVIEW ***********************\n");
 			OrderMgr.printOrderDetails(item);
-			sc.close();
+			// sc.close();
 		}
 
 	}
@@ -142,7 +142,7 @@ public class OrderUI {
 			choice = sc.nextInt();
 		} while (choice < 1 || choice > index);
 
-		sc.close();
+		// sc.close();
 		return tList.get(choice - 1);
 	}
 
@@ -165,7 +165,7 @@ public class OrderUI {
 			choice = sc.nextInt();
 		} while (choice < 1 || choice > index);
 
-		sc.close();
+		// sc.close();
 		return staffList.get(choice - 1);
 	}
 
@@ -178,7 +178,7 @@ public class OrderUI {
 		// Sanity check
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently");
-			sc.close();
+			// sc.close();
 			return;
 		}
 
@@ -199,7 +199,7 @@ public class OrderUI {
 
 		// If user choose to exit the UI
 		if (choice == index) {
-			sc.close();
+			// sc.close();
 			return;
 		}
 
@@ -226,10 +226,10 @@ public class OrderUI {
 			break;
 		case 3:
 			// Exit the UI
-			sc.close();
+			// sc.close();
 			return;
 		}
-		sc.close();
+		// sc.close();
 	}
 
 	// UI to provide user to remove an Order from the current list of orders
@@ -241,7 +241,7 @@ public class OrderUI {
 		// Sanity Check
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently");
-			sc.close();
+			// sc.close();
 			return;
 		}
 		// Print out all current orders
@@ -260,12 +260,12 @@ public class OrderUI {
 
 		// If user choose to exit
 		if (choice == index) {
-			sc.close();
+			// sc.close();
 			return;
 		}
 
 		OrderMgr.removeOrder(choice - 1);
-		sc.close();
+		// sc.close();
 	}
 
 	// Provides UI for choosing the specific order to be paid for
@@ -276,7 +276,7 @@ public class OrderUI {
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently");
-			sc.close();
+			// sc.close();
 			return;
 		}
 
@@ -295,11 +295,11 @@ public class OrderUI {
 
 		// If user choose to exit
 		if (choice == index) {
-			sc.close();
+			// sc.close();
 			return;
 		}
 
 		OrderMgr.completeOrder(choice - 1);
-		sc.close();
+		// sc.close();
 	}
 }

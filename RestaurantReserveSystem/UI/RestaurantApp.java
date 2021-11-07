@@ -50,7 +50,7 @@ public class RestaurantApp {
                 break;
 
             case 4:
-                // UI.SalesReportUI.displaysalesInvoiceUI();
+                UI.SalesReportUI.displaysalesInvoiceUI();
                 break;
             }
         } while (choice > 0 && choice < 5);
