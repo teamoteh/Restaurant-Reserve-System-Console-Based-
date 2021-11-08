@@ -45,6 +45,7 @@ public class ReservationMgr {
         checkReservationExpiry();
         r.add(r1);
         System.out.println("Reservation Confirmed. Table allocated is table " + r1.getTableNo());
+        System.out.println();
 
         try {
 
@@ -77,30 +78,37 @@ public class ReservationMgr {
                 TableMgr.unassignTable(r.get(i).getTableNo());
                 r.remove(i);
                 System.out.println("Reservation successfully removed!");
+                System.out.println();
                 return;
             }
-        }
+        }  System.out.println("Reservation does not exist!\n");
+
     }
 
     public static void checkReservationBooking(int number) {
+        checkReservationExpiry();
         for (int i = 0; i < r.size(); i++) {
             if (r.get(i).getCustContact() == number) {
                 System.out.println("Reservation valid under " + r.get(i).getCustName() + " at "
-                        + r.get(i).getReserveTime() + " on " + r.get(i).getReserveDate() + "for"
-                        + r.get(i).getNumOfPax() + "pax, table number is" + r.get(i).getTableNo());
+                        + r.get(i).getReserveTime() + " on " + r.get(i).getReserveDate() + " for "
+                        + r.get(i).getNumOfPax() + " pax, table number is " + r.get(i).getTableNo());
+                        System.out.println();
                 return;
-            } else
-                System.out.println("Reservation does not exist!");
-        }
+            }
+                
+        } System.out.println("Reservation does not exist!");
+        System.out.println();
     }
 
     public static void displayReservation() throws FileNotFoundException {
         // FileReaderWriter.getReservation(r);
-        System.out.println("Date            Time            Name          Pax           Contact         TableNo");
+        String spaceNeeded = "            ";
+        System.out.println("Date            Time            Name            Pax            Contact            TableNo");
         for (int i = 0; i < r.size(); i++) {
-            System.out.println(r.get(i).getReserveDate() + "    " + r.get(i).getReserveTime() + "    "
-                    + r.get(i).getCustName() + "    " + r.get(i).getNumOfPax() + "    " + r.get(i).getCustContact()
-                    + "    " + r.get(i).getTableNo());
+            System.out.println(r.get(i).getReserveDate() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getReserveTime() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length())
+                    + r.get(i).getCustName() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getNumOfPax() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getCustContact()
+                    + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getTableNo());
         }
+        System.out.println();
     }
 }
