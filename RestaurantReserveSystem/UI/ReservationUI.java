@@ -27,6 +27,15 @@ public class ReservationUI {
 			System.out.println("Input a choice:");
 			user_choice = Integer.parseInt(sc.nextLine());
 
+			while (!(user_choice > 0 && user_choice < 5)) {
+				System.out.println("Invalid Option. Please key try again!\n");
+				System.out.println("What would you like to do?");
+				System.out.println("1. Create Reservation\n" + "2. Check Reservation\n" + "3. Remove Reservation\n"
+					+ "4. Display Reservation\n" + "5. Exit\n");
+				System.out.println("Input a choice:");
+				user_choice = Integer.parseInt(sc.nextLine());
+			}
+
 			switch (user_choice) {
 			case 1:
 				int choice;
@@ -37,9 +46,9 @@ public class ReservationUI {
 					LocalDate date = LocalDate.parse(sc.nextLine());
 					LocalDate today = LocalDate.now();
 					// Check reservation date is not in the past
-					if (date.isBefore(today)) {
-						System.out.println("Invalid Date");
-						break;
+					while (date.isBefore(today)) {
+						System.out.println("Invalid Date. Please key try again:");
+						date = LocalDate.parse(sc.nextLine());
 					}
 					System.out.println("Enter time of arrival in the format of hh:mm");
 					LocalTime time = LocalTime.parse(sc.nextLine());
@@ -48,7 +57,7 @@ public class ReservationUI {
 					Table table = TableMgr.assignTable(pax);
 					if (table == null) {
 						System.out.println("Unable to make reservation, no available table. ");
-						System.out.println("Enter your choice: \n1) Choose another date and time \n2) Exit");
+						System.out.println("Enter your choice: \n1. Choose another date and time \n2. Exit");
 						choice = Integer.parseInt(sc.nextLine());
 					} else {
 						System.out.println("Enter contact number:");
@@ -75,6 +84,7 @@ public class ReservationUI {
 			case 4:
 				ReservationMgr.displayReservation();
 				break;
+
 			}
 		} while (user_choice > 0 && user_choice < 5);
 		// sc.close();
