@@ -27,7 +27,7 @@ public class ReservationUI {
 			System.out.println("Input a choice:");
 			user_choice = Integer.parseInt(sc.nextLine());
 
-			while (!(user_choice > 0 && user_choice < 5)) {
+			while (!(user_choice > 0 && user_choice < 6)) {
 				System.out.println("Invalid Option. Please key try again!\n");
 				System.out.println("What would you like to do?");
 				System.out.println("1. Create Reservation\n" + "2. Check Reservation\n" + "3. Remove Reservation\n"
