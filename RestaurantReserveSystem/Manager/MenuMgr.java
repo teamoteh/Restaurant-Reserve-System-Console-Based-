@@ -10,15 +10,43 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import Entities.FoodItem.FoodType;
 
-// figure out how to read from txt and need to update and delete correctly
+/**
+ * A food item to be used in storing menu items
+ * 
+ * @author Pranwanth
+ * @version 1.0
+ * @since 2021-11-12
+ */
+
 public class MenuMgr {
 
+	/**
+	 * An ArrayList of FoodItems which will be classified as Appetizers
+	 */
 	protected static ArrayList<FoodItem> appet = new ArrayList<FoodItem>();
+	/**
+	 * An ArrayList of FoodItems which will be classified as Dessert
+	 */
 	protected static ArrayList<FoodItem> dessert = new ArrayList<FoodItem>();
+	/**
+	 * An ArrayList of FoodItems which will be classified as Drinks
+	 */
 	protected static ArrayList<FoodItem> drinks = new ArrayList<FoodItem>();
+	/**
+	 * An ArrayList of FoodItems which will be classified as Main Course
+	 */
 	protected static ArrayList<FoodItem> mainCourse = new ArrayList<FoodItem>();
+	/**
+	 * An ArrayList of FoodItems which will add the Appetizer, Drinks, Dessert and
+	 * Main Course ArrayList
+	 */
 	protected static ArrayList<FoodItem> menu = new ArrayList<FoodItem>();
 
+	/**
+	 * Reads the Menu Items from their txt files
+	 * 
+	 * @return ArrayList<FoodItem>
+	 */
 	public static ArrayList<FoodItem> readMenu() {
 		FileReaderWriter fi = new FileReaderWriter();
 		try {
@@ -29,11 +57,6 @@ public class MenuMgr {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		/*
-		 * for(int i = 0; i < appet.size(); i++) { for(int j = 0; j < menu.size(); j++)
-		 * { if(appet.get(i).getFoodName().equals(menu.get(j).getFoodName())) { break; }
-		 * } }
-		 */
 		menu.addAll(appet);
 		menu.addAll(drinks);
 		menu.addAll(dessert);
@@ -42,6 +65,14 @@ public class MenuMgr {
 		return menu;
 	}
 
+	/**
+	 * Adds a Food Item into the Menu
+	 * 
+	 * @param name        Food Item's name
+	 * @param price       Food Item's price
+	 * @param description Food Item's Description
+	 * @param type        Food Item's Food Type
+	 */
 	public static void addToMenu(String name, double price, String desc, String type) {
 		FoodType ftype = null; // Default value will change if it is something else
 		for (int i = 0; i < FoodType.values().length; i++) {
@@ -80,6 +111,16 @@ public class MenuMgr {
 		}
 
 	}
+
+	/**
+	 * Updates an existing Food Item into the Menu
+	 * 
+	 * @param name     Current Food Item's name
+	 * @param newName  Updated name for selcted Food Item
+	 * @param newPrice Updated price for selcted Food Item
+	 * @param newDesc  Updated Description for selcted Food Item
+	 * @param newType  Updated Food Type for selcted Food Item
+	 */
 
 	public static void updateToMenu(String name, String newName, double newPrice, String newDesc, String newType) {
 		FoodType ftype = null;
@@ -145,6 +186,12 @@ public class MenuMgr {
 		// Need to implement writing to text file;
 	}
 
+	/**
+	 * Removes an existing Food Item from the Menu using it's name
+	 * 
+	 * @param name Current Food Item's name
+	 */
+
 	public static void removeFromMenu(String name) {
 		FoodType fType = null;
 		for (int j = 0; j < menu.size(); j++) {
@@ -184,45 +231,47 @@ public class MenuMgr {
 
 	}
 
+	/**
+	 * Prints current Menu according the categories Appetizer, MainCourse, Dessert,
+	 * Drinks
+	 */
+
 	public static void printMenu() {
-		/*
-		 * System.out.println("Name       Price        Description       Food Type");
-		 * for (int s = 0; s < menu.size(); s++) {
-		 * System.out.println(menu.get(s).getFoodName() + " " +
-		 * menu.get(s).getFoodPrice() + " " + menu.get(s).getFoodDesc() + " " +
-		 * menu.get(s).getFoodType()); }
-		 */
 		System.out.println("Appetizers");
+		System.out.println("=============================================");
 		for (int s = 0; s < appet.size(); s++) {
 			System.out.println(
 					appet.get(s).getFoodName() + " " + appet.get(s).getFoodPrice() + " " + appet.get(s).getFoodDesc());
-			// + " "+ appet.get(s).getFoodType()); //Don't actually have to print food Type
-			// anymore
 		}
 
 		System.out.println("MainCourse");
+		System.out.println("=============================================");
 		for (int s = 0; s < mainCourse.size(); s++) {
 			System.out.println(mainCourse.get(s).getFoodName() + " " + mainCourse.get(s).getFoodPrice() + " "
 					+ mainCourse.get(s).getFoodDesc());
-			// + " " + mainCourse.get(s).getFoodType());
 		}
 
 		System.out.println("Dessert");
+		System.out.println("=============================================");
 		for (int s = 0; s < dessert.size(); s++) {
 			System.out.println(dessert.get(s).getFoodName() + " " + dessert.get(s).getFoodPrice() + " "
 					+ dessert.get(s).getFoodDesc());
-			// + " " + dessert.get(s).getFoodType());
 		}
 
 		System.out.println("Drinks");
+		System.out.println("=============================================");
 		for (int s = 0; s < drinks.size(); s++) {
 			System.out.println(drinks.get(s).getFoodName() + " " + drinks.get(s).getFoodPrice() + " "
 					+ drinks.get(s).getFoodDesc());
-			// + " " + drinks.get(s).getFoodType());
 		}
 
 	}
 
+	/**
+	 * Returns the menu ArrayList
+	 * 
+	 * @return MenuMgr's menu
+	 */
 	public static ArrayList<FoodItem> getMenuList() {
 		return menu;
 	}

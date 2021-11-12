@@ -6,31 +6,24 @@ import Manager.OrderMgr;
 import Manager.PromoMgr;
 import Entities.FoodItem;
 
+/**
+ * Menu Console UI to display Menu options
+ * 
+ * @author Pranwanth
+ * @version 1.0
+ * @since 2021-11-12
+ */
+
 public class MenuUI {
-	/*
-	 * PLEASE READ BEFORE EDITING sc.nextLine() is used instead of sc.next(), as
-	 * sc.next() stops reading at whitespaces Hence when inputting foodDesc e.g.
-	 * "Spicy Chicken Burger" sc.next() will be equal to Spicy only therefore had to
-	 * use sc.nextLine() Integer and Double are being parsed, to allow proper
-	 * execution of sc.nextLine() Without parse THE PROBLEM will occur. THE PROBLEM:
-	 * https://stackoverflow.com/questions/13102045/scanner-is-skipping-nextline-
-	 * after-using-next-or-nextfoo Menu should be working fine now, only need to
-	 * figure out how to write to text file. To run it remember to initialise it in
-	 * Restaurant App at the start Initialise command: MenuMgr.getMenu();
-	 *
-	 * For the txt files the commas after the last item were the reason why MenuMgr
-	 * got errors
-	 *
-	 * Menu Testing was done on a different local git branch
+	/**
+	 * Displays all the menu console UI options
 	 */
-	// public static void main(String args[])
 	public static void displayMenu_UI() {
-		// MenuMgr.getMenu();
 		Scanner sc = new Scanner(System.in);
 
 		int user_choice;
 		do {
-			
+
 			System.out.println("What would you like to do?");
 
 			System.out.println("1. View Current Menu \n" + "2. Create Menu Item\n" + "3. Update Menu Item\n"
@@ -41,7 +34,6 @@ public class MenuUI {
 			user_choice = Integer.parseInt(sc.nextLine());
 
 			switch (user_choice) {
-			default:
 			case 1:
 				MenuMgr.printMenu();
 				break;
@@ -128,7 +120,7 @@ public class MenuUI {
 
 				PromoMgr.removeFood(name, setName);
 				break;
-				
+
 			case 8:
 				System.out.println("What is the name of the new Set Promo?");
 				name = sc.nextLine();
@@ -137,7 +129,7 @@ public class MenuUI {
 				desc = sc.nextLine();
 
 				System.out.println("How many Food Items are in " + name + " Set Promo?");
-				int num = sc.nextInt();
+				int num = Integer.parseInt(sc.nextLine());
 
 				PromoMgr.createSetPromo(name, desc, num);
 			}

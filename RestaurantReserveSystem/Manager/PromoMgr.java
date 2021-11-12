@@ -14,14 +14,37 @@ import MenuClass.MainCourse;
 import Entities.FoodItem;
 import Manager.MenuMgr;
 
+/**
+ * Represents the class which manages anything related to the Set Promos in the
+ * restaurant.
+ * 
+ * @author Timothy Lim
+ * @version 1.0
+ * @since 2021-11-12
+ */
 public class PromoMgr {
 
+    /**
+     * The array list containing all the Set Promos and their attributes in the
+     * restaurant.
+     */
     public static ArrayList<SetPromo> setPromoList = new ArrayList<SetPromo>();
 
+    /**
+     * Gets the Array List of Set Promos
+     * 
+     * @return ArrayList<Reservation>
+     */
     public static ArrayList<SetPromo> getPromoList() {
         return setPromoList;
     }
 
+    /**
+     * File Reader function to read data in the Set Promo txt file and stores the
+     * values and its relative attributes in the Array List
+     * 
+     * @param promoList The Array List to store attributes.
+     */
     public static void readPromo(ArrayList<SetPromo> promoList) throws FileNotFoundException {
         File file = new File("RestaurantReserveSystem/datatxt/SetPromo.txt");
         Scanner sc = new Scanner(file);
@@ -31,7 +54,7 @@ public class PromoMgr {
         String itemName, itemDesc, promoName, promoDesc;
         double itemPrice, promoPrice;
         ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
-        FoodType ftype = null; // Default value will change if it
+        FoodType ftype = null; // Default value
         do {
             // Using '~' as a separator between the other Promo Packages
             set = new SetPromo();
@@ -44,8 +67,6 @@ public class PromoMgr {
             String foodType = sc.next();
             boolean check = true;
             while (check) {
-                // Identifying the classification of the FoodTypes
-
                 for (int i = 0; i < FoodType.values().length; i++) {
                     if (FoodType.values()[i].toString().equals(foodType)) {
                         ftype = FoodType.values()[i];
@@ -55,11 +76,9 @@ public class PromoMgr {
                 itemName = sc.next();
                 itemPrice = Double.parseDouble(sc.next());
                 itemDesc = sc.next();
-                //System.out.println("This has been scanned : " + ftype + " " + itemName + " " + itemPrice + " " + itemDesc);
                 FoodItem food = new FoodItem(itemName, itemPrice, itemDesc, ftype);
-                
+
                 set.addFood(food);
-                //System.out.println("This food has been added  : " + food.getFoodName() + " at index : " + set.foodList.indexOf(food));
                 foodType = sc.next();
 
                 if (foodType.equals("End")) {
@@ -67,24 +86,30 @@ public class PromoMgr {
                 }
             }
             setPromoList.add(set);
-            //set.dropAllFood();
         } while (sc.hasNextLine());
         // sc.close();
     }
-    
-    public static void createSetPromo(String setName, String setDes, int numOfFood){
+
+    /**
+     * Creates a new Set Promo and adds it to the Array List.
+     * 
+     * @param setName   This new Set Promo's name.
+     * @param setDes    This new Set Promo's description.
+     * @param numofFood The number of Food Item's in this new Set Promo.
+     */
+    public static void createSetPromo(String setName, String setDes, int numOfFood) {
         FoodType ftype = null;
         SetPromo newSet = new SetPromo();
         newSet.setPromoName(setName);
         newSet.setPromoDesc(setDes);
 
-        for (int i = 0; i < numOfFood; i ++){
+        for (int i = 0; i < numOfFood; i++) {
             boolean flag = false;
             Scanner scan = new Scanner(System.in);
-            System.out.println("What is the name of Food Item " + (i+1) + " to add?");
+            System.out.println("What is the name of Food Item " + (i + 1) + " to add?");
             String name = scan.nextLine();
 
-            System.out.println("What is the Food Type of Food Item " + (i+1) + " to add?");
+            System.out.println("What is the Food Type of Food Item " + (i + 1) + " to add?");
             System.out.println("-----------------------------------------------");
             System.out.println("Appetizer, MainCourse, Drinks, Dessert");
             String type = scan.nextLine();
@@ -131,8 +156,8 @@ public class PromoMgr {
                     }
                 }
             }
-            
-            if(!flag){
+
+            if (!flag) {
                 System.out.println("The " + name + " Food Item is not found in the Menu!");
                 System.out.println("Please try again!");
                 i--;
@@ -142,25 +167,32 @@ public class PromoMgr {
         setPromoList.add(newSet);
     }
 
+    /**
+     * Adds a new Food Item in the specified Set Promo.
+     * 
+     * @param foodName Name of Food Item to be added.
+     * @param type     Type of the new Foot Item to be added.
+     * @param setName  The name of the Set Promo to add Food Item.
+     */
     public static void addFood(String foodName, String type, String setName) {
         FoodType ftype = null; // Default value will change if it is something else
-		for (int i = 0; i < FoodType.values().length; i++) {
-			if (FoodType.values()[i].toString().equals(type)) {
-				ftype = FoodType.values()[i];
-			}
-		}
-        
+        for (int i = 0; i < FoodType.values().length; i++) {
+            if (FoodType.values()[i].toString().equals(type)) {
+                ftype = FoodType.values()[i];
+            }
+        }
+
         if (ftype == null) {
-			System.out.println("Invalid Food Type, please try again!");
-			return;
-		}
+            System.out.println("Invalid Food Type, please try again!");
+            return;
+        }
 
         FoodItem item = new FoodItem();
         item.setFoodName(foodName);
         item.setFoodType(ftype);
 
-        for(int i = 0; i < setPromoList.size(); i++){
-            if(setPromoList.get(i).getPromoName().equals(setName)){
+        for (int i = 0; i < setPromoList.size(); i++) {
+            if (setPromoList.get(i).getPromoName().equals(setName)) {
                 if (ftype == FoodType.Appetizer) {
                     for (int j = 0; j < MenuMgr.appet.size(); j++) {
                         if (item.getFoodName().equals(MenuMgr.appet.get(j).getFoodName())) {
@@ -204,19 +236,25 @@ public class PromoMgr {
                             return;
                         }
                     }
-                }   
+                }
             }
         }
-        
+
         System.out.println("Food item:" + foodName + " is not found in the Menu!");
         System.out.println("");
     }
 
+    /**
+     * Removes a Food Item from the Set Promo.
+     * 
+     * @param name    The name of the Food Item to be removed.
+     * @param setName The name of the Set Promo for Food Item to be removed.
+     */
     public static void removeFood(String name, String setName) {
-        for(int i = 0; i < setPromoList.size(); i++){
-            if(setPromoList.get(i).getPromoName().equals(setName)){
-                for(int j = 0; j < setPromoList.get(i).foodList.size(); j++){
-                    if(setPromoList.get(i).foodList.get(j).getFoodName().equals(name)){
+        for (int i = 0; i < setPromoList.size(); i++) {
+            if (setPromoList.get(i).getPromoName().equals(setName)) {
+                for (int j = 0; j < setPromoList.get(i).foodList.size(); j++) {
+                    if (setPromoList.get(i).foodList.get(j).getFoodName().equals(name)) {
                         FoodItem food = setPromoList.get(i).foodList.get(j);
                         setPromoList.get(i).foodList.remove(food);
                         setPromoList.get(i).setPromoPriceFromFood();
@@ -233,23 +271,19 @@ public class PromoMgr {
         System.out.println("There is no Set Promo with name " + setName);
         System.out.println("");
         return;
-        /* for (int i = 0; i < set.foodList.size(); i++) {
-            if (food.getFoodName() == set.foodList.get(i).getFoodName()) {
-                set.foodList.remove(food);
-                return;
-            }
-        }*/
     }
 
+    /**
+     * Prints the Set Promos available in the Restaurant
+     * 
+     */
     public static void printPromoMenu() {
         System.out.println("");
         for (int s = 0; s < setPromoList.size(); s++) {
             String setName = setPromoList.get(s).getPromoName();
-            //System.out.println("There are this many Set Promos: \t\t" + setPromoList.size());
             System.out.println("The Set Promo for today is: \t" + setPromoList.get(s).getPromoName());
             System.out.println("The Set Promo cost is: \t\t" + setPromoList.get(s).getPromoPrice());
             System.out.println("About this Set Promo: \t\t" + setPromoList.get(s).getPromoDesc());
-            //System.out.println("There are this many food items: \t\t" + setPromoList.get(s).foodList.size());
             for (int j = 0; j < setPromoList.get(s).foodList.size(); j++) {
                 System.out.println("The " + setPromoList.get(s).foodList.get(j).getFoodType() + " in " + setName
                         + " Set Promo is: \t" + setPromoList.get(s).foodList.get(j).getFoodName());
@@ -259,20 +293,3 @@ public class PromoMgr {
         System.out.println("");
     }
 }
-
-/*
- * if (sc.next() == "Main") { ftype = FoodType.MainCourse; itemName = sc.next();
- * itemPrice = Double.parseDouble(sc.next()); itemDesc = sc.next();
- * System.out.println("This has been added: " + itemName); FoodItem food = new
- * FoodItem(itemName, itemPrice, itemDesc, ftype); set.addFood(food); }
- * 
- * if (sc.next() == "Drink") { ftype = FoodType.Drinks; itemName = sc.next();
- * itemPrice = Double.parseDouble(sc.next()); itemDesc = sc.next();
- * System.out.println("This has been added: " + itemName); FoodItem food = new
- * FoodItem(itemName, itemPrice, itemDesc, ftype); set.addFood(food);
- * 
- * } if (sc.next() == "Dessert") { ftype = FoodType.Dessert; itemName =
- * sc.next(); itemPrice = Double.parseDouble(sc.next()); itemDesc = sc.next();
- * System.out.println("This has been added: " + itemName); FoodItem food = new
- * FoodItem(itemName, itemPrice, itemDesc, ftype); set.addFood(food); }
- */

@@ -12,16 +12,27 @@ import Entities.Order;
 import Entities.SetPromo;
 import Manager.OrderMgr;
 
-// Sale revenue report will detail the period, individual sale items (either ala carte or promotional items) and total revenue.
+/**
+ * Details the Period, Individual sale items (either ala carte or promotional
+ * items) and total revenue.
+ * 
+ * @author KaiSheng Lim
+ * @version 1.0
+ * @since 2021-11-12
+ */
 
 public class SalesReportUI {
 
     private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Order> invoiceList = OrderMgr.getInvoiceList();
-    // private static ArrayList<Menu> menuItemList = Restaurant.menu;
-    // UI provided to display list of actions that can be performed on
-    // Restaurant'sInvoices
 
+    /**
+     * Contains an Array List of Order Invoices
+     */
+    private static ArrayList<Order> invoiceList = OrderMgr.getInvoiceList();
+
+    /**
+     * Displays list of Order Invoices from Restaurant
+     */
     public static void displaysalesInvoiceUI() {
         int choice;
         do {
@@ -71,26 +82,31 @@ public class SalesReportUI {
      * @return Total revenue for reporting period
      */
     private static double getPeriodTotalRevenue(int month) {
-        double totalSum = 0;
-
-        for (Order order : invoiceList) {
-            String input_date = order.getTimeStamp(); // YYYY-MM-DD
+        double total = 0;
+        for (Order invoice : invoiceList) {
+            double totalSum = 0;
+            String input_date = invoice.getTimeStamp(); // YYYY-MM-DD
             String input_month = input_date.substring(5, 7); // MM
             String string_month = String.valueOf(month); // Convert input integer to string
 
             // Checking through the invoice to get the matching month
             if (string_month.equals(input_month)) {
                 // Summing the A' la carte
-                for (FoodItem item : order.getOrderItems()) {
+                for (FoodItem item : invoice.getOrderItems()) {
                     totalSum += item.getFoodPrice();
                 }
                 // Summing the PromoItem
-                for (SetPromo item : order.getOrderPromo()) {
+                for (SetPromo item : invoice.getOrderPromo()) {
                     totalSum += item.getPromoPrice();
                 }
             }
+            // Check if Promotion was applied
+            totalSum = invoice.getMemberDiscount() ? totalSum * 0.8 : totalSum;
+            // Add in the charges
+            totalSum *= 1.17;
+            total += totalSum;
         }
-        double totalRoundOff = Math.round(totalSum * 1.17 * 100.0) / 100.0;
+        double totalRoundOff = Math.round(total * 100.0) / 100.0;
         return totalRoundOff;
     }
 
@@ -107,20 +123,15 @@ public class SalesReportUI {
         for (Order order : invoiceList) {
             String input_date = order.getTimeStamp(); // YYYY-MM-DD
             String input_month = input_date.substring(5, 7); // MM
-            String string_month = String.valueOf(input_month); // Convert input integer to string
+            String string_month = Integer.toString(month); // Convert input integer to string
 
+            // System.out.println("input_month: " + input_month);
+            // System.out.println("month: " + string_month);
             // Checking through the invoice to get the matching month
             if (string_month.equals(input_month)) {
-                ArrayList<FoodItem> foodList = order.getOrderItems();
-                ArrayList<SetPromo> promoList = order.getOrderPromo();
-
                 // To add individual food item into the collection list
-                for (FoodItem food : foodList) {
-                    totalFoodDetail.add(food);
-                }
-                for (SetPromo set : promoList) {
-                    totalPromoDetail.add(set);
-                }
+                totalFoodDetail.addAll(order.getOrderItems());
+                totalPromoDetail.addAll(order.getOrderPromo());
             }
         }
 

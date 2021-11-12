@@ -9,9 +9,19 @@ import Entities.Table;
 import Manager.ReservationMgr;
 import Manager.TableMgr;
 
+/**
+ * Reservation Console UI to display Reservation options
+ * 
+ * @author Shannen
+ * @version 1.0
+ * @since 2021-11-12
+ */
+
 public class ReservationUI {
 
 	/**
+	 * Displays all the Reservation console UI options
+	 * 
 	 * @throws FileNotFoundException
 	 */
 	public static void displayReservationUI() throws FileNotFoundException {
@@ -31,7 +41,7 @@ public class ReservationUI {
 				System.out.println("Invalid Option. Please key try again!\n");
 				System.out.println("What would you like to do?");
 				System.out.println("1. Create Reservation\n" + "2. Check Reservation\n" + "3. Remove Reservation\n"
-					+ "4. Display Reservation\n" + "5. Exit\n");
+						+ "4. Display Reservation\n" + "5. Exit\n");
 				System.out.println("Input a choice:");
 				user_choice = Integer.parseInt(sc.nextLine());
 			}

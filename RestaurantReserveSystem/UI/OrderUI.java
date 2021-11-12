@@ -9,12 +9,20 @@ import Entities.Order;
 import Manager.OrderMgr;
 import Manager.TableMgr;
 
-// Boundary class: provides UI for users to perform actions on Order Entity Class using Order Control Class
-
+/**
+ * Provides UI for users to perform actions on Order Entity Class using Order
+ * Control Class
+ * 
+ * @author KaiSheng Lim
+ * @version 1.0
+ * @since 2021-11-12
+ */
 public class OrderUI {
 	// private static Scanner sc = new Scanner(System.in);
 
-	// UI provided for user to perform request
+	/**
+	 * UI provided for user to perform request
+	 */
 	public static void displayOrder_UI() {
 		Scanner sc = new Scanner(System.in);
 		int choice;
@@ -56,7 +64,9 @@ public class OrderUI {
 
 	}
 
-	// Display current order
+	/**
+	 * Displays Current Order
+	 */
 	private static void viewCurrentOrderUI() {
 		Scanner sc = new Scanner(System.in);
 		int index, choice;
@@ -77,7 +87,7 @@ public class OrderUI {
 			for (Order order : orderList) {
 				System.out.println((index++) + ". " + order.getName());
 			}
-			System.out.println(orderList.size()+1 + ". Exit");
+			System.out.println(orderList.size() + 1 + ". Exit");
 			System.out.println("======================================================");
 
 			System.out.println("Input your choice of Order: ");
@@ -101,13 +111,18 @@ public class OrderUI {
 
 	}
 
-	// UI to faciliate addition of new Order
+	/**
+	 * UI to facilitate the addition of a new Order
+	 */
 	public static void addNewOrderUI() {
 		Staff staff = selectStaffUI();
 		Table table = selectTableUI();
 		OrderMgr.addNewOrder(staff, table);
 	}
 
+	/**
+	 * @param tableId
+	 */
 	// @Overload
 	public static void addNewOrderUI(int tableId) {
 		Staff staff = selectStaffUI();
@@ -116,6 +131,9 @@ public class OrderUI {
 		OrderMgr.addNewOrder(staff, table);
 	}
 
+	/**
+	 * @return Table
+	 */
 	// Private Method: UI to faciliate selection of Table for new Orders
 	private static Table selectTableUI() {
 		Scanner sc = new Scanner(System.in);
@@ -146,6 +164,9 @@ public class OrderUI {
 		return tList.get(choice - 1);
 	}
 
+	/**
+	 * @return Staff
+	 */
 	// Private Method: UI to faciliate selection of Staff for new Orders
 	private static Staff selectStaffUI() {
 		Scanner sc = new Scanner(System.in);

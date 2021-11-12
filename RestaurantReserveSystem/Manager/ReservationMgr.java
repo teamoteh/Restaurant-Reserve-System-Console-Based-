@@ -3,21 +3,38 @@ package Manager;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-//import datatxt.FileReaderWriter;
 import Entities.Reservation;
 import Entities.Table;
 import datatxt.FileReaderWriter;
-//import Entities.Table;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Represents the class which manages anything related to the reservations in
+ * the restaurant.
+ * 
+ * @author Shannen Lee
+ * @version 1.0
+ * @since 2021-11-12
+ */
 public class ReservationMgr {
+
+    /**
+     * The array list containing all the reservations and their attributes in the
+     * restaurant.
+     */
     protected static ArrayList<Reservation> r = new ArrayList<Reservation>();
 
     public ReservationMgr() throws FileNotFoundException {
 
     }
 
+    /**
+     * 
+     * Reads the reservations from the Reservation.txt file.
+     * 
+     * @return ArrayList<Reservation>
+     */
     public static ArrayList<Reservation> readReservation() {
         FileReaderWriter fi = new FileReaderWriter();
         try {
@@ -29,6 +46,11 @@ public class ReservationMgr {
         return r;
     }
 
+    /**
+     * Checks the expired reservations by checking if it is 30 minutes past the
+     * current time.
+     * 
+     */
     public static void checkReservationExpiry() {
         for (int i = 0; i < r.size(); i++) {
             if (LocalDate.now().isEqual(r.get(i).getReserveDate())) {
@@ -41,6 +63,12 @@ public class ReservationMgr {
         }
     }
 
+    /**
+     * Adds reservation bookings into the array list r.
+     * 
+     * @param r1 The reservation that will be added into the array list of
+     *           reservations
+     */
     public static void addReservationBooking(Reservation r1) {
         checkReservationExpiry();
         r.add(r1);
@@ -48,8 +76,6 @@ public class ReservationMgr {
         System.out.println();
 
         try {
-
-            // RestaurantReserveSystem/datatxt/MainCourse.txt
             String fileName = "RestaurantReserveSystem/datatxt/Reservation.txt";
             Scanner sc = new Scanner(fileName);
             sc.useDelimiter("\\s*,\\s*");
@@ -71,6 +97,13 @@ public class ReservationMgr {
 
     }
 
+    /**
+     * Removes the reservation booking with the specific customer contact number
+     * from the array list of reservations.
+     * 
+     * @param number The customer contact of the reservation which will be removed
+     *               from the array list.
+     */
     public static void removeReservationBooking(int number) {
         checkReservationExpiry();
         for (int i = 0; i < r.size(); i++) {
@@ -81,10 +114,20 @@ public class ReservationMgr {
                 System.out.println();
                 return;
             }
-        }  System.out.println("Reservation does not exist!\n");
+        }
+        System.out.println("Reservation does not exist!\n");
 
     }
 
+    /**
+     * Checks the reservation booking with the specific customer contact number from
+     * the array list of reservations. If it is valid, the reservation details will
+     * be printed. If it is not valid, it will print that the reservation does not
+     * exist.
+     * 
+     * @param number The customer contact of the reservation which will be checked
+     *               with the array list.
+     */
     public static void checkReservationBooking(int number) {
         checkReservationExpiry();
         for (int i = 0; i < r.size(); i++) {
@@ -92,23 +135,51 @@ public class ReservationMgr {
                 System.out.println("Reservation valid under " + r.get(i).getCustName() + " at "
                         + r.get(i).getReserveTime() + " on " + r.get(i).getReserveDate() + " for "
                         + r.get(i).getNumOfPax() + " pax, table number is " + r.get(i).getTableNo());
-                        System.out.println();
+                System.out.println();
                 return;
             }
-                
-        } System.out.println("Reservation does not exist!");
+
+        }
+        System.out.println("Reservation does not exist!");
         System.out.println();
     }
 
+    /**
+     * Displays the current reservations and the reservation details
+     * 
+     * @throws FileNotFoundException
+     */
+    // "%d. %s :$%.2f\n"
     public static void displayReservation() throws FileNotFoundException {
         // FileReaderWriter.getReservation(r);
-        String spaceNeeded = "            ";
-        System.out.println("Date            Time            Name            Pax            Contact            TableNo");
-        for (int i = 0; i < r.size(); i++) {
-            System.out.println(r.get(i).getReserveDate() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getReserveTime() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length())
-                    + r.get(i).getCustName() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getNumOfPax() + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getCustContact()
-                    + spaceNeeded.substring(0, spaceNeeded.length() - Integer.toString(i).length()) + r.get(i).getTableNo());
-        }
+        // String spaceNeeded = " ";
+        /*
+         * System.out.printf("%d. %s :$%.2f\n", (index++), String.format("%-20s",
+         * item.getFoodName()), item.getFoodPrice()); sum += item.getFoodPrice();
+         */
+        System.out.printf("%s %s %s %s %s %s", String.format("%-20s", "Date"), String.format("%-20s", "Time"),
+                String.format("%-20s", "Name"), String.format("%-20s", "Pax"), String.format("%-20s", "Contact"),
+                String.format("%-20s", "TableNo."));
+        // System.out.printf("Date", "%-20s", "Time", "%-20s", "Name", "%-20s", "Pax",
+        // "%-20s", "Contact", "%-20s",
+        // "TableNo");
         System.out.println();
+
+        for (int i = 0; i < r.size(); i++) {
+            /*
+             * System.out.printf("%s %s %s %s %s", r.get(i).getReserveDate(), "%-20s",
+             * r.get(i).getReserveTime(), "%-20s", r.get(i).getCustName(), "%-20s",
+             * r.get(i).getNumOfPax(), "%-20s", r.get(i).getCustContact(), "%-20s",
+             * r.get(i).getTableNo());
+             */
+            System.out.printf("%s %s %s %s %s %s", String.format("%-20s", r.get(i).getReserveDate().toString()),
+                    String.format("%-20s", r.get(i).getReserveTime().toString()),
+                    String.format("%-20s", r.get(i).getCustName().toString()),
+                    String.format("%-20s", Integer.toString(r.get(i).getNumOfPax())),
+                    String.format("%-20s", Integer.toString(r.get(i).getCustContact())),
+                    String.format("%-20s", Integer.toString(r.get(i).getTableNo())));
+            System.out.println();
+        }
+
     }
 }

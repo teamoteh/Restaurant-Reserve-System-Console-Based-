@@ -4,21 +4,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import Manager.MenuMgr;
-// import java.text.DateFormat;
-// import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-//import java.util.Date;
 import Manager.TableMgr;
 import Manager.StaffMgr;
 import Manager.PromoMgr;
 import Manager.MenuMgr;
 import Manager.ReservationMgr;
 import Manager.CloseApp;
+
+/**
+ * Overall Restaurant App
+ * 
+ * @author KaiSheng Lim
+ * @version 1.0
+ * @since 2021-11-12
+ */
 public class RestaurantApp {
 
     public static void main(String[] args) throws IOException {
 
-        // To read in preset details for object intializati
+        /**
+         * Intialize all Array Lists in the various Managers
+         */
         TableMgr.readTables(TableMgr.getTableList());
         StaffMgr.readStaffs(StaffMgr.getStaffList());
         PromoMgr.readPromo(PromoMgr.getPromoList());

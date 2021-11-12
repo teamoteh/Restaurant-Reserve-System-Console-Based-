@@ -4,41 +4,84 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.*;
-import Manager.*; // It is in used, ignore error. See line 17~19
+import Manager.*;
 
-// import Entities.Restaurant;
-
+/**
+ * Class which manages the orders in the restaurant
+ */
 public class OrderMgr {
-    private static ArrayList<Order> orderList = new ArrayList<Order>(); // List of current order that is unpaid
-    private static ArrayList<Order> invoiceList = new ArrayList<Order>(); // List of exisiting order that has checkout
-                                                                          // as invoice
-    private static ArrayList<SetPromo> PromoItemList = PromoMgr.getPromoList(); // Need tim inputs
-    private static ArrayList<FoodItem> FoodItemList = MenuMgr.getMenuList(); // All food options
-    private static ArrayList<Table> tableList = TableMgr.getTableList(); // Available tables for walk in order
-    private static ArrayList<Staff> staffList = StaffMgr.getStaffList(); // For receipt
 
-    // Retrieves List of Restaurant's Orders
+    /**
+     * List of current orders that is unpaid
+     */
+    private static ArrayList<Order> orderList = new ArrayList<Order>();
+
+    /**
+     * List of existing order that has checkout as invoice
+     */
+    private static ArrayList<Order> invoiceList = new ArrayList<Order>();
+
+    /**
+     * List of promo items
+     */
+    private static ArrayList<SetPromo> PromoItemList = PromoMgr.getPromoList();
+
+    /**
+     * List of all food options (Appetizer, Main Course, Dessert, Drinks)
+     */
+    private static ArrayList<FoodItem> FoodItemList = MenuMgr.getMenuList();
+
+    /**
+     * List of all available tables for walk in order
+     */
+    private static ArrayList<Table> tableList = TableMgr.getTableList();
+
+    /**
+     * List of staf members of the restaurant
+     */
+    private static ArrayList<Staff> staffList = StaffMgr.getStaffList();
+
+    /**
+     * Retrieves List of Restaurant's Orders
+     * 
+     * @return List of Restaurant's Orders
+     */
     public static ArrayList<Order> getOrderList() {
         return orderList;
     }
 
-    // Retrieves List of Restaurant's completed Orders
+    /**
+     * Retrieves List of Restaurant's completed Orders
+     * 
+     * @return List of Restaurant's completed Orders
+     */
     public static ArrayList<Order> getInvoiceList() {
         return invoiceList;
     }
 
-    // Retrieves List of Restaurant's Tables
+    /**
+     * Retrieves List of Restaurant's Tables
+     * 
+     * @return List of Restaurant's Tables
+     */
     public static ArrayList<Table> getRestaurantTables() {
         return tableList;
     }
 
-    // Retrieves List of Restaurant's Staff
+    /**
+     * Retrieves List of Restaurant's Staff
+     * 
+     * @return List of Restaurant's Staff
+     */
     public static ArrayList<Staff> getRestaurantStaff() {
         return staffList;
     }
 
-    // Prints the input Order's details
-    // Input: order - Prints detail of input Order object
+    /**
+     * Prints the input Order's details
+     * 
+     * @param order Existing order
+     */
     public static void printOrderDetails(Order order) {
         System.out.println();
         System.out.println("======================= RECEIPT =======================");
@@ -52,15 +95,16 @@ public class OrderMgr {
         double sum = 0;
         int index = 1;
         for (FoodItem item : order.getOrderItems()) {
-            System.out.printf("%d. %s  \t\t- $%.2f\n", (index++), item.getFoodName(), item.getFoodPrice());
+            System.out.printf("%d. %s :$%.2f\n", (index++), String.format("%-20s", item.getFoodName()),
+                    item.getFoodPrice());
             sum += item.getFoodPrice();
         }
         for (SetPromo item : order.getOrderPromo()) {
-            System.out.printf("%d. %s  \t- $%.2f\n", (index++), item.getPromoName(), item.getPromoPrice());
+            System.out.printf("%d. %s :$%.2f\n", (index++), String.format("%-20s", item.getPromoName()),
+                    item.getPromoPrice());
             sum += item.getPromoPrice();
         }
 
-        // MEMBER DISCOUNT (20%)
         if (order.getMemberDiscount()) {
             sum = sum * 0.8;
         }
@@ -74,9 +118,12 @@ public class OrderMgr {
 
     }
 
-    // Adds a new order to the restaurant's Order List
-    // input: staff - Staff who keys in the order
-    // input: table - Table assigned to this order
+    /**
+     * Adds a new order to the restaurant's Order List
+     * 
+     * @param staff Staff who keys in the order
+     * @param table Table assigned to this order
+     */
     public static void addNewOrder(Staff staff, Table table) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nEnter today's date in the format of YYYY-MM-DD: ");
@@ -87,8 +134,12 @@ public class OrderMgr {
         orderList.add(item);
     }
 
-    // Adds FoodItems to the order
-    // input: order - Order to be modified
+    /**
+     * Adds FoodItems to the order
+     * 
+     * @param order Order to be modified
+     * @return Modified Order
+     */
     public static Order addFoodItemToOrder(Order order) {
         Scanner scanner = new Scanner(System.in);
         int opt = 0;
@@ -151,8 +202,11 @@ public class OrderMgr {
         return order;
     }
 
-    // Removes FoodItem Items from the order
-    // input: order - Order to be modified
+    /**
+     * Removes FoodItem Items from the order
+     * 
+     * @param order Order to be modified
+     */
     public static void removeFoodItemFromOrder(Order order) {
         Scanner scanner = new Scanner(System.in);
 
@@ -160,14 +214,14 @@ public class OrderMgr {
         int setIndex;
 
         // Sanity check for menu
-        if (order.getOrderItems().size() < 1) {
+        if (order.getOrderItems().size() < 1 && order.getOrderPromo().size() < 1) {
             System.out.println("There are no items in this order");
             // scanner.close();
             return;
         }
         // Removal of items
         else {
-            while ((order.getOrderItems().size() > 0) && (order.getOrderPromo().size() > 0)) {
+            while ((order.getOrderItems().size() > 0) || (order.getOrderPromo().size() > 0)) {
                 String choice = "", compare = "Y";
                 do {
                     // Prompt user
@@ -181,54 +235,59 @@ public class OrderMgr {
                     // A' La carte
                     System.out.println("\t========== A' LA CARTE ==========\t");
                     for (FoodItem item : order.getOrderItems()) {
-                        System.out.println("[" + (index++) + "] : " + item.getFoodName());
+                        System.out.println((1 + index++) + ". " + item.getFoodName());
                     }
-                    // Placeholder to identify from which index onwards are setPromo
+
+                    // To track from which index onwards it is Set Meal
                     setIndex = index;
 
                     // Set Meal
                     System.out.println("\t=========== SET MEAL ============\t");
-                    for (SetPromo set : PromoItemList) {
-                        System.out.println((index++) + ". " + set.getPromoName());
+                    for (SetPromo set : order.getOrderPromo()) {
+                        System.out.println((1 + index++) + ". " + set.getPromoName());
                     }
 
                     System.out.println("================================================================\n");
                     System.out.println("Input your choice of removable food: ");
                     // Error Checking: Ask user to input an options within the given range
                     do {
-                        opt = scanner.nextInt();
+                        opt = Integer.parseInt(scanner.nextLine());
                     } while (opt < 0 || opt > index);
 
                     // Removing the foodItem / setPromo to the arrayList
-                    if (opt >= setIndex) {
-                        order.removePromo(opt); // Remove set promo
+                    if (opt > setIndex) {
+                        order.removePromo(opt - setIndex - 1);
                     } else {
-                        order.removeItem(opt); // Remove a' la carte
+                        order.removeItem(opt - 1); // Remove a' la carte
                     }
 
                     // Repeater
                     System.out.println("Do you want to [remove] more food from the order? (Y/N)");
                     choice = scanner.nextLine();
-                } while (choice.toUpperCase().equals(compare));
+                } while (choice.toUpperCase().equals(compare)
+                        && (order.getOrderItems().size() > 0 || order.getOrderPromo().size() > 0));
 
-                // scanner.close();
-                // To break the while Loop
                 return;
             }
         }
-        // scanner.close();
     }
 
-    // Removes an entire order from Restaurant's orders
-    // Input: index - index of "order" to remove from
+    /**
+     * Removes an entire order from Restaurant's orders
+     * 
+     * @param index index of "order" to remove from
+     */
     public static void removeOrder(int index) {
         String removedOrderName = orderList.get(index).getName();
         orderList.remove(index);
         System.out.println("Successfully removed [" + removedOrderName + "] from the list of current orders");
     }
 
-    // To change the order status from unpaid to paid (Order becomes Invoice)
-    // input: index - index of "order"
+    /**
+     * Changes the order status from unpaid to paid (Order becomes Invoice)
+     * 
+     * @param index index of "order"
+     */
     public static void completeOrder(int index) {
         Scanner scanner = new Scanner(System.in);
         Order completedOrder = orderList.get(index);
@@ -236,7 +295,7 @@ public class OrderMgr {
         // During checkout, prompt user if he/she is a member for member discount
         System.out.println("Is the customer a member (Y/N) ?");
         String choice = scanner.nextLine().toUpperCase();
-        Boolean membership = (choice == "Y") ? true : false; // ternary operator / conditional operator
+        Boolean membership = choice.equals("Y") ? true : false; // ternary operator / conditional operator
         completedOrder.setMemberDiscount(membership);
 
         // Update the table status to "available"
@@ -250,14 +309,5 @@ public class OrderMgr {
         // Shift order to invoice arraylist
         invoiceList.add(completedOrder);
         orderList.remove(index);
-
-        // scanner.close();
     }
 }
-
-/**
- * Find the total revenue made for a reporting month
- * 
- * @param month Month for statistics to be reported
- * @return Total revenue for reporting period
- */

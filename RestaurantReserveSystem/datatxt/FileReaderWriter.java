@@ -11,6 +11,13 @@ import Manager.TableMgr;
 
 import java.util.ArrayList;
 
+/**
+ * Base File Reading for various data files
+ * 
+ * @author Pranwanth
+ * @version 1.0
+ * @since 2021-11-12
+ */
 public class FileReaderWriter {
 
 	public FileReaderWriter() {
@@ -18,6 +25,7 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * 
 	 * @param address
 	 * @param text
 	 * @throws IOException
@@ -128,7 +136,7 @@ public class FileReaderWriter {
 		File file = new File("RestaurantReserveSystem/datatxt/Reservation.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
-		System.out.println(file.length());
+
 		if (file.length() < 2) {
 			sc.close();
 			return;
@@ -139,7 +147,6 @@ public class FileReaderWriter {
 			int numOfPax = Integer.parseInt(sc.next());
 			String custName = sc.next();
 			int custContact = Integer.parseInt(sc.next());
-			// System.out.println(custContact);
 			int tableNum = Integer.parseInt(sc.next());
 			Table table = null;
 			for (int i = 0; i < TableMgr.getTableList().size(); i++) {
@@ -154,10 +161,4 @@ public class FileReaderWriter {
 		}
 		sc.close();
 	}
-
-	/*
-	 * Things to implement getReservation getTable getOrder getAppetizer
-	 * getMainCourse getDessert getStaff getSetPromo
-	 */
-
 }
