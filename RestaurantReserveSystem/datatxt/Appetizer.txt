@@ -1,4 +1,3 @@
-Mushroom Soup, 2.00, Creamy Goodness in a bowl, 
-Garlic Bread, 2.20, Fresh out of the oven,
-Potato Wedges, 3.00, Made with organic potatoes
-
+Mushroom Soup,2.0,Creamy Goodness in a bowl,
+Garlic Bread,2.2,Fresh out of the oven,
+Potato Wedges,3.0,Made with organic potatoes

@@ -1,4 +1,3 @@
-Coke, 2 , Gasy and Tasty,
-Sprite, 1, Fancy Lemonade,
-Ice Lemon Tea, 1, Freshly Brewed
-
+Coke,2.0,Gasy and Tasty,
+Sprite,1.0,Fancy Lemonade,
+Ice Lemon Tea,1.0,Freshly Brewed

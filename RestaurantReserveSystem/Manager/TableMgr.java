@@ -13,7 +13,7 @@ import Entities.Table;
 
 public class TableMgr {
 
-    private static ArrayList<Table> tables = new ArrayList<Table>();
+    protected static ArrayList<Table> tables = new ArrayList<Table>();
 
     // FileReader for Tables
     public static void readTables(ArrayList<Table> tables) throws FileNotFoundException {

@@ -46,7 +46,7 @@ public class FileReaderWriter {
 
 		do {
 			String foodName = sc.next();
-			double foodPrice = Integer.parseInt(sc.next());
+			double foodPrice = sc.nextDouble();
 			String foodDesc = sc.next();
 			FoodItem.FoodType fType = FoodItem.FoodType.Drinks;
 

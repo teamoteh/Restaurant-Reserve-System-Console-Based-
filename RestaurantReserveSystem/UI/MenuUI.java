@@ -142,7 +142,7 @@ public class MenuUI {
 				PromoMgr.createSetPromo(name, desc, num);
 			}
 
-		} while (user_choice > 0 && user_choice < 8);
+		} while (user_choice > 0 && user_choice < 9);
 		// sc.close();
 	}
 

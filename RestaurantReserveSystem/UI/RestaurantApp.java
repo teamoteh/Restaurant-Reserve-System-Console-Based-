@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import Manager.MenuMgr;
 // import java.text.DateFormat;
@@ -11,11 +12,11 @@ import Manager.TableMgr;
 import Manager.StaffMgr;
 import Manager.PromoMgr;
 import Manager.MenuMgr;
-import Manager.ReservationMgr;;
-
+import Manager.ReservationMgr;
+import Manager.CloseApp;
 public class RestaurantApp {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         // To read in preset details for object intializati
         TableMgr.readTables(TableMgr.getTableList());
@@ -52,6 +53,7 @@ public class RestaurantApp {
             }
         } while (choice > 0 && choice < 5);
 
+        CloserUI.closeRestaurant();
         System.out.println("App terminated.");
         sc.close();
     }
