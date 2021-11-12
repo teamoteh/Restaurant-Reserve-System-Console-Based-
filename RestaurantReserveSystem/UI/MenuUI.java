@@ -30,16 +30,18 @@ public class MenuUI {
 
 		int user_choice;
 		do {
+			
 			System.out.println("What would you like to do?");
 
 			System.out.println("1. View Current Menu \n" + "2. Create Menu Item\n" + "3. Update Menu Item\n"
 					+ "4. Remove Menu Item\n" + "5. View Promo Menu\n" + "6. Add Promo Item\n"
-					+ "7. Remove Promo Item\n" + "8. Exit\n");
+					+ "7. Remove Promo Item\n" + "8. Create New Set Promo\n" + "9. Exit\n");
 
 			System.out.println("Input a choice:");
 			user_choice = Integer.parseInt(sc.nextLine());
 
 			switch (user_choice) {
+			default:
 			case 1:
 				MenuMgr.printMenu();
 				break;
@@ -95,142 +97,49 @@ public class MenuUI {
 				break;
 
 			case 6:
-				int promoChoice;
-				do {
-					System.out.println("What is the Food Type of the item to be added?");
-					System.out.println(
-							"1. Appetizer \n" + "2. Main Course\n" + "3. Dessert\n" + "4. Drink\n" + "5. Exit\n");
-					promoChoice = sc.nextInt();
-					switch (promoChoice) {
-					case 1:
-						int i;
-						System.out.println("What is the name of the Appetizer to add to the Promo?");
-						String foodName = sc.nextLine();
-						FoodItem food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Appetizer);
-						System.out.println("What is the name of the set you would like to add to?");
-						String promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.addFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 2:
-						System.out.println("What is the name of the Main Course to add to the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.MainCourse);
-						System.out.println("What is the name of the set you would like to add to?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.addFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 3:
-						System.out.println("What is the name of the Dessert to add to the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Dessert);
-						System.out.println("What is the name of the set you would like to add to?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.addFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 4:
-						System.out.println("What is the name of the Drink to add to the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Drinks);
-						System.out.println("What is the name of the set you would like to add to?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.addFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					}
-				} while (promoChoice > 0 && promoChoice < 5);
+				System.out.println("What is the name of the new Menu Item?");
+				name = sc.nextLine();
+
+				System.out.println("Please choose from MainCourse, Drinks, Dessert or Appetizer");
+				System.out.println("What is the type of the new Menu Item?");
+				type = sc.nextLine();
+				System.out.println("");
+
+				System.out.println("Please type the name of the Set Promo to add to: ");
+				for (int s = 0; s < PromoMgr.setPromoList.size(); s++) {
+					System.out.println("-" + PromoMgr.setPromoList.get(s).getPromoName());
+				}
+
+				String setName = sc.nextLine();
+
+				PromoMgr.addFood(name, type, setName);
 				break;
 
 			case 7:
-				do {
-					System.out.println("What is the Food Type of the item to be removed?");
-					System.out.println(
-							"1. Appetizer \n" + "2. Main Course\n" + "3. Dessert\n" + "4. Drink\n" + "5. Exit\n");
-					promoChoice = Integer.parseInt(sc.nextLine());
-					switch (promoChoice) {
-					case 1:
-						int i;
-						System.out.println("What is the name of the Appetizer to remove from the Promo?");
-						String foodName = sc.nextLine();
-						FoodItem food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Appetizer);
-						System.out.println("What is the name of the set you would like to remove from?");
-						String promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.removeFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 2:
-						System.out.println("What is the name of the Main Course to remove from the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.MainCourse);
-						System.out.println("What is the name of the set you would like to remove from?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.removeFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 3:
-						System.out.println("What is the name of the Dessert to remove from the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Dessert);
-						System.out.println("What is the name of the set you would like to remove from?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.removeFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					case 4:
-						System.out.println("What is the name of the Drink to remove from the Promo?");
-						foodName = sc.nextLine();
-						food = new FoodItem();
-						food.setFoodName(foodName);
-						food.setFoodType(FoodItem.FoodType.Drinks);
-						System.out.println("What is the name of the set you would like to remove from?");
-						promoName = sc.nextLine();
-						for (i = 0; i < PromoMgr.setPromoList.size(); i++) {
-							if (PromoMgr.setPromoList.get(i).getPromoName() == promoName) {
-								PromoMgr.removeFood(food, PromoMgr.setPromoList.get(i));
-								PromoMgr.setPromoList.get(i).setPromoPriceFromFood();
-							}
-						}
-					}
-				} while (promoChoice > 0 && promoChoice < 5);
-				break;
+				System.out.println("What is the name of the Food Item from Set Promo to be removed?");
+				name = sc.nextLine();
 
+				System.out.println("Please type the name of the Set Promo to add to: ");
+				for (int s = 0; s < PromoMgr.setPromoList.size(); s++) {
+					System.out.println(PromoMgr.setPromoList.get(s).getPromoName());
+				}
+
+				setName = sc.nextLine();
+
+				PromoMgr.removeFood(name, setName);
+				break;
+				
+			case 8:
+				System.out.println("What is the name of the new Set Promo?");
+				name = sc.nextLine();
+
+				System.out.println("What is the description of the new Set Promo?");
+				desc = sc.nextLine();
+
+				System.out.println("How many Food Items are in " + name + " Set Promo?");
+				int num = sc.nextInt();
+
+				PromoMgr.createSetPromo(name, desc, num);
 			}
 
 		} while (user_choice > 0 && user_choice < 8);

@@ -2,13 +2,15 @@ package Entities;
 
 import Entities.FoodItem;
 import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class SetPromo {
 
     public String promoName;
     public double promoPrice;
-    public ArrayList<FoodItem> foodList;
     public String promoDesc;
+    public ArrayList<FoodItem> foodList;
 
     public SetPromo() {
         this.promoName = null;
@@ -46,7 +48,8 @@ public class SetPromo {
             total += foodList.get(i).getFoodPrice();
         }
         total *= 0.8;
-        this.promoPrice = total;
+        BigDecimal bd = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+        this.promoPrice = bd.doubleValue();
     }
 
     public String getPromoDesc() {
@@ -69,5 +72,15 @@ public class SetPromo {
         for (int i = 0; i < foodList.size(); i++) {
             foodList.remove(i);
         }
+    }
+
+    public void printAllFood(){
+        System.out.println("The size is : " + foodList.size());
+        for (int s = 0; s < foodList.size(); s++) {
+			System.out.println(foodList.get(s).getFoodType() + " " +
+					foodList.get(s).getFoodName() + " " + foodList.get(s).getFoodPrice() + " " + foodList.get(s).getFoodDesc());
+			// + " "+ appet.get(s).getFoodType()); //Don't actually have to print food Type
+			// anymore
+		}
     }
 }
