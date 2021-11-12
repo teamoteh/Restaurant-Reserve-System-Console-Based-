@@ -9,6 +9,13 @@
             "name": "Launch RestaurantApp",
             "request": "launch",
             "mainClass": "UI.RestaurantApp",
+            "projectName": "RestaurantReserveSystem"
+        },
+        {
+            "type": "java",
+            "name": "Launch RestaurantApp",
+            "request": "launch",
+            "mainClass": "UI.RestaurantApp",
             "projectName": "Restaurant-Reserve-System-Console-Based-_a112ca81"
         },
         {
