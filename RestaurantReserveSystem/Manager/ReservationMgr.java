@@ -25,10 +25,6 @@ public class ReservationMgr {
      */
     protected static ArrayList<Reservation> r = new ArrayList<Reservation>();
 
-    public ReservationMgr() throws FileNotFoundException {
-
-    }
-
     /**
      * 
      * Reads the reservations from the Reservation.txt file.
