@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 import Entities.SetPromo;
 import Entities.FoodItem.FoodType;
-import MenuClass.Appetizer;
-import MenuClass.Dessert;
-import MenuClass.Drink;
-import MenuClass.MainCourse;
 import Entities.FoodItem;
 import Manager.MenuMgr;
 
