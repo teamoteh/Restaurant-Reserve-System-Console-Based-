@@ -24,12 +24,7 @@ public class FileReaderWriter {
 
 	}
 
-	/**
-	 * Writing into the respective text files.
-	 * @param address
-	 * @param text
-	 * @throws IOException
-	 */
+	/*
 	public void write(String address, String text) throws IOException {
 		try {
 			FileWriter fw = new FileWriter(address, true);
@@ -41,7 +36,7 @@ public class FileReaderWriter {
 		} catch (IOException e) {
 			// exception handling left as an exercise for the reader
 		}
-	}
+	} */
 
 	/**
 	 * Scans the Drinks.txt and uses the scanned attributes to 
