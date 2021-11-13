@@ -94,6 +94,10 @@ public class TableMgr {
         System.out.println("Table %f has been removed.");
     }
 
+    
+    /** 
+     * @return ArrayList<Table>
+     */
     public static ArrayList<Table> getTableList() {
         return tables;
     }
