@@ -151,27 +151,14 @@ public class ReservationMgr {
      */
     // "%d. %s :$%.2f\n"
     public static void displayReservation() throws FileNotFoundException {
-        // FileReaderWriter.getReservation(r);
-        // String spaceNeeded = " ";
-        /*
-         * System.out.printf("%d. %s :$%.2f\n", (index++), String.format("%-20s",
-         * item.getFoodName()), item.getFoodPrice()); sum += item.getFoodPrice();
-         */
+        
         System.out.printf("%s %s %s %s %s %s", String.format("%-20s", "Date"), String.format("%-20s", "Time"),
                 String.format("%-20s", "Name"), String.format("%-20s", "Pax"), String.format("%-20s", "Contact"),
                 String.format("%-20s", "TableNo."));
-        // System.out.printf("Date", "%-20s", "Time", "%-20s", "Name", "%-20s", "Pax",
-        // "%-20s", "Contact", "%-20s",
-        // "TableNo");
+        
         System.out.println();
 
         for (int i = 0; i < r.size(); i++) {
-            /*
-             * System.out.printf("%s %s %s %s %s", r.get(i).getReserveDate(), "%-20s",
-             * r.get(i).getReserveTime(), "%-20s", r.get(i).getCustName(), "%-20s",
-             * r.get(i).getNumOfPax(), "%-20s", r.get(i).getCustContact(), "%-20s",
-             * r.get(i).getTableNo());
-             */
             System.out.printf("%s %s %s %s %s %s", String.format("%-20s", r.get(i).getReserveDate().toString()),
                     String.format("%-20s", r.get(i).getReserveTime().toString()),
                     String.format("%-20s", r.get(i).getCustName().toString()),
@@ -180,6 +167,6 @@ public class ReservationMgr {
                     String.format("%-20s", Integer.toString(r.get(i).getTableNo())));
             System.out.println();
         }
-
+        System.out.println();
     }
 }
