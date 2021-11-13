@@ -70,7 +70,7 @@ public class MenuMgr {
 	 * 
 	 * @param name        Food Item's name
 	 * @param price       Food Item's price
-	 * @param description Food Item's Description
+	 * @param desc Food Item's Description
 	 * @param type        Food Item's Food Type
 	 */
 	public static void addToMenu(String name, double price, String desc, String type) {
