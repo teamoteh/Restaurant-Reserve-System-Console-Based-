@@ -9,4 +9,4 @@
 9,6,true,
 10,6,true,
 11,8,true,
-12,8,true
+12,10,true
