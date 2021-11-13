@@ -21,6 +21,11 @@ import Manager.CloseApp;
  */
 public class RestaurantApp {
 
+    
+    /** 
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         /**
