@@ -24,20 +24,6 @@ public class FileReaderWriter {
 
 	}
 
-	/*
-	public void write(String address, String text) throws IOException {
-		try {
-			FileWriter fw = new FileWriter(address, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter out = new PrintWriter(bw);
-			out.println(text);
-			out.close();
-			// more code
-		} catch (IOException e) {
-			// exception handling left as an exercise for the reader
-		}
-	} */
-
 	/**
 	 * Scans the Drinks.txt and uses the scanned attributes to 
 	 * create a new FoodItem drink in the ArrayList<FoodItem> drinks. 
