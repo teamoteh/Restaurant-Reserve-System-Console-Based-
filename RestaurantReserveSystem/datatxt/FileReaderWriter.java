@@ -25,7 +25,7 @@ public class FileReaderWriter {
 	}
 
 	/**
-	 * 
+	 * Writing into the respective text files.
 	 * @param address
 	 * @param text
 	 * @throws IOException
@@ -44,6 +44,8 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * Scans the Drinks.txt and uses the scanned attributes to 
+	 * create a new FoodItem drink in the ArrayList<FoodItem> drinks. 
 	 * @param drinks
 	 * @throws FileNotFoundException
 	 */
@@ -65,6 +67,8 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * * Scans the Appetizer.txt and uses the scanned attributes to 
+	 * create a new FoodItem appetizer in the ArrayList<FoodItem> appet. 
 	 * @param appet
 	 * @throws FileNotFoundException
 	 */
@@ -87,6 +91,8 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * Scans the Dessert.txt and uses the scanned attributes to 
+	 * create a new FoodItem dessert in the ArrayList<FoodItem> desserts.
 	 * @param desserts
 	 * @throws FileNotFoundException
 	 */
@@ -108,6 +114,8 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * Scans the MainCourse.txt and uses the scanned attributes to 
+	 * create a new FoodItem mainCourse in the ArrayList<FoodItem> mainCourses.
 	 * @param mainCourses
 	 * @throws FileNotFoundException
 	 */
@@ -129,10 +137,12 @@ public class FileReaderWriter {
 	}
 
 	/**
+	 * Scans the Reservation.txt and uses the scanned attributes to 
+	 * create a new Reservation r in the ArrayList<Reservation> Reservations.
 	 * @param Reservations
 	 * @throws FileNotFoundException
 	 */
-	public static void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException {
+	public void getReservation(ArrayList<Reservation> Reservations) throws FileNotFoundException {
 		File file = new File("RestaurantReserveSystem/datatxt/Reservation.txt");
 		Scanner sc = new Scanner(file);
 		sc.useDelimiter("\\s*,\\s*");
