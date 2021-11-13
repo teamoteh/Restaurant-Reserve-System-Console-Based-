@@ -12,7 +12,7 @@ import Entities.FoodItem.FoodType;
 
 /**
  * A food item to be used in storing menu items
- * 
+ *
  * @author Pranwanth
  * @version 1.0
  * @since 2021-11-12
@@ -44,7 +44,7 @@ public class MenuMgr {
 
 	/**
 	 * Reads the Menu Items from their txt files
-	 * 
+	 *
 	 * @return ArrayList<FoodItem>
 	 */
 	public static ArrayList<FoodItem> readMenu() {
@@ -67,11 +67,11 @@ public class MenuMgr {
 
 	/**
 	 * Adds a Food Item into the Menu
-	 * 
-	 * @param name        Food Item's name
-	 * @param price       Food Item's price
-	 * @param desc Food Item's Description
-	 * @param type        Food Item's Food Type
+	 *
+	 * @param name  Food Item's name
+	 * @param price Food Item's price
+	 * @param desc  Food Item's Description
+	 * @param type  Food Item's Food Type
 	 */
 	public static void addToMenu(String name, double price, String desc, String type) {
 		FoodType ftype = null; // Default value will change if it is something else
@@ -96,25 +96,24 @@ public class MenuMgr {
 		}
 		menu.add(item);
 
-		System.out.println("Item successfully added to Menu");
-
-		String file_name = item.getFoodType().toString();
-
-		try {
-			// RestaurantReserveSystem/datatxt/MainCourse.txt
-			FileWriter menuWriter = new FileWriter("RestaurantReserveSystem/" + "datatxt/" + file_name + ".txt", true);
-			PrintWriter menuPrinter = new PrintWriter(menuWriter);
-			menuPrinter.println("," + item.getFoodName() + ", " + item.getFoodPrice() + "," + item.getFoodDesc());
-			menuPrinter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * System.out.println("Item successfully added to Menu");
+		 * 
+		 * String file_name = item.getFoodType().toString();
+		 * 
+		 * try { // RestaurantReserveSystem/datatxt/MainCourse.txt FileWriter menuWriter
+		 * = new FileWriter("RestaurantReserveSystem/" + "datatxt/" + file_name +
+		 * ".txt", true); PrintWriter menuPrinter = new PrintWriter(menuWriter);
+		 * menuPrinter.println("," + item.getFoodName() + ", " + item.getFoodPrice() +
+		 * "," + item.getFoodDesc()); menuPrinter.close(); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 */
 
 	}
 
 	/**
 	 * Updates an existing Food Item into the Menu
-	 * 
+	 *
 	 * @param name     Current Food Item's name
 	 * @param newName  Updated name for selcted Food Item
 	 * @param newPrice Updated price for selcted Food Item
@@ -188,7 +187,7 @@ public class MenuMgr {
 
 	/**
 	 * Removes an existing Food Item from the Menu using it's name
-	 * 
+	 *
 	 * @param name Current Food Item's name
 	 */
 
@@ -237,43 +236,48 @@ public class MenuMgr {
 	 */
 
 	public static void printMenu() {
+		System.out.println();
 		System.out.println("Appetizers");
 		System.out.println("=============================================");
 		for (int s = 0; s < appet.size(); s++) {
 			System.out.printf("%s %s %s", String.format("%-20s", appet.get(s).getFoodName()),
 					String.format("%-20s", Double.toString(appet.get(s).getFoodPrice())),
 					String.format("%-20s", appet.get(s).getFoodDesc()));
+			System.out.println();
 		}
-
+		System.out.println();
 		System.out.println("MainCourse");
 		System.out.println("=============================================");
 		for (int s = 0; s < mainCourse.size(); s++) {
 			System.out.printf("%s %s %s", String.format("%-20s", mainCourse.get(s).getFoodName()),
 					String.format("%-20s", Double.toString(mainCourse.get(s).getFoodPrice())),
 					String.format("%-20s", mainCourse.get(s).getFoodDesc()));
+			System.out.println();
 		}
-
+		System.out.println();
 		System.out.println("Dessert");
 		System.out.println("=============================================");
 		for (int s = 0; s < dessert.size(); s++) {
 			System.out.printf("%s %s %s", String.format("%-20s", dessert.get(s).getFoodName()),
 					String.format("%-20s", Double.toString(dessert.get(s).getFoodPrice())),
 					String.format("%-20s", dessert.get(s).getFoodDesc()));
+			System.out.println();
 		}
-
+		System.out.println();
 		System.out.println("Drinks");
 		System.out.println("=============================================");
 		for (int s = 0; s < drinks.size(); s++) {
 			System.out.printf("%s %s %s", String.format("%-20s", drinks.get(s).getFoodName()),
 					String.format("%-20s", Double.toString(drinks.get(s).getFoodPrice())),
 					String.format("%-20s", drinks.get(s).getFoodDesc()));
+			System.out.println();
 		}
-
+		System.out.println();
 	}
 
 	/**
 	 * Returns the menu ArrayList
-	 * 
+	 *
 	 * @return MenuMgr's menu
 	 */
 	public static ArrayList<FoodItem> getMenuList() {

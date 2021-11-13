@@ -275,15 +275,26 @@ public class PromoMgr {
      */
     public static void printPromoMenu() {
         System.out.println("");
+        /*
+         * for (int s = 0; s < appet.size(); s++) { System.out.printf("%s%s%s",
+         * String.format("%-20s", appet.get(s).getFoodName()), String.format("%-20s",
+         * Double.toString(appet.get(s).getFoodPrice())), String.format("%-20s",
+         * appet.get(s).getFoodDesc())); System.out.println(); }
+         */
         for (int s = 0; s < setPromoList.size(); s++) {
             String setName = setPromoList.get(s).getPromoName();
-            System.out.println("The Set Promo for today is: \t" + setPromoList.get(s).getPromoName());
-            System.out.println("The Set Promo cost is: \t\t" + setPromoList.get(s).getPromoPrice());
-            System.out.println("About this Set Promo: \t\t" + setPromoList.get(s).getPromoDesc());
+            System.out.printf("%s%s%s", String.format("%-20s", setPromoList.get(s).getPromoName()),
+                    String.format("%-20s", Double.toString(setPromoList.get(s).getPromoPrice())),
+                    String.format("%-20s", setPromoList.get(s).getPromoDesc()));
+            System.out.println();
+            System.out.println("=============================================================");
             for (int j = 0; j < setPromoList.get(s).foodList.size(); j++) {
-                System.out.println("The " + setPromoList.get(s).foodList.get(j).getFoodType() + " in " + setName
-                        + " Set Promo is: \t" + setPromoList.get(s).foodList.get(j).getFoodName());
+                System.out.printf("%s%s%s", String.format("%-20s", setPromoList.get(s).foodList.get(j).getFoodName()),
+                        String.format("%-20s", setPromoList.get(s).foodList.get(j).getFoodType()),
+                        String.format("%-20s", setPromoList.get(s).foodList.get(j).getFoodDesc()));
+                System.out.println();
             }
+            System.out.println("=============================================================");
             System.out.println("");
         }
         System.out.println("");

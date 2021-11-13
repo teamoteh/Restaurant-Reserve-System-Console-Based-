@@ -1,4 +1,3 @@
 Fish and Chips,12.5,Freshly Made With Our Original Batter,
-Fried Rice,10.0,Fried with Chicken and Egg,
 Grilled Chicken,14.0,Topped with Honey Brown Sauce,
-Mc Spicy,5.05,spicccy
+Fried Rice,5.0,Fried Rice with Chicken

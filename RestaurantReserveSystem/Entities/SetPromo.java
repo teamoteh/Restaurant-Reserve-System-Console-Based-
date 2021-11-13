@@ -107,7 +107,7 @@ public class SetPromo {
         }
         total *= 0.8;
         BigDecimal bd = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
-        this.promoPrice = bd.doubleValue();
+        this.promoPrice = Math.round(bd.doubleValue() * 2) / 2;
     }
 
     /**

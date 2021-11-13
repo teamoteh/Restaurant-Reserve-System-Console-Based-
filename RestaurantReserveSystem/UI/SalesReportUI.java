@@ -38,8 +38,8 @@ public class SalesReportUI {
         do {
             System.out.println("\nWhich Sales Report to view?\n");
 
-            System.out.println("[1] - View Individual Sales Revenue (Month)");
-            System.out.println("[2] - Exit");
+            System.out.println("1. View Individual Sales Revenue (Month)");
+            System.out.println("2. Exit");
 
             // Error catching
             do {
@@ -83,6 +83,8 @@ public class SalesReportUI {
      */
     private static double getPeriodTotalRevenue(int month) {
         double total = 0;
+        int index = 1;
+        System.out.println("==================== ORDERS FOUND ====================");
         for (Order invoice : invoiceList) {
             double totalSum = 0;
             String input_date = invoice.getTimeStamp(); // YYYY-MM-DD
@@ -99,14 +101,17 @@ public class SalesReportUI {
                 for (SetPromo item : invoice.getOrderPromo()) {
                     totalSum += item.getPromoPrice();
                 }
+                // Check if Promotion was applied
+                totalSum = invoice.getMemberDiscount() ? totalSum * 0.8 : totalSum;
+
+                // Add in the charges
+                totalSum *= 1.17;
+                System.out.println("Invoice [" + (index++) + "] : " + Math.round(totalSum * 100.0) / 100.0);
+                total += totalSum;
             }
-            // Check if Promotion was applied
-            totalSum = invoice.getMemberDiscount() ? totalSum * 0.8 : totalSum;
-            // Add in the charges
-            totalSum *= 1.17;
-            total += totalSum;
         }
         double totalRoundOff = Math.round(total * 100.0) / 100.0;
+
         return totalRoundOff;
     }
 

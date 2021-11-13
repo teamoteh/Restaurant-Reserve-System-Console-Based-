@@ -1,3 +1,4 @@
 Banana Split,5.0,Delicious vanilla and strawberry ice cream topped with Banana,
 Red Ruby,6.0,Refreshing Thai Dessert,
-Oreo Gelato,3.0,Large Scoop Served In Waffle Cones
+Oreo Gelato,3.0,Large Scoop Served In Waffle Cones,
+Dark Chocolate Cake,7.5,A slice of dark chocolate cake

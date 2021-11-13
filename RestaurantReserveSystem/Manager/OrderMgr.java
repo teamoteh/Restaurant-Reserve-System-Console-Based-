@@ -278,7 +278,12 @@ public class OrderMgr {
      * @param index index of "order" to remove from
      */
     public static void removeOrder(int index) {
-        String removedOrderName = orderList.get(index).getName();
+        Order order = orderList.get(index);
+        String removedOrderName = order.getName();
+
+        // Update the table status to "available"
+        order.getTable().setAvailStatus();
+
         orderList.remove(index);
         System.out.println("Successfully removed [" + removedOrderName + "] from the list of current orders");
     }

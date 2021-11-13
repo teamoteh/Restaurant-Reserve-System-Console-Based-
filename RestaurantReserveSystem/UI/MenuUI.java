@@ -92,6 +92,8 @@ public class MenuUI {
 				System.out.println("What is the name of the new Menu Item?");
 				name = sc.nextLine();
 
+				System.out.println("");
+
 				System.out.println("Please choose from MainCourse, Drinks, Dessert or Appetizer");
 				System.out.println("What is the type of the new Menu Item?");
 				type = sc.nextLine();
@@ -104,16 +106,18 @@ public class MenuUI {
 
 				String setName = sc.nextLine();
 
+				System.out.println("");
 				PromoMgr.addFood(name, type, setName);
 				break;
 
 			case 7:
 				System.out.println("What is the name of the Food Item from Set Promo to be removed?");
 				name = sc.nextLine();
+				System.out.println("");
 
 				System.out.println("Please type the name of the Set Promo to add to: ");
 				for (int s = 0; s < PromoMgr.setPromoList.size(); s++) {
-					System.out.println(PromoMgr.setPromoList.get(s).getPromoName());
+					System.out.println("-" + PromoMgr.setPromoList.get(s).getPromoName());
 				}
 
 				setName = sc.nextLine();
