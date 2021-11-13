@@ -18,8 +18,6 @@ import Manager.TableMgr;
  * @since 2021-11-12
  */
 public class OrderUI {
-	// private static Scanner sc = new Scanner(System.in);
-
 	/**
 	 * UI provided for user to perform request
 	 */
@@ -59,7 +57,6 @@ public class OrderUI {
 			case 6:
 				return;
 			}
-			// sc.close();
 		}
 
 	}
@@ -75,7 +72,6 @@ public class OrderUI {
 		// Sanity Check
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders");
-			// sc.close();
 			return;
 		}
 
@@ -98,7 +94,6 @@ public class OrderUI {
 
 			// To break the while Loop
 			if (choice == index) {
-				// sc.close();
 				return;
 			}
 
@@ -106,7 +101,6 @@ public class OrderUI {
 			Order item = orderList.get(choice - 1);
 			System.out.println("********************** PREVIEW ***********************\n");
 			OrderMgr.printOrderDetails(item);
-			// sc.close();
 		}
 
 	}
@@ -114,17 +108,18 @@ public class OrderUI {
 	/**
 	 * UI to facilitate the addition of a new Order
 	 */
-	public static void addNewOrderUI() {
+	private static void addNewOrderUI() {
 		Staff staff = selectStaffUI();
 		Table table = selectTableUI();
 		OrderMgr.addNewOrder(staff, table);
 	}
 
 	/**
+	 * (Overload) UI to facilitate the addition of a new Order
+	 *
 	 * @param tableId
 	 */
-	// @Overload
-	public static void addNewOrderUI(int tableId) {
+	private static void addNewOrderUI(int tableId) {
 		Staff staff = selectStaffUI();
 		Table table = OrderMgr.getRestaurantTables().get(tableId);
 
@@ -132,9 +127,10 @@ public class OrderUI {
 	}
 
 	/**
+	 * UI to faciliate selection of Table for new Orders
+	 *
 	 * @return Table
 	 */
-	// Private Method: UI to faciliate selection of Table for new Orders
 	private static Table selectTableUI() {
 		Scanner sc = new Scanner(System.in);
 		int choice, index = 1;
@@ -165,9 +161,10 @@ public class OrderUI {
 	}
 
 	/**
+	 * UI to faciliate selection of Staff for new Orders
+	 *
 	 * @return Staff
 	 */
-	// Private Method: UI to faciliate selection of Staff for new Orders
 	private static Staff selectStaffUI() {
 		Scanner sc = new Scanner(System.in);
 		int index = 1, choice;
@@ -186,11 +183,12 @@ public class OrderUI {
 			choice = sc.nextInt();
 		} while (choice < 1 || choice > index);
 
-		// sc.close();
 		return staffList.get(choice - 1);
 	}
 
-	// UI Provided to user to modify (add/delete) Orders from an Order Object
+	/**
+	 * UI Provided to user to modify (add/delete) Orders from an Order Object
+	 */
 	private static void modifyOrderUI() {
 		Scanner sc = new Scanner(System.in);
 		int index = 1, choice;
@@ -199,7 +197,6 @@ public class OrderUI {
 		// Sanity check
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently");
-			// sc.close();
 			return;
 		}
 
@@ -220,7 +217,6 @@ public class OrderUI {
 
 		// If user choose to exit the UI
 		if (choice == index) {
-			// sc.close();
 			return;
 		}
 
@@ -247,13 +243,13 @@ public class OrderUI {
 			break;
 		case 3:
 			// Exit the UI
-			// sc.close();
 			return;
 		}
-		// sc.close();
 	}
 
-	// UI to provide user to remove an Order from the current list of orders
+	/**
+	 * UI to provide user to remove an Order from the current list of orders
+	 */
 	private static void removeOrderUI() {
 		Scanner sc = new Scanner(System.in);
 		int index = 1, choice;
@@ -281,15 +277,15 @@ public class OrderUI {
 
 		// If user choose to exit
 		if (choice == index) {
-			// sc.close();
 			return;
 		}
 
 		OrderMgr.removeOrder(choice - 1);
-		// sc.close();
 	}
 
-	// Provides UI for choosing the specific order to be paid for
+	/**
+	 * Provides UI for choosing which specific order to be paid for
+	 */
 	private static void makePaymentUI() {
 		Scanner sc = new Scanner(System.in);
 		int index = 1, choice;
@@ -297,7 +293,6 @@ public class OrderUI {
 
 		if (orderList.size() < 1) {
 			System.out.println("There are no orders currently");
-			// sc.close();
 			return;
 		}
 
@@ -316,11 +311,9 @@ public class OrderUI {
 
 		// If user choose to exit
 		if (choice == index) {
-			// sc.close();
 			return;
 		}
 
 		OrderMgr.completeOrder(choice - 1);
-		// sc.close();
 	}
 }

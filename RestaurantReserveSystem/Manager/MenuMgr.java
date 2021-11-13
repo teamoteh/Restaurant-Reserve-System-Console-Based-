@@ -240,29 +240,33 @@ public class MenuMgr {
 		System.out.println("Appetizers");
 		System.out.println("=============================================");
 		for (int s = 0; s < appet.size(); s++) {
-			System.out.println(
-					appet.get(s).getFoodName() + " " + appet.get(s).getFoodPrice() + " " + appet.get(s).getFoodDesc());
+			System.out.printf("%s %s %s", String.format("%-20s", appet.get(s).getFoodName()),
+					String.format("%-20s", Double.toString(appet.get(s).getFoodPrice())),
+					String.format("%-20s", appet.get(s).getFoodDesc()));
 		}
 
 		System.out.println("MainCourse");
 		System.out.println("=============================================");
 		for (int s = 0; s < mainCourse.size(); s++) {
-			System.out.println(mainCourse.get(s).getFoodName() + " " + mainCourse.get(s).getFoodPrice() + " "
-					+ mainCourse.get(s).getFoodDesc());
+			System.out.printf("%s %s %s", String.format("%-20s", mainCourse.get(s).getFoodName()),
+					String.format("%-20s", Double.toString(mainCourse.get(s).getFoodPrice())),
+					String.format("%-20s", mainCourse.get(s).getFoodDesc()));
 		}
 
 		System.out.println("Dessert");
 		System.out.println("=============================================");
 		for (int s = 0; s < dessert.size(); s++) {
-			System.out.println(dessert.get(s).getFoodName() + " " + dessert.get(s).getFoodPrice() + " "
-					+ dessert.get(s).getFoodDesc());
+			System.out.printf("%s %s %s", String.format("%-20s", dessert.get(s).getFoodName()),
+					String.format("%-20s", Double.toString(dessert.get(s).getFoodPrice())),
+					String.format("%-20s", dessert.get(s).getFoodDesc()));
 		}
 
 		System.out.println("Drinks");
 		System.out.println("=============================================");
 		for (int s = 0; s < drinks.size(); s++) {
-			System.out.println(drinks.get(s).getFoodName() + " " + drinks.get(s).getFoodPrice() + " "
-					+ drinks.get(s).getFoodDesc());
+			System.out.printf("%s %s %s", String.format("%-20s", drinks.get(s).getFoodName()),
+					String.format("%-20s", Double.toString(drinks.get(s).getFoodPrice())),
+					String.format("%-20s", drinks.get(s).getFoodDesc()));
 		}
 
 	}

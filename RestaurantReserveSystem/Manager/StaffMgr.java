@@ -19,7 +19,7 @@ public class StaffMgr {
 	/**
 	 * An ArrayList of all the Restaurant Staff
 	 */
-	public static ArrayList<Staff> staffList = new ArrayList<Staff>();
+	protected static ArrayList<Staff> staffList = new ArrayList<Staff>();
 
 	/**
 	 * Gets the Staff's Name, Job Title, Gender and ID

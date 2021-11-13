@@ -25,6 +25,7 @@ public class ReservationMgr {
      */
     protected static ArrayList<Reservation> r = new ArrayList<Reservation>();
 
+
     /**
      * 
      * Reads the reservations from the Reservation.txt file.
